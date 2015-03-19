@@ -82,18 +82,46 @@
                     popupAnchor:  [0, 0]
                 });
 		var map = L.map('map').setView([51.1101, 17.03], 15);
-		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+		/*var grayscale =*/ L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
 			maxZoom: 18, minZoom: 13,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id: 'examples.map-i875mjb7'
 		}).addTo(map);
-		L.marker([51.110121, 17.032020], {icon: redIcon}).addTo(map).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 1");
-                L.marker([51.110902, 17.032225], {icon: greenIcon}).addTo(map).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 2");
-                L.marker([51.110000, 17.032425], {icon: blueIcon}).addTo(map).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 3");
-                L.marker([51.109950, 17.030954], {icon: yellowIcon}).addTo(map).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 4");
-                L.marker([51.109200, 17.030254], {icon: purpleIcon}).addTo(map).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 5");
+		 
+		var category1 = new L.LayerGroup();
+		var category2 = new L.LayerGroup();
+		var category3 = new L.LayerGroup();
+		var category4 = new L.LayerGroup();
+		var category5 = new L.LayerGroup();
+
+		L.marker([51.110121, 17.032020], {icon: redIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 1").addTo(category1);
+        L.marker([51.110902, 17.032225], {icon: greenIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 2").addTo(category2);
+        L.marker([51.110000, 17.032425], {icon: blueIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 3").addTo(category3);
+        L.marker([51.109200, 17.030254], {icon: purpleIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 5").addTo(category5);
+		L.marker([51.109950, 17.030954], {icon: yellowIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 4").addTo(category4),
+		L.marker([51.111150, 17.030444], {icon: yellowIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 4").addTo(category4),
+        L.marker([51.109255, 17.011154], {icon: yellowIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 4").addTo(category4);
+		
+		/*var baseLayers = {
+			"Mapa1": grayscale
+		};*/
+
+		var overlays = {
+			"Kategoria 1": category1,
+			"Kategoria 2": category2,
+			"Kategoria 3": category3,
+			"Kategoria 4": category4,
+			"Kategoria 5": category5
+		};
+		map.addLayer(category1);
+		map.addLayer(category2);
+		map.addLayer(category3);
+		map.addLayer(category4);
+		map.addLayer(category5);
+		L.control.layers(null, overlays).addTo(map).setPosition('topleft');
+
             </script>
             <aside role="complementary">
                 <h1>Kategorie</h1>
