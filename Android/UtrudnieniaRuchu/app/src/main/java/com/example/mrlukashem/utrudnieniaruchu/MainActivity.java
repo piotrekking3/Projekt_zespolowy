@@ -3,13 +3,17 @@ package com.example.mrlukashem.utrudnieniaruchu;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,8 +31,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import junit.framework.Assert;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
-public class MainActivity extends FragmentActivity
+/**
+ * Created by mrlukashem
+ */
+public class MainActivity extends ActionBarActivity
         implements OnMapReadyCallback {
 
     //app fields
@@ -46,9 +54,13 @@ public class MainActivity extends FragmentActivity
     //drawer fields
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
+    private ArrayAdapter<String> drawerListAdapter;
 
     //dialogs
     private Dialog markerContentDialog;
+
+    //ActionBar
+    private ActionBar aBar;
 
 
     @Override
@@ -60,17 +72,36 @@ public class MainActivity extends FragmentActivity
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
-
         mapFragment.getMapAsync(this);
+
+
+        aBar = this.getSupportActionBar();
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
 
         markerContentDialog = DialogFactory
                 .newInstance(DialogFactory.DIALOG_TYPE.MARKER_CONTENT_DIALOG, this);
-    }
 
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        drawerListView = (ListView)findViewById(R.id.left_drawer);
+        drawerListAdapter =
+                new ArrayAdapter<>(this, R.layout.drawer_list_item, R.id.drawer_text_view_list_item);
+
+        //example Adapter data
+        String[] _string = new String[] {"Example 1", "Example 2", "Example 3"};
+        drawerListAdapter.addAll(_string);
+
+        drawerListView.setAdapter(drawerListAdapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu);
         return true;
     }
 
@@ -92,11 +123,10 @@ public class MainActivity extends FragmentActivity
         uiSettings = googleMap.getUiSettings();
 
         gMap.addMarker(new MarkerOptions()
-                .position(new LatLng(51, 17))
+                .position(WROCLAW_RYNEK)
                 .title("Marker"));
 
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WROCLAW_RYNEK, 14));
-        gMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
         uiSettings.setZoomControlsEnabled(true);
         uiSettings.setMyLocationButtonEnabled(true);
