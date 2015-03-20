@@ -1,0 +1,57 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Git configs
+.gitattributes text
+.gitignore text
+
+# Documents
+*.md text
+*.doc diff=astextplain
+*.docx diff=astextplain
+*.dot diff=astextplain
+*.pdf diff=astextplain
+*.rtf diff=astextplain
+LICENSE text
+AUTHORS text
+
+# Programming languages
+*.java diff=java
+*.jsp text diff=java
+*.cs text diff=csharp
+*.php text diff=php
+*.css text
+*.js text
+*.json text
+*.htm text diff=html
+*.html text diff=html
+*.xhtml text diff=html
+*.xml text diff=html
+*.txt text
+*.ini text
+*.inc text
+*.sql text
+*.bat text
+*.sh text
+.htaccess text
+.properties text
+
+# Binary files
+*.jar binary
+*.class binary
+*.dll binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.flv binary
+*.fla binary
+*.swf binary
+*.gz binary
+*.zip binary
+*.7z binary
+*.ttf binary
