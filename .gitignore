@@ -21,3 +21,4 @@ proguard/
 *.jar
 *.war
 *.ear
+*.bat
