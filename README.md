@@ -1,4 +1,4 @@
-# Projekt_zespolowy
+# Mobile-App
 Identyfikacja miejskich utrudnień ruchu - aplikacja mobilna<br><br>
 Osoby odpowiedzialne za aplikacje mobilną:<br>
 Łukasz Merta<br>
