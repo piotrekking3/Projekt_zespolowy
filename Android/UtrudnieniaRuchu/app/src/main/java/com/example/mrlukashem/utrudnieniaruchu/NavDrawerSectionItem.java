@@ -10,6 +10,10 @@ public class NavDrawerSectionItem implements NavDrawerItem {
 
     public static final int TYPE = 1;
 
+    public NavDrawerSectionItem(String __label) {
+        label = __label;
+    }
+
     @Override
     public int getId() {
         return id;

@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity
     //drawer fields
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
-    private ArrayAdapter<String> drawerListAdapter;
+    private NavDrawerArrayAdapter drawerListAdapter;
 
     //dialogs
     private Dialog markerContentDialog;
@@ -87,12 +87,9 @@ public class MainActivity extends ActionBarActivity
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         drawerListView = (ListView)findViewById(R.id.left_drawer);
-        drawerListAdapter =
-                new ArrayAdapter<>(this, R.layout.drawer_list_item, R.id.drawer_text_view_list_item);
-
-        //example Adapter data
-        String[] _string = new String[] {"Example 1", "Example 2", "Example 3"};
-        drawerListAdapter.addAll(_string);
+        NavDrawerArrayAdapter drawerListAdapter =
+                new NavDrawerArrayAdapter(this, R.id.drawer_text_view_list_item);
+        drawerListAdapter.makeAndSetItems();
 
         drawerListView.setAdapter(drawerListAdapter);
     }
