@@ -7,7 +7,7 @@ import android.content.Context;
 /**
  * Created by mrlukashem on 15.03.15.
  */
-public class DialogFactory {
+public class DialogFactory{
 
     public static enum DIALOG_TYPE {
         MARKER_CONTENT_DIALOG, CATEGORIES_DIALOG
