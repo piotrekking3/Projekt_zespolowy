@@ -28,7 +28,7 @@ public class NavDrawerTitleItem implements NavDrawerItem {
      */
     public NavDrawerTitleItem(String __label) {
         label = __label;
-        hasIconField = false;
+        id = __id;
     }
 
     /*

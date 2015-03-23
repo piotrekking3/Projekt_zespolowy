@@ -13,4 +13,15 @@
                 android:layout_height="48sp"
                 android:text="New Text"
     />
+        android:gravity="center_vertical"
+        android:textColor="#A8A8A8"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingTop="7dp"
+        android:height="48dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="16dp"
+        android:textStyle="normal"
+    />
 </LinearLayout>
