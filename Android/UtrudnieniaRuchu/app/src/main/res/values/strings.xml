@@ -8,4 +8,19 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="new_marker">Dodaj</string>
+    <string name="setting">Opcje</string>
+    <string name="search">Szukaj</string>
+    <string name="maps_categories">Rodzaj mapy</string>
+    <string name="filtr">filtruj</string>
+    <string name="categories">Kategorie</string>
+    <string name="help">Pomoc</string>
+    <string name="cat_choice_title">Wybierz kategorie</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Anuluj</string>
+
+    <string-array name="categories">
+        <item>exp1</item>
+    </string-array>
 </resources>

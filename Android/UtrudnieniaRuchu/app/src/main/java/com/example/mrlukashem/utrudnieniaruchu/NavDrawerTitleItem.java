@@ -10,9 +10,9 @@ public class NavDrawerTitleItem implements NavDrawerItem {
 
     public static final int TYPE = 0;
 
-    public NavDrawerTitleItem(String __label, int __id) {
+    public NavDrawerTitleItem(String __label) {
         label = __label;
-        id = __id;
+        id = 0;
     }
 
     @Override

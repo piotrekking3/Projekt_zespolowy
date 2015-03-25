@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity
     //map fields
     private GoogleMap gMap;
     private UiSettings uiSettings;
-    private LatLng WROCLAW_RYNEK = new LatLng(51.1056248, 17.0381557);
+    private final LatLng WROCLAW_RYNEK = new LatLng(51.1056248, 17.0381557);
 
     //listeners fields
     GoogleMap.OnMapClickListener onMapClickListener;
@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity
     //drawer fields
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
-    private ArrayAdapter<String> drawerListAdapter;
+    private NavDrawerArrayAdapter drawerListAdapter;
 
     //dialogs
     private Dialog markerContentDialog;
@@ -69,30 +69,21 @@ public class MainActivity extends ActionBarActivity
         setContentView(R.layout.activity_main);
         setListeners();
         context = getApplicationContext();
+        aBar = this.getSupportActionBar();
+        setActionBar();
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-        aBar = this.getSupportActionBar();
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.getSupportActionBar().setHomeButtonEnabled(true);
-        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
 
         markerContentDialog = DialogFactory
                 .newInstance(DialogFactory.DIALOG_TYPE.MARKER_CONTENT_DIALOG, this);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         drawerListView = (ListView)findViewById(R.id.left_drawer);
-        drawerListAdapter =
-                new ArrayAdapter<>(this, R.layout.drawer_list_item, R.id.drawer_text_view_list_item);
-
-        //example Adapter data
-        String[] _string = new String[] {"Example 1", "Example 2", "Example 3"};
-        drawerListAdapter.addAll(_string);
+        NavDrawerArrayAdapter drawerListAdapter =
+                new NavDrawerArrayAdapter(this, R.id.drawer_text_view_list_item);
+        drawerListAdapter.makeAndSetItems();
 
         drawerListView.setAdapter(drawerListAdapter);
     }
@@ -138,6 +129,15 @@ public class MainActivity extends ActionBarActivity
     private void setMapListeners() {
         gMap.setOnMapClickListener(onMapClickListener);
         gMap.setOnMarkerClickListener(onMarkerClickListener);
+    }
+
+    private void setActionBar() {
+        if(aBar == null)
+            return;
+
+        this.aBar.setDisplayHomeAsUpEnabled(true);
+        this.aBar.setHomeButtonEnabled(true);
+        this.aBar.setDisplayShowTitleEnabled(false);
     }
 
     private void setListeners() {

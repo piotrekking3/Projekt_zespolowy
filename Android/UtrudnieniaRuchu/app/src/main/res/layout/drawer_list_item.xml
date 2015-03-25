@@ -5,17 +5,18 @@
     android:id="@+id/list_item">
 
     <ImageView
-        android:layout_weight="0.3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/drawer_image_view_list_item" />
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:id="@+id/drawer_image_view_list_item"
+        android:layout_height="48sp"
+        android:src="@drawable/ic_action_about"/>
 
     <TextView
-        android:textStyle="bold"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textColor="#111"
         android:gravity="center_vertical"
-        android:layout_weight="0.7"
+        android:paddingLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="48sp"
         android:text="New Text"

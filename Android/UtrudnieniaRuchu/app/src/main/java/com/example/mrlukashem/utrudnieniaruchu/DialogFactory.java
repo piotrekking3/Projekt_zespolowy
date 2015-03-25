@@ -3,14 +3,29 @@ package com.example.mrlukashem.utrudnieniaruchu;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+
+import java.util.ArrayList;
 
 /**
  * Created by mrlukashem on 15.03.15.
  */
-public class DialogFactory {
+
+/*
+    Klasa na bazie Faktory. Tworzy gotowe okienka dialogowe.
+    Np. Activity w ogole nie interesuje sposob tworzenia, tylko otrzymuje
+    referencje do Dialog.
+ */
+public class DialogFactory{
+
 
     public static enum DIALOG_TYPE {
-        MARKER_CONTENT_DIALOG, CATEGORIES_DIALOG
+        //okienko pojawiajace sie po nacisnieciu znacznika na mapie
+        MARKER_CONTENT_DIALOG,
+        //okienko z lista wszystkich kategorii
+        CATEGORIES_DIALOG,
+        //okienko z checklista kategorii
+        CAT_CHECK_LIST_DIALOG
     }
 
     public static Dialog newInstance(DIALOG_TYPE __dialog_type, Context __con) {
@@ -26,6 +41,9 @@ public class DialogFactory {
                 _builder_2.setMessage("testowy wpis catiegories!");
 
                 return _builder_2.create();
+            case CAT_CHECK_LIST_DIALOG:
+                CategoriesChoiceDialog _builder_3 = new CategoriesChoiceDialog(__con);
+                return _builder_3.getDialog();
             default:
                 return null;
         }
