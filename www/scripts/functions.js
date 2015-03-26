@@ -84,6 +84,8 @@
 	map.addLayer(category5);
 	L.control.layers(null, overlays).addTo(map).setPosition('topleft');
 	
+/*nowy marker*/
+	
 	// Initialise the FeatureGroup to store editable layers
 	var drawnItems = new L.FeatureGroup();
 	map.addLayer(drawnItems);
@@ -95,15 +97,15 @@
 		}
 	});
 	//map.addControl(drawControl);
-	
+	var m;
 	map.on('draw:created', function (e) {
     var type = e.layerType,
         layer = e.layer;
-
+	
     if (type === 'marker') {
-        layer.bindPopup('Nowy znacznik!!!');
+		m = layer;
+ 		dialog.dialog( "open" );
     }
-
     // Do whatever else you need to. (save to db, add to map etc)
     drawnItems.addLayer(layer);
 });
@@ -114,4 +116,55 @@ map.on('draw:edited', function () {
 
 map.on('draw:deleted', function () {
     // Update db to save latest changes.
+});
+
+/*formularz*/
+
+var dialog, form,
+
+	category = $( "#category" ),
+	data = $( "#data" ),
+	email = $( "#email" ),
+	image = $( "#image" ),
+	allFields = $( [] ).add( category ).add( data ).add( email ).add( image ),
+	tips = $( ".validateTips" );
+
+function updateTips( t ) {
+  tips
+	.text( t )
+	.addClass( "ui-state-highlight" );
+  setTimeout(function() {
+	tips.removeClass( "ui-state-highlight", 1500 );
+  }, 500 );
+}
+
+function obsluga() {
+	dialog.dialog( "close" );
+	//tymczasowo zamyka formularz, można tutaj dać wysłanie na serwer i wtedy stan mapy zaktualizuje się
+}
+
+function anuluj() {
+	dialog.dialog( "close" );
+	map.removeLayer(m);
+}
+
+dialog = $( "#dialog-form" ).dialog({
+  autoOpen: false,
+  height: 340,
+  width: 350,
+  modal: true,
+  buttons: {
+	"Wyślij": obsluga,
+	Anuluj: anuluj
+  },
+  close: function() {
+    //map.removeLayer(m); //odkomentować po dodaniu obsługi submita
+	form[ 0 ].reset();
+	allFields.removeClass( "ui-state-error" );
+  }
+});
+
+form = dialog.find( "form" ).on( "submit", function( event ) {
+  event.preventDefault();
+  //TODO funkcja obsługująca submit?
 });

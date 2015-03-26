@@ -434,7 +434,7 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 		});
 
 		this._markerGroup.addLayer(marker);
-
+		
 		return marker;
 	},
 
