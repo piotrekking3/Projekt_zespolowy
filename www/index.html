@@ -2,58 +2,88 @@
 <html>
 	<head lang="pl">
 		<meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="./styles/design.css">
-                <link rel="stylesheet" href="./styles/leaflet.css">
-				<link rel="stylesheet" href="./styles/leaflet.draw.css">
-                <script src="./scripts/leaflet.js"></script>
-				<script src="./scripts/leaflet.draw.js"></script>
-                <!--[if lt IE 9]>
-                <script src="./scripts/html5shiv.js"></script>
-                <![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./styles/design.css">
+		<link rel="stylesheet" href="./styles/leaflet.css">
+		<link rel="stylesheet" href="./styles/leaflet.draw.css">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<!--[if lt IE 9]>
+		<script src="./scripts/html5shiv.js"></script>
+		<![endif]-->
 		<title>Wrocławska Mapa Barier</title>
 	</head>
 	<body>
-            <header role="banner">
-                <hgroup>
-                    <h1>Wrocławska Mapa Barier</h1>
-                    <h2>Identyfikacja miejskich utrudnień ruchu</h2>
-                </hgroup>
-                <form action="search.html" method="get">
-                    <p>
-                        
-                        <input type="search" name="query">
-                        <input type="submit" value="Szukaj">
-                    </p>
-                </form>
-            </header>
-            <nav role="navigation">
-                <ul>
-                    <li><a href="#" rel="nofollow">Kontakt</a></li>
-                    <li><a href="#" rel="author">O projekcie</a></li>
-                    <li><a href="#" rel="help">Rodzaje barier</a></li>
-                    <li><a href="#" rel="canonical">Lista barier</a></li>
-                    <li><a href="index.html" rel="index">Mapa barier</a></li>
-                </ul>
-            </nav>
-            <div id="map" role="main"></div>
-           <script src="./scripts/functions.js"></script>
-            <aside role="complementary">
-                <h1>Kategorie</h1>
-                <ul>
-                    <li><img src="./scripts/images/marker_red.png" alt="Kategoria 1"> Kategoria 1, 1 zgłoszeń</li>
-                    <li><img src="./scripts/images/marker_green.png" alt="Kategoria 2"> Kategoria 2, 1 zgłoszeń </li>
-                    <li><img src="./scripts/images/marker_blue.png" alt="Kategoria 3"> Kategoria 3, 1 zgłoszeń</li>
-                    <li><img src="./scripts/images/marker_yellow.png" alt="Kategoria 4"> Kategoria 4, 1 zgłoszeń</li>
-                    <li><img src="./scripts/images/marker_purple.png" alt="Kategoria 5"> Kategoria 5, 1 zgłoszeń</li>
-                </ul>
-            </aside>
-            <footer>
-                <ul>
-                    <li><a href="#" rel="nofollow">Panel administracyjny</a></li>
-                    <li><a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow">CSS 3</a></li>
-                    <li><a href="http://validator.w3.org/check/referer" rel="nofollow">HTML 5</a></li>
-                </ul>
-            </footer>
+		<header role="banner">
+			<hgroup>
+				<h1>Wrocławska Mapa Barier</h1>
+				<h2>Identyfikacja miejskich utrudnień ruchu</h2>
+			</hgroup>
+			<form action="search.html" method="get">
+				<p>
+					
+					<input type="search" name="query">
+					<input type="submit" value="Szukaj">
+				</p>
+			</form>
+		</header>
+		<nav role="navigation">
+			<ul>
+				<li><a href="contact.html" rel="nofollow">Kontakt</a></li>
+				<li><a href="about.html" rel="author">O projekcie</a></li>
+				<li><a href="types.html" rel="help">Rodzaje barier</a></li>
+				<li><a href="list.html" rel="canonical">Lista barier</a></li>
+				<li><a href="index.html" rel="index">Mapa barier</a></li>
+			</ul>
+		</nav>
+		<div id="map" role="main"></div>
+		<aside role="complementary">
+			<h1>Statystyki</h1>
+			<ul>
+				<li><img src="./scripts/images/marker_red.png" alt="Kategoria 1"> Kategoria 1, 1 zgłoszeń</li>
+				<li><img src="./scripts/images/marker_green.png" alt="Kategoria 2"> Kategoria 2, 1 zgłoszeń </li>
+				<li><img src="./scripts/images/marker_blue.png" alt="Kategoria 3"> Kategoria 3, 1 zgłoszeń</li>
+				<li><img src="./scripts/images/marker_yellow.png" alt="Kategoria 4"> Kategoria 4, 1 zgłoszeń</li>
+				<li><img src="./scripts/images/marker_purple.png" alt="Kategoria 5"> Kategoria 5, 1 zgłoszeń</li>
+			</ul>
+		</aside>
+		<div id="dialog-form" title="Wprowadzanie nowego zgłoszenia">
+			<p class="validateTips">Uzupełnij poniższe pola</p>
+			<form>
+				<fieldset>
+					<label for="category">Kategoria<font color="red">*</font></label>
+					<select name="category" id="category">
+						<optgroup label="Grupa 1">
+							<option>Kategoria1</option>
+							<option>Kategoria2</option>
+							<option>Kategoria2</option>
+						</optgroup>
+						<optgroup label="Grupa 2">
+							<option>Kategoria33</option>
+							<option>Kategoria44</option>
+							<option>Kategoria55</option>
+						</optgroup>
+					</select>
+					<label for="data">Data<font color="red">*</font></label>
+					<input type="date" name="data" id="data" class="text ui-widget-content ui-corner-all">
+					<label for="email">Email<font color="red">*</font></label>
+					<input type="text" name="email" id="email" value="user@mail.com" class="text ui-widget-content ui-corner-all">
+					<label for="image">Zdjęcie</label>
+					<input type="file" name="image" id="image" class="text ui-widget-content ui-corner-all">
+					<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+				</fieldset>
+			</form>
+		</div>
+		<footer>
+			<ul>
+				<li><a href="admin.html" rel="nofollow">Panel administracyjny</a></li>
+				<li><a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow">CSS 3</a></li>
+				<li><a href="http://validator.w3.org/check/referer" rel="nofollow">HTML 5</a></li>
+			</ul>
+		</footer>
+		<script src="./scripts/leaflet.js"></script>
+		<script src="./scripts/leaflet.draw.js"></script>
+		<script src="./scripts/functions.js"></script>	
 	</body>
 </html>

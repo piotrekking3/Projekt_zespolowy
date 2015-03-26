@@ -432,9 +432,7 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 			icon: this.options.icon,
 			zIndexOffset: this.options.zIndexOffset * 2
 		});
-
 		this._markerGroup.addLayer(marker);
-
 		return marker;
 	},
 
@@ -2937,6 +2935,5 @@ L.EditToolbar.Delete = L.Handler.extend({
 		return this._deletableLayers.getLayers().length !== 0;
 	}
 });
-
 
 }(window, document));

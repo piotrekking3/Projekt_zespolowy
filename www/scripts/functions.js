@@ -83,7 +83,8 @@
 	map.addLayer(category4);
 	map.addLayer(category5);
 	L.control.layers(null, overlays).addTo(map).setPosition('topleft');
-	
+
+/*new marker*/
 	// Initialise the FeatureGroup to store editable layers
 	var drawnItems = new L.FeatureGroup();
 	map.addLayer(drawnItems);
@@ -95,23 +96,71 @@
 		}
 	});
 	//map.addControl(drawControl);
-	
+	var layer;
 	map.on('draw:created', function (e) {
-    var type = e.layerType,
-        layer = e.layer;
+	var type = e.layerType;
+	layer = e.layer;
+	
+	if (type === 'marker') {
+		m = layer;
+ 		dialog.dialog( "open" );
+	}
+	// Do whatever else you need to. (save to db, add to map etc)
+	drawnItems.addLayer(layer);
+	});
 
-    if (type === 'marker') {
-        layer.bindPopup('Nowy znacznik!!!');
-    }
+	map.on('draw:edited', function () {
+	// Update db to save latest changes.
+	});
 
-    // Do whatever else you need to. (save to db, add to map etc)
-    drawnItems.addLayer(layer);
-});
+	map.on('draw:deleted', function () {
+	// Update db to save latest changes.
+	});
 
-map.on('draw:edited', function () {
-    // Update db to save latest changes.
-});
+/*form*/
+	var dialog, form,
+	category = $( "#category" ),
+	data = $( "#data" ),
+	email = $( "#email" ),
+	image = $( "#image" ),
+	allFields = $( [] ).add( category ).add( data ).add( email ).add( image ),
+	tips = $( ".validateTips" );
 
-map.on('draw:deleted', function () {
-    // Update db to save latest changes.
-});
+	function updateTips( t ) {
+	tips
+		.text( t )
+		.addClass( "ui-state-highlight" );
+	setTimeout(function() {
+		tips.removeClass( "ui-state-highlight", 1500 );
+	}, 500 );
+}
+
+	function submit() {
+		dialog.dialog( "close" );
+		//temporary close the form, we can add here sending to server and then then the map state will automaticaly refresh
+	}
+
+	function cancel() {
+		dialog.dialog( "close" );
+		map.removeLayer(layer);
+	}
+
+	dialog = $( "#dialog-form" ).dialog({
+	autoOpen: false,
+	height: 340,
+	width: 350,
+	modal: true,
+	buttons: {
+		"Wyślij": submit,
+		Anuluj: cancel
+	},
+	close: function() {
+		//map.removeLayer(m); //we can uncomment it when we will have submit function
+		form[ 0 ].reset();
+		allFields.removeClass( "ui-state-error" );
+	}
+	});
+
+	form = dialog.find( "form" ).on( "submit", function( event ) {
+	  event.preventDefault();
+	});
