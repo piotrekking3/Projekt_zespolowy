@@ -1,0 +1,239 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_67482e5c",
+        "filename": "www/about.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "Taby? Spacje?",
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_874baa58",
+        "filename": "www/admin.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "Taby czy spacje? Oto jest pytanie",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 15
+      },
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_273e36b9",
+        "filename": "www/contact.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "Nawet tu.",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 15
+      },
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_4741b238",
+        "filename": "www/index.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "I tutaj też.",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 15
+      },
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_e75c1e28",
+        "filename": "www/list.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "To samo co wcześniej. Taby czy spacje?",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 15
+      },
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_67314eec",
+        "filename": "www/scripts/functions.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "Czegoś takiego nie powinno być",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 1
+      },
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_87344adf",
+        "filename": "www/scripts/functions.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "Komentarz po polsku",
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_a7522611",
+        "filename": "www/scripts/functions.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "Do czego jest ta zmienna?",
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_871d6a69",
+        "filename": "www/scripts/leaflet.draw-src.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "Co to jest?",
+      "range": {
+        "startLine": 437,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 2
+      },
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_473a52ce",
+        "filename": "www/styles/design.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "białe znaki na końcu linii",
+      "range": {
+        "startLine": 150,
+        "startChar": 14,
+        "endLine": 150,
+        "endChar": 15
+      },
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_273756e5",
+        "filename": "www/types.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-27T08:31:05Z",
+      "side": 1,
+      "message": "Raz taby raz spacje. Warto poprawić na taby.",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 15
+      },
+      "revId": "8cc7853bd1d1fe9bb0f4d316a168ef35dd624760",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
