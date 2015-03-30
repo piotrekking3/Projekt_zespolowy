@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.ArrayList;
 
 /**
@@ -15,6 +17,7 @@ import java.util.ArrayList;
     Klasa na bazie Faktory. Tworzy gotowe okienka dialogowe.
     Np. Activity w ogole nie interesuje sposob tworzenia, tylko otrzymuje
     referencje do Dialog.
+    TODO: Czy ta klasa jest zbędna?...
  */
 public class DialogFactory{
 
@@ -41,9 +44,6 @@ public class DialogFactory{
                 _builder_2.setMessage("testowy wpis catiegories!");
 
                 return _builder_2.create();
-            case CAT_CHECK_LIST_DIALOG:
-                CategoriesChoiceDialog _builder_3 = new CategoriesChoiceDialog(__con);
-                return _builder_3.getDialog();
             default:
                 return null;
         }
