@@ -6,7 +6,34 @@
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
     </string>
 
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_marker">Dodaj</string>
+    <string name="setting">Opcje</string>
+    <string name="search">Szukaj</string>
+    <string name="maps_categories">Rodzaj mapy</string>
+    <string name="filtr">Filtruj</string>
+    <string name="categories">Kategorie</string>
+    <string name="help">Pomoc</string>
+    <string name="cat_choice_title">Wybierz kategorie</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Anuluj</string>
+    <string name="terrein">Teren</string>
+    <string name="satelite">Satelita</string>
+    <string name="form_title">Wypełnij formularz</string>
+    <string name="email">Adres e-mail</string>
+    <string name="content">Krótki opis...</string>
+    <string name="onLongClickOnMapString">
+        Proszę przytrzymać w miejscu gdzie ma się znaleźć nowe utrudnienie.</string>
+
+    <string-array name="categories">
+        <item>Sugnalizacja światła</item>
+        <item>Wysoki krawężnik</item>
+        <item>Brak podjazdu</item>
+        <item>Konieczne uspokojenie ruchu</item>
+        <item>Zniszczona nawierzchnia</item>
+        <item>Miejsce często blokowane</item>
+        <item>Brak widoczności</item>
+        <item>Zbyt niski peron przystanku</item>
+    </string-array>
 
 </resources>
