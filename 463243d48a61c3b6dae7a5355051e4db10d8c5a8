@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a106d94_84db9b1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-31T08:41:51Z",
+      "side": 1,
+      "message": "Brakuje tytułu",
+      "revId": "463243d48a61c3b6dae7a5355051e4db10d8c5a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_a4097797",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-31T08:41:51Z",
+      "side": 1,
+      "message": "Zdecydowaliście się na język polski w zmianach? Jeśli tak to wszystkie kolejne opisy też mają być po polsku.",
+      "range": {
+        "startLine": 10,
+        "startChar": 16,
+        "endLine": 10,
+        "endChar": 17
+      },
+      "revId": "463243d48a61c3b6dae7a5355051e4db10d8c5a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_33266f17",
         "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
         "patchSetId": 1
@@ -36,6 +76,24 @@
       "writtenOn": "2015-03-30T15:55:20Z",
       "side": 1,
       "message": "odstęp?",
+      "revId": "463243d48a61c3b6dae7a5355051e4db10d8c5a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_e4036f71",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-03-31T08:41:51Z",
+      "side": 1,
+      "message": "Jest chyba ok. Następna linia 94 jest niżej.",
+      "parentUuid": "1a106d94_13237306",
       "revId": "463243d48a61c3b6dae7a5355051e4db10d8c5a8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
