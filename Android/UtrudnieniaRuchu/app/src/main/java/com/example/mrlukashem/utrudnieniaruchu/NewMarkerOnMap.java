@@ -13,7 +13,7 @@ import android.provider.ContactsContract;
     formularz służący do pobrania danych od użytkownika.
  */
 public interface NewMarkerOnMap {
-    void setLongClickListener();
+    void setLongClickListener(boolean __setter);
     void setToastMarkerInfo();
-    void setData(String __email, int __category_id, String __content);
+    void createMarkerFromFormData(String __email, int __category_id, String __content);
 }
