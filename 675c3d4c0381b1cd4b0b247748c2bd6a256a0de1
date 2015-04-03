@@ -2,6 +2,144 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a106d94_11ab59d9",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-03T10:24:58Z",
+      "side": 1,
+      "message": "Moznaby uzyc jakichs definow (private static final w klasie MainActivity) zamiast hardkodowanych cyferek?",
+      "range": {
+        "startLine": 195,
+        "startChar": 25,
+        "endLine": 195,
+        "endChar": 26
+      },
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_519311a3",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-03T10:24:58Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 198,
+        "startChar": 25,
+        "endLine": 198,
+        "endChar": 26
+      },
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_b1908596",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-03T10:24:58Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 201,
+        "startChar": 25,
+        "endLine": 201,
+        "endChar": 26
+      },
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_918d897e",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-03T10:24:58Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 204,
+        "startChar": 25,
+        "endLine": 204,
+        "endChar": 26
+      },
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_f1e95d1b",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-03T10:24:58Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 207,
+        "startChar": 25,
+        "endLine": 207,
+        "endChar": 26
+      },
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_d1eee121",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-03T10:24:58Z",
+      "side": 1,
+      "message": "i jeszcze walnij \"default:\", chocby nawet mialo nic nie robic",
+      "range": {
+        "startLine": 211,
+        "startChar": 29,
+        "endLine": 211,
+        "endChar": 30
+      },
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_1126b9b7",
         "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
         "patchSetId": 1
@@ -13,6 +151,29 @@
       "writtenOn": "2015-04-03T10:01:09Z",
       "side": 1,
       "message": "Co jeśli, ktoś nie ustawi danych wcześniej? Może mi się tylko wydaje, ale chyba String będzie nullem. Może jakiś exception?",
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_71dd6d70",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-03T10:24:58Z",
+      "side": 1,
+      "message": "tak, to IMO moze byc nulem! Podobnie jak reszta pol z formularzy.",
+      "range": {
+        "startLine": 247,
+        "startChar": 23,
+        "endLine": 247,
+        "endChar": 49
+      },
       "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
