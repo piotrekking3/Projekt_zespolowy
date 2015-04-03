@@ -80,12 +80,10 @@ public class FormDialogFragment extends DialogFragment
                 EditText _content = (EditText)customView.findViewById(R.id.newMarkerFormContentEditText);
 
                 NewMarkerOnMap _setter = (NewMarkerOnMap)getActivity();
-                _setter.setLongClickListener();
-                _setter.setData(
+                _setter.createMarkerFromFormData(
                         _email.getText().toString(),
                         selectedItem,
                         _content.getText().toString());
-                _setter.setToastMarkerInfo();
 
                 dismiss();
             }
@@ -94,6 +92,8 @@ public class FormDialogFragment extends DialogFragment
         onNegativClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                NewMarkerOnMap _setter = (NewMarkerOnMap)getActivity();
+                _setter.setLongClickListener(false);
                 dismiss();
             }
         };
