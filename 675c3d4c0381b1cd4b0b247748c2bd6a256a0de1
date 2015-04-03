@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a106d94_1126b9b7",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-03T10:01:09Z",
+      "side": 1,
+      "message": "Co jeśli, ktoś nie ustawi danych wcześniej? Może mi się tylko wydaje, ale chyba String będzie nullem. Może jakiś exception?",
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_762563c1",
         "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
         "patchSetId": 1
