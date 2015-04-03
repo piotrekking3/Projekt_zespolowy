@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_762563c1",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-03T09:56:23Z",
+      "side": 1,
+      "message": "dziwna nazwa, niespojna z konwencja",
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_5622e7b9",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-03T09:56:23Z",
+      "side": 1,
+      "message": "dziwna nazwa, niespojna z konwencja",
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_3613eb67",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-03T09:56:23Z",
+      "side": 1,
+      "message": "literowka, brakuje \u0027e\u0027; showFilterCategoriesDialog",
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_16186f80",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-03T09:56:23Z",
+      "side": 1,
+      "message": "dziwna nazwa, niespojna z konwencja",
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_760c4343",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-03T09:56:23Z",
+      "side": 1,
+      "message": "dziwna nazwa, niespojna z konwencja",
+      "range": {
+        "startLine": 278,
+        "startChar": 29,
+        "endLine": 278,
+        "endChar": 30
+      },
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_310ad521",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-03T09:56:23Z",
+      "side": 1,
+      "message": "dziwna nazwa, niespojna z konwencja",
+      "revId": "675c3d4c0381b1cd4b0b247748c2bd6a256a0de1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
