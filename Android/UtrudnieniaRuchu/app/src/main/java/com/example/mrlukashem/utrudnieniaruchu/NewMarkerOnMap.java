@@ -14,6 +14,6 @@ import android.provider.ContactsContract;
  */
 public interface NewMarkerOnMap {
     void setLongClickListener();
-    void setToastMarkerInfo();
-    void setData(String __email, int __category_id, String __content);
+    void showToastMarkerInfo();
+    void createMarkerFromFormData(String __email, int __category_id, String __content);
 }
