@@ -77,6 +77,7 @@ public class MainActivity extends ActionBarActivity
     private String tempEmailFromNewMarkerForm;
     private String tempContentFromNewMarkerForm;
     private int tempCatIdFromMarkerForm;
+    private LatLng lastLongClickLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,37 +193,21 @@ public class MainActivity extends ActionBarActivity
                         TODO: Zajęcie się kwestią lepszego tworzenia okienek dialogowych za pomoca fragmentów.
                      */
                     case 0:
-                        FragmentTransaction tt = getFragmentManager().beginTransaction();
-                        DialogFragment dd = (DialogFragment)getFragmentManager().findFragmentByTag("FormDialog");
-                        if(dd != null) {
-                            tt.remove(dd);
-                        }
-                        tt.addToBackStack(null);
-
-                        FormDialogFragment ff = FormDialogFragment.newInstance();
-                        tt.add(ff, "FormDialog");
-                        tt.commit();
+                        prepareToNewMarker();
                         break;
                     case 1:
-
+                        gMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
                         break;
                     case 2:
-
+                        gMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
                         break;
                     case 3:
-                        FragmentTransaction t = getFragmentManager().beginTransaction();
-                        DialogFragment d = (DialogFragment)getFragmentManager().findFragmentByTag("dialog");
-                        if(d != null) {
-                            t.remove(d);
-                        }
-                            t.addToBackStack(null);
-
-                            CategoriesChoiceDialogFragment f = CategoriesChoiceDialogFragment.newInstance();
-                            t.add(f, "dialog");
-                            t.commit();
+                        showFiltrCategoriesDialog();
                         break;
                     case 4:
-
+                        /*
+                            TODO: Zrobienie jakiś podstawowych opcji w nowym Activity
+                         */
                         break;
 
                 };
@@ -230,9 +215,14 @@ public class MainActivity extends ActionBarActivity
         };
     }
 
-    @Override
     public void setLongClickListener() {
         isLongClickListening = true;
+    }
+
+    public void prepareToNewMarker() {
+        drawerLayout.closeDrawers();
+        setLongClickListener();
+        setToastMarkerInfo();
     }
 
     @Override
@@ -245,23 +235,54 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void setData(String __email, int __category_id, String __content) {
+    public void sendFormData(String __email, int __category_id, String __content) {
         tempEmailFromNewMarkerForm = __email;
         tempCatIdFromMarkerForm = __category_id;
         tempContentFromNewMarkerForm = __content;
     }
 
     @Override
+    public void addMarkerFromFormData() {
+        MarkerOptions _options = new MarkerOptions();
+        _options.title(tempEmailFromNewMarkerForm);
+        _options.position(lastLongClickLatLng);
+        ObjectsOnMapHandler.objectsOnMapHandler.addMarker(_options, tempCatIdFromMarkerForm);
+        isLongClickListening = false;
+    }
+
+    @Override
     public void onMapLongClick(LatLng __latLng) {
-        Log.e("onMapLongClick", "długie kliknięcie na mapę");
         if(!isLongClickListening) {
             return;
         }
+        lastLongClickLatLng = __latLng;
 
-        MarkerOptions _options = new MarkerOptions();
-        _options.title(tempEmailFromNewMarkerForm);
-        _options.position(__latLng);
-        ObjectsOnMapHandler.objectsOnMapHandler.addMarker(_options, tempCatIdFromMarkerForm);
-        isLongClickListening = false;
+        showNewMarkerFormDialog();
+    }
+
+    private void showNewMarkerFormDialog() {
+        FragmentTransaction tt = getFragmentManager().beginTransaction();
+        DialogFragment dd = (DialogFragment)getFragmentManager().findFragmentByTag("FormDialog");
+        if(dd != null) {
+            tt.remove(dd);
+        }
+        tt.addToBackStack(null);
+
+        FormDialogFragment ff = FormDialogFragment.newInstance();
+        tt.add(ff, "FormDialog");
+        tt.commit();
+    }
+
+    private void showFiltrCategoriesDialog() {
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        DialogFragment d = (DialogFragment)getFragmentManager().findFragmentByTag("dialog");
+        if(d != null) {
+            t.remove(d);
+        }
+        t.addToBackStack(null);
+
+        CategoriesChoiceDialogFragment f = CategoriesChoiceDialogFragment.newInstance();
+        t.add(f, "dialog");
+        t.commit();
     }
 }
