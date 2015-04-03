@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a106d94_2ce9dc80",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-03T15:58:44Z",
+      "side": 1,
+      "message": "Nie uwazam, zeby to bylo potrzebne: patrz moj nastepny komentarz.",
+      "revId": "41fb9a7c7d967d6de8f0fdd009ae271f64888217",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_ac4e6cbf",
         "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
         "patchSetId": 2
@@ -13,6 +30,23 @@
       "writtenOn": "2015-04-03T15:52:13Z",
       "side": 1,
       "message": "nie podoba mi sie to. Skoro add* i send* zawsze dzialaja razem, to zrob je prywatne i wloz w nowa metode publiczna. W ten sposob uzywkownik NewMarkerOnMap nie bedzie mial mozliwosci popelnienia bledu.\n\nareFormFieldsNull mogloby wtedy byc wywalone, a dodatkowa metoda moglaby wprost sprawdzic poprawnosc argumantow.",
+      "revId": "41fb9a7c7d967d6de8f0fdd009ae271f64888217",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_6c02b43f",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-03T15:58:44Z",
+      "side": 1,
+      "message": "Gdy juz bedziesz mial publiczna  metode \u0027post\u0027 wrapujaca send* i add* w dobrej kolejnosci, poprawnosc argumentow sprawdz explicite za pomoca Objects.requireNonNull- nie sadze, zeby byl sens towrzyc metode.",
       "revId": "41fb9a7c7d967d6de8f0fdd009ae271f64888217",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
