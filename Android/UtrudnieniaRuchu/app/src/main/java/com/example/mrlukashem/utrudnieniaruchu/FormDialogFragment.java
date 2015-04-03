@@ -80,12 +80,11 @@ public class FormDialogFragment extends DialogFragment
                 EditText _content = (EditText)customView.findViewById(R.id.newMarkerFormContentEditText);
 
                 NewMarkerOnMap _setter = (NewMarkerOnMap)getActivity();
-                _setter.setLongClickListener();
-                _setter.setData(
+                _setter.sendFormData(
                         _email.getText().toString(),
                         selectedItem,
                         _content.getText().toString());
-                _setter.setToastMarkerInfo();
+                _setter.addMarkerFromFormData();
 
                 dismiss();
             }
