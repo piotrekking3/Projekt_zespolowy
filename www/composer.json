@@ -1,0 +1,13 @@
+{
+    "name": "wmb/web-app",
+    "description": "Wroclawska Mapa Barier",
+    "require": {
+        "slim/slim": "~2.6"
+    },
+    "authors": [
+        {
+            "name": "Robert Chojnacki",
+            "email": "robek.chojnacki@gmail.com"
+        }
+    ]
+}
