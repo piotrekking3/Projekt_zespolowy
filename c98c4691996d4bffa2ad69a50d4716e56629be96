@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_e59eb253",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-07T13:21:37Z",
+      "side": 1,
+      "message": "enableLongClickListener\n\n(teraz nazwa metody sugeruje ze ustawiacz za jej pomoca listener\u0027a)\n\na tak poza tym, to moim zdaniem duzo ladniej byloby dodawac/odejmowac listener\u0027a, zamiast ustawiac flage i sprawdzac ja w listenerze- tu zwyczajnie nie ma potrzeby przechowywac stan.",
+      "revId": "c98c4691996d4bffa2ad69a50d4716e56629be96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_05a4aea4",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-07T13:21:37Z",
+      "side": 1,
+      "message": "czy to musi byc publiczne?",
+      "revId": "c98c4691996d4bffa2ad69a50d4716e56629be96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_65bac2c1",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/NewMarkerOnMap.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-07T13:21:37Z",
+      "side": 1,
+      "message": "obydwie metody set sa dziwne. nic nimi nie ustawiam (nie maja parametru), a nazywaja sie set*",
+      "revId": "c98c4691996d4bffa2ad69a50d4716e56629be96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
