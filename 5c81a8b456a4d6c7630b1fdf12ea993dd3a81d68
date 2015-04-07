@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_a0d5c8ba",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/FormDialogFragment.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-07T16:46:49Z",
+      "side": 1,
+      "message": "to sie chyba nie skompiluje, bo NewMarkerOnMap nie ma metody przyjmujacej boolean\u0027a",
+      "range": {
+        "startLine": 96,
+        "startChar": 45,
+        "endLine": 96,
+        "endChar": 50
+      },
+      "revId": "5c81a8b456a4d6c7630b1fdf12ea993dd3a81d68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_20e1d89a",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1004374
+      },
+      "writtenOn": "2015-04-07T16:46:49Z",
+      "side": 1,
+      "message": "prawie :)\nTa metoda dalej jest dziwna.\n\nhttp://www.iwombat.com/standards/JavaStyleGuide.html\n\n\"Accessors and mutators are methods used to return and set the attribute value. These methods typically begin with \"get\" or \"set\", followed by the attribute name.\"\n\nenableLongClickListener?",
+      "range": {
+        "startLine": 239,
+        "startChar": 16,
+        "endLine": 239,
+        "endChar": 36
+      },
+      "revId": "5c81a8b456a4d6c7630b1fdf12ea993dd3a81d68",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
