@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_cd10f803",
+        "filename": "RestApi/src/main/webapp/WEB-INF/web.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-08T08:32:33Z",
+      "side": 1,
+      "message": "Nie lubię mieszania tabów i spacji w jednym pliku. Dodatkowo Red Is Bad",
+      "revId": "4b8733d6e8ef0f29278e36d1fbbb4c1f2ace9d51",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
