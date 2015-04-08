@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_4d0408c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-08T08:37:57Z",
+      "side": 1,
+      "message": "tytuł (max 80 znaków) potem jedna pusta linia, potem dokładny opis",
+      "revId": "f17daf378e3f4457ea42ba8fade1cfa492155bda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_8d2d6049",
+        "filename": "www/index.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-08T08:37:57Z",
+      "side": 1,
+      "message": "Czemu nie template?",
+      "revId": "f17daf378e3f4457ea42ba8fade1cfa492155bda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_ad2adc29",
+        "filename": "www/styles/design.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-08T08:37:57Z",
+      "side": 1,
+      "message": "tab czy spacja?",
+      "revId": "f17daf378e3f4457ea42ba8fade1cfa492155bda",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
