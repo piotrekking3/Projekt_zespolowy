@@ -1,5 +1,5 @@
 // Definicja mapy
-var map = L.map('map', {center: [51.1101, 17.03], zoom: 14, layers: [OSMgrayscale, OSMcolor], maxBounds: mapBounds});
+var map = L.map('map', {center: [51.1101, 17.03], zoom: 14, layers: [OSMcycle, OSMgrayscale, OSMcolor], maxBounds: mapBounds});
 
 // Obsługa geolokalizacji
 function onLocationFound(e) {
@@ -29,9 +29,9 @@ L.control.layers(baseLayers, overlays).addTo(map);
 var newMarkerLayer;
 map.on('draw:created', function (e) {
 	if (e.layerType == 'marker') {
-		// Zapamiętujemy warstwę nowego znacznika, 
+		// Zapamiętujemy warstwę nowego znacznika,
 		// ponieważ dodamy ją do mapy dopiero po obsłudze formularza
-		newMarkerLayer = e.layer;	
+		newMarkerLayer = e.layer;
 		newMarkerDialog.dialog("open");
 	}
 });

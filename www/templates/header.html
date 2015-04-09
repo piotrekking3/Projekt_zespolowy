@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head lang="pl">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=0.75, width=device-width, user-scalable=yes, minimum-scale=0.5, maximum-scale=2.0">
+		<link rel="stylesheet" href="./styles/design.css">
+		<link rel="stylesheet" href="./styles/jquery.ui.css">
+		<link rel="stylesheet" href="./styles/leaflet.css">
+		<link rel="stylesheet" href="./styles/leaflet.draw.css">
+		<script src="./scripts/jquery.js"></script>
+		<script src="./scripts/jquery.ui.js"></script>
+		<script src="./scripts/leaflet.js"></script>
+		<script src="./scripts/leaflet.draw.js"></script>
+		<!--[if lt IE 9]>
+		<script src="./scripts/html5shiv.js"></script>
+		<![endif]-->
+		<title><?php echo($this->data['title']); ?></title>
+	</head>
+	<body>
+		<header role="banner">
+			<div id="title">
+				<h1>Wrocławska Mapa Barier</h1>
+				<h2>Identyfikacja miejskich utrudnień ruchu</h2>
+			</div>
+		</header>
+		<nav role="navigation">
+			<ul>
+				<li><a href="/contact" rel="nofollow"<?= ($this->data['active'] == 'contact') ? ' class="active"' : '' ; ?>>Kontakt</a></li>
+				<li><a href="/about" rel="author"<?= ($this->data['active'] == 'about') ? ' class="active"' : '' ; ?>>O projekcie</a></li>
+				<li><a href="/types" rel="help"<?= ($this->data['active'] == 'types') ? ' class="active"' : '' ; ?>>Rodzaje barier</a></li>
+				<li><a href="/list" rel="search"<?= ($this->data['active'] == 'list') ? ' class="active"' : '' ; ?>>Lista barier</a></li>
+				<li><a href="/map" rel="index"<?= ($this->data['active'] == 'map') ? ' class="active"' : '' ; ?>>Mapa barier</a></li>
+			</ul>
+		</nav>

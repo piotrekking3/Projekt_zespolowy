@@ -6,17 +6,24 @@ var southWest = L.latLng(51.210, 17.379),
 	OSMcolor = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 	{
 		minZoom: 12, maxZoom: 18,
-		bounds: mapBounds, 
+		bounds: mapBounds,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}),
 	OSMgrayscale = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
 	{
 		minZoom: 12, maxZoom: 18,
-		bounds: mapBounds, 
+		bounds: mapBounds,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}),
+	OSMcycle = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
+	{
+		minZoom: 12, maxZoom: 18,
+		bounds: mapBounds,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	});
 
 var baseLayers = {
+	"Rowerowa": OSMcycle,
 	"Czarno-biała": OSMgrayscale,
 	"Kolorowa": OSMcolor
 };
