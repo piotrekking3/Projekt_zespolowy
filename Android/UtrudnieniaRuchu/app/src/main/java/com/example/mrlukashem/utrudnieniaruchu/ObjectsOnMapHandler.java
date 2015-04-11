@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -41,7 +42,7 @@ public class ObjectsOnMapHandler {
     }
 
     private boolean[] categoriesStateArray;
-    private ArrayList<Pair<Marker, Integer>> markersOnMap;
+    private ArrayList<ProblemInstance> markersOnMap;
     private GoogleMap gMap;
     private Context context;
 
@@ -64,22 +65,38 @@ public class ObjectsOnMapHandler {
     }
 
     /*
-        Metoda dodająca nowy marker na mapę i sprawdzająca, czy jego kategoria
+        Metoda dodająca nowy marker/problem na mapę i sprawdzająca, czy jego kategoria
         nie została wyłączona przez użytkownika.
-        @param1 Nowy markerOptions
-        @param2 Typ - kategoria markera
-        Po stworzeniu i dodania na mapę i do listy nowego markera metoda sprawdza
+        @param1 Dane potrzebne do stworzenia nowego utrudnienia
+        Po stworzeniu i dodania na mapę i do listy nowego markera/problemu metoda sprawdza
         czy kategoria w jakiej marker się znajduje jest wyświetlana.
         Jeżeli nie to zostaje on wyłączony.
      */
-    public void addMarker(MarkerOptions __marker_option, Integer __type){
-        Marker _marker = gMap.addMarker(__marker_option);
-        markersOnMap.add(new Pair<>(_marker, __type));
+    public void addProblem(ProblemInstance.ProblemData __data){
+        if(__data.getCategoryId() >= categoriesStateArray.length
+                || __data.getCategoryId() < 0) {
+            throw new ArrayIndexOutOfBoundsException("Index poza zakresem tablicy kategorii");
+        }
+        MarkerOptions _options = new MarkerOptions();
+        ProblemInstance _problem;
+        Marker _marker;
 
-        if(__type > 0 && __type < categoriesStateArray.length) {
-            if (!categoriesStateArray[__type]) {
-                _marker.setVisible(false);
-            }
+        _options
+                .position(__data.getCords())
+                .title(context.getResources().getStringArray(R.array.categories)[__data.getCategoryId()])
+                .snippet(__data.getContent())
+                .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColorById(__data.getCategoryId())));
+        _marker = gMap.addMarker(_options);
+        try {
+            _problem = ProblemInstance.newInstance(__data, _marker);
+        } catch(NullPointerException __e) {
+            _marker.remove();
+            return;
+        }
+        markersOnMap.add(_problem);
+
+        if (!categoriesStateArray[_problem.getCategoryId()]) {
+            _marker.setVisible(false);
         }
     }
 
@@ -104,15 +121,30 @@ public class ObjectsOnMapHandler {
     }
 
     /*
+        Metoda wyszukująca instancję zadanego problemu po jego markerze
+        @param1 marker
+        @return znaleziony obiekt lub null w przeciwnym wypadku
+     */
+    public ProblemInstance findProblemByMarker(Marker __marker) {
+        for(ProblemInstance problem : markersOnMap) {
+            if(__marker.equals(problem.getMarker())) {
+                return problem;
+            }
+        }
+
+        return null;
+    }
+
+    /*
         Funkcja odpowiedzialna za ustawienie zadanej ketogorii poprzez Id wartości
         true lub false w zależności od drugiego argumentu.
         @param1 Id kategorii
         @param2 nowa wartość true lub false
      */
     private void setCategoryVisible(Integer __index, boolean __setter) {
-        for(Pair<Marker, Integer> e : markersOnMap) {
-            if(e.getSecond().equals(__index)) {
-                e.getFirst().setVisible(__setter);
+        for(ProblemInstance p : markersOnMap) {
+            if(p.getCategoryId().equals(__index)) {
+                p.getMarker().setVisible(__setter);
             }
         }
     }
@@ -128,6 +160,31 @@ public class ObjectsOnMapHandler {
             } else {
                 setCategoryVisible(category, false);
             }
+        }
+    }
+
+    private float getMarkerColorById(int __id) {
+        switch (__id) {
+            case 0:
+                return BitmapDescriptorFactory.HUE_AZURE;
+            case 1:
+                return BitmapDescriptorFactory.HUE_BLUE;
+            case 2:
+                return BitmapDescriptorFactory.HUE_CYAN;
+            case 3:
+                return BitmapDescriptorFactory.HUE_GREEN;
+            case 4:
+                return BitmapDescriptorFactory.HUE_MAGENTA;
+            case 5:
+                return BitmapDescriptorFactory.HUE_ORANGE;
+            case 6:
+                return BitmapDescriptorFactory.HUE_RED;
+            case 7:
+                return BitmapDescriptorFactory.HUE_ROSE;
+            case 8:
+                return BitmapDescriptorFactory.HUE_VIOLET;
+            default:
+                return BitmapDescriptorFactory.HUE_RED;
         }
     }
 }

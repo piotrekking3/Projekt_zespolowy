@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by mrlukashem on 28.03.15.
  */
 public class FormDialogFragment extends DialogFragment
-        implements AdapterView.OnItemClickListener {
+        implements Spinner.OnItemSelectedListener {
 
     private Dialog instance;
     private View customView;
@@ -46,7 +46,7 @@ public class FormDialogFragment extends DialogFragment
     public Dialog onCreateDialog(Bundle __saved_instance_state) {
         AlertDialog.Builder _builder = new AlertDialog.Builder(getActivity());
         LayoutInflater _inflater = getActivity().getLayoutInflater();
-        setListener();
+        enableListener();
 
         customView = _inflater.inflate(R.layout.new_marker_form, null);
         _builder
@@ -64,7 +64,7 @@ public class FormDialogFragment extends DialogFragment
         Metoda tworzy obiekty słuchaczy i przypisuje je referencją, które
         są zdefiniowane w polach.
      */
-    private void setListener() {
+    private void enableListener() {
         /*
             Słuchacz odpowiedzialny za odebranie komunikatu o nacisnięciu przycisku ok.
             Następnie pobiera wszystkie dane z pół tekstowych i spinnera. Z kolei potem
@@ -110,15 +110,20 @@ public class FormDialogFragment extends DialogFragment
                     getResources().getStringArray(R.array.categories));
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
+            spinner.setOnItemSelectedListener(this);
         } catch(Exception __e) {
             Log.e("setSpinnerMethodExc", __e.toString());
             dismiss();
         }
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedItem = position;
+    }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        selectedItem = position;
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
