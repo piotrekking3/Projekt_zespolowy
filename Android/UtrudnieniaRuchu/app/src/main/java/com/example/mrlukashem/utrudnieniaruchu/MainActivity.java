@@ -94,7 +94,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         ObjectsOnMapHandler.objectsOnMapHandler.setObjectsOnMapHandler(gMap, getApplicationContext());
         setContentView(R.layout.activity_main);
-        setListeners();
+        enableListeners();
         setActionBar();
 
         fragmentManager = getSupportFragmentManager();
@@ -174,7 +174,7 @@ public class MainActivity extends ActionBarActivity
         chooseCatDialog = CategoriesChoiceDialogFragment.newInstance();
     }
 
-    private void setListeners() {
+    private void enableListeners() {
         onMapClickListener = new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -271,10 +271,13 @@ public class MainActivity extends ActionBarActivity
     }
 
     private void addMarkerFromFormData() {
-        MarkerOptions _options = new MarkerOptions();
-        _options.title(Objects.requireNonNull(tempEmailFromNewMarkerForm, "null email"));
-        _options.position(lastLongClickLatLng);
-        ObjectsOnMapHandler.objectsOnMapHandler.addMarker(_options, tempCatIdFromMarkerForm);
+        ProblemInstance.ProblemData _data =
+                ProblemInstance.createProblemData(
+                        tempContentFromNewMarkerForm,
+                        tempEmailFromNewMarkerForm,
+                        tempCatIdFromMarkerForm,
+                        lastLongClickLatLng);
+        ObjectsOnMapHandler.objectsOnMapHandler.addProblem(_data);
     }
 
     private void showNewMarkerFormDialog() {
