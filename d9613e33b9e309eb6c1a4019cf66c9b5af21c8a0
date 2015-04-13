@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a106d94_50d12b56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-13T11:07:05Z",
+      "side": 1,
+      "message": "tak tylko sie czepiam:\n\"^ * text$\" \njest lepsze niz\n\"^-text$\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 15,
+        "endLine": 9,
+        "endChar": 30
+      },
+      "revId": "d9613e33b9e309eb6c1a4019cf66c9b5af21c8a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_90f443f3",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/FormDialogFragment.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-13T11:07:05Z",
+      "side": 1,
+      "message": "ta funkcja ma strasznie duzo martwych parametrow... nie trzeba czegos jeszczze poprzepisywac, lub wywolac jakiegos Supera?",
+      "range": {
+        "startLine": 122,
+        "startChar": 31,
+        "endLine": 122,
+        "endChar": 32
+      },
+      "revId": "d9613e33b9e309eb6c1a4019cf66c9b5af21c8a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_b03cdfc0",
         "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/ObjectsOnMapHandler.java",
         "patchSetId": 2
@@ -13,6 +59,52 @@
       "writtenOn": "2015-04-13T10:23:47Z",
       "side": 1,
       "message": "Ja widzę tylko jeden @param",
+      "revId": "d9613e33b9e309eb6c1a4019cf66c9b5af21c8a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_50eacb0f",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/ObjectsOnMapHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-13T11:07:05Z",
+      "side": 1,
+      "message": "Moznaby sie pokusic o zrobienie tych kolorkow konrigurowalnych w jakims res/values/kolorki.xml czy innym .xml\u0027u. Ale to moze byc pozniej zrobione.",
+      "range": {
+        "startLine": 170,
+        "startChar": 47,
+        "endLine": 170,
+        "endChar": 56
+      },
+      "revId": "d9613e33b9e309eb6c1a4019cf66c9b5af21c8a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_10ba1323",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/ProblemInstance.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-13T11:07:05Z",
+      "side": 1,
+      "message": "zastanawiam sie czy to nie jest \"redundant\" informacja, skoro juz w _problem\u0027ie trzymasz .marker. Ale moze zostac.",
+      "range": {
+        "startLine": 47,
+        "startChar": 17,
+        "endLine": 47,
+        "endChar": 25
+      },
       "revId": "d9613e33b9e309eb6c1a4019cf66c9b5af21c8a0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
