@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_b03cdfc0",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/ObjectsOnMapHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-13T10:23:47Z",
+      "side": 1,
+      "message": "Ja widzę tylko jeden @param",
+      "revId": "d9613e33b9e309eb6c1a4019cf66c9b5af21c8a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
