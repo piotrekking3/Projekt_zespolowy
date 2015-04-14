@@ -1,10 +1,41 @@
 // Definicje znaczników
-// Ten plik powinien być generowany przez PHP na podstawie punktów zapisanych w bazie danych
 
-L.marker([51.110121, 17.032020], {icon: redIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 1").addTo(category1);
-L.marker([51.110902, 17.032225], {icon: greenIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 2").addTo(category2);
-L.marker([51.110000, 17.032425], {icon: blueIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 3").addTo(category3);
-L.marker([51.109200, 17.030254], {icon: purpleIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 5").addTo(category5);
-L.marker([51.109950, 17.030954], {icon: yellowIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 4").addTo(category4),
-L.marker([51.111150, 17.030444], {icon: yellowIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 4").addTo(category4),
-L.marker([51.109255, 17.011154], {icon: yellowIcon}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 4").addTo(category4);
+$.getJSON("http://virt2.iiar.pwr.edu.pl/api/zgloszenia/getAll", 
+	function(data){
+		$.each(data, function(i){
+			L.marker([data[i].zgloszenia.wspolrzedne.x, data[i].zgloszenia.wspolrzedne.y], {icon: setIcon(data[i].zgloszenia.id_typu)}).bindPopup("<b>Wrocław - Rynek</b><br>Kategoria 4").addTo( setCategory(data[i].zgloszenia.id_typu) );
+		});
+});
+
+function setIcon(id){
+	if(id == 1){
+		return redIcon;
+	}
+	if(id == 2){
+		return greenIcon;
+	}
+	if(id == 3){
+		return blueIcon;
+	}
+	if(id == 4){
+		return yellowIcon;
+	}
+	if(id == 5){
+		return purpleIcon;
+	}
+}
+
+function setCategory(id){
+	if(id == 1){
+		return category1;
+	}
+	if(id == 2){
+		return category2;
+	}
+	if(id == 3){
+		return category3;
+	}
+	if(id == 4){
+		return category4;
+	}
+}
