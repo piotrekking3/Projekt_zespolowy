@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_29288585",
+        "filename": "www/scripts/wmb.markers.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-15T07:25:31Z",
+      "side": 1,
+      "message": "może lepiej jako zwykłą tablicę?\nvar color \u003d [redIcon,greenIcon....];\nicon: colorIcon[data[i].zgloszenia.id_typu],",
+      "revId": "85e23a6081fc794e9874f926171998398be16750",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_69227da5",
+        "filename": "www/scripts/wmb.markers.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-15T07:25:31Z",
+      "side": 1,
+      "message": "To samo co wyżej. Jeśli masz problem z zerem to można\nvar category \u003d {1:category1,2:category2.....}",
+      "revId": "85e23a6081fc794e9874f926171998398be16750",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
