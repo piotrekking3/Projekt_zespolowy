@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a106d94_445fa872",
+        "filename": "www/scripts/wmb.markers.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-15T13:23:32Z",
+      "side": 1,
+      "message": "Tu coś czerwonego :-)",
+      "revId": "42b1e9e479a3af24ff950171dbb1fdec0bb15c3f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_8436c0e5",
         "filename": "www/scripts/wmb.markers.js",
         "patchSetId": 2
@@ -13,6 +30,30 @@
       "writtenOn": "2015-04-15T11:54:43Z",
       "side": 1,
       "message": "TABs in JS?\nhttp://javascript.crockford.com/code.html",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 5
+      },
+      "revId": "42b1e9e479a3af24ff950171dbb1fdec0bb15c3f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_c44a78ab",
+        "filename": "www/scripts/wmb.markers.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-15T13:23:32Z",
+      "side": 1,
+      "message": "Ja sam zawsze używam tabów ;-) cenię sobie czas i nie chce mi się 4 razy naciskać strzałki zamiast raz.",
+      "parentUuid": "1a106d94_8436c0e5",
       "range": {
         "startLine": 6,
         "startChar": 0,
