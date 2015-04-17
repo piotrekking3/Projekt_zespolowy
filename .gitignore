@@ -22,3 +22,6 @@ proguard/
 *.war
 *.ear
 *.bat
+
+#REST
+/*/target/
