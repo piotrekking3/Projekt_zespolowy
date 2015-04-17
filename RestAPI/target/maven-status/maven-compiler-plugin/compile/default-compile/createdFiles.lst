@@ -1,0 +1,10 @@
+projekt_zespolowy\restapi\model\Zgloszenia.class
+projekt_zespolowy\restapi\dao\TestDao.class
+projekt_zespolowy\restapi\model\Uzytkownicy.class
+projekt_zespolowy\restapi\services\ServiceZgloszenia.class
+projekt_zespolowy\restapi\services\ServiceUzytkownicy.class
+projekt_zespolowy\restapi\services\ServiceTest.class
+projekt_zespolowy\restapi\util\DatabaseConnection.class
+projekt_zespolowy\restapi\model\Test.class
+projekt_zespolowy\restapi\dao\UzytkownicyDao.class
+projekt_zespolowy\restapi\dao\ZgloszeniaDao.class
