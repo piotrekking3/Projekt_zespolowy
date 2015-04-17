@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_a1c5a43d",
+        "filename": "ClientTest/src/main/java/projekt_zespolowy/clienttest/ClientTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-17T07:58:29Z",
+      "side": 1,
+      "message": "spacja?",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "04344ccdddfe11ef578d358e26656a548152ff2c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
