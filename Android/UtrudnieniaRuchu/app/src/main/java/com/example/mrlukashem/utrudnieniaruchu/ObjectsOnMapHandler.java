@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by mrlukashem on 26.03.15.
@@ -68,6 +69,7 @@ public class ObjectsOnMapHandler {
         Metoda dodająca nowy marker/problem na mapę i sprawdzająca, czy jego kategoria
         nie została wyłączona przez użytkownika.
         @param1 Dane potrzebne do stworzenia nowego utrudnienia
+        @param2 marker options
         Po stworzeniu i dodania na mapę i do listy nowego markera/problemu metoda sprawdza
         czy kategoria w jakiej marker się znajduje jest wyświetlana.
         Jeżeli nie to zostaje on wyłączony.
@@ -88,7 +90,7 @@ public class ObjectsOnMapHandler {
                 .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColorById(__data.getCategoryId())));
         _marker = gMap.addMarker(_options);
         try {
-            _problem = ProblemInstance.newInstance(__data, _marker);
+             _problem = ProblemInstance.newInstance(__data, _marker);
         } catch(NullPointerException __e) {
             _marker.remove();
             return;
