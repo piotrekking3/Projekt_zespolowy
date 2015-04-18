@@ -2,14 +2,10 @@ package com.example.mrlukashem.utrudnieniaruchu;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

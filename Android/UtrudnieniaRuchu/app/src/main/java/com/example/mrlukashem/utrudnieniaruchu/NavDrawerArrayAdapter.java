@@ -88,7 +88,6 @@ public class NavDrawerArrayAdapter extends ArrayAdapter<NavDrawerItem> {
             } else if (_item.getType() == NavDrawerSectionItem.TYPE) {
                 __convertView = getSectionItem(__position, __convertView, __parent);
             }
-            }
         }
 
         return __convertView;

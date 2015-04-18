@@ -24,6 +24,9 @@
     <string name="content">Krótki opis...</string>
     <string name="onLongClickOnMapString">
         Proszę przytrzymać w miejscu gdzie ma się znaleźć nowe utrudnienie.</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="dialog_problem_info_title">Opis przypadku</string>
 
     <string-array name="categories">
         <item>Sugnalizacja światła</item>
@@ -36,4 +39,14 @@
         <item>Zbyt niski peron przystanku</item>
     </string-array>
 
+    <string-array name="categoriesColors">
+        <item>Sugnalizacja światła</item>
+        <item>Wysoki krawężnik</item>
+        <item>Brak podjazdu</item>
+        <item>Konieczne uspokojenie ruchu</item>
+        <item>Zniszczona nawierzchnia</item>
+        <item>Miejsce często blokowane</item>
+        <item>Brak widoczności</item>
+        <item>Zbyt niski peron przystanku</item>
+    </string-array>
 </resources>
