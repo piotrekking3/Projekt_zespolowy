@@ -6,6 +6,9 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -15,15 +18,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,6 +38,7 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -38,6 +46,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import junit.framework.Assert;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.Objects;
 import java.util.zip.Inflater;
@@ -46,13 +61,14 @@ import java.util.zip.Inflater;
  * Created by mrlukashem
  */
 /*
-TODO: Zwinięcie navigation draera po wypełnieniu formularza dodającego nowy marker w celu łatwiejszego zaznaczenia miejsca na mapie.
+TODO: Settingsy!
  */
 public class MainActivity extends ActionBarActivity
         implements OnMapReadyCallback, NewMarkerOnMap {
 
     //map fields
     private GoogleMap gMap;
+    private MapFragment mapFragment;
     private UiSettings uiSettings;
     private final LatLng WROCLAW_RYNEK = new LatLng(51.1056248, 17.0381557);
 
@@ -65,6 +81,7 @@ public class MainActivity extends ActionBarActivity
     //drawer fields
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
+    private ActionBarDrawerToggle drawerToggle;
     private NavDrawerArrayAdapter drawerListAdapter;
 
     //dialogs
@@ -75,12 +92,12 @@ public class MainActivity extends ActionBarActivity
 
     private FragmentManager fragmentManager;
 
+    //new marker form data
     private String tempEmailFromNewMarkerForm;
     private String tempContentFromNewMarkerForm;
     private int tempCatIdFromMarkerForm;
     private LatLng lastLongClickLatLng;
 
-    //drawer lists elements ids
     private static final int NEW_MARKER = 0;
     private static final int MAP_SET_TERRAIN = 1;
     private static final int MAP_SET_SATATELITE = 2;
@@ -97,9 +114,11 @@ public class MainActivity extends ActionBarActivity
         enableListeners();
         setActionBar();
 
-        fragmentManager = getSupportFragmentManager();
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
+        mapFragment = MapFragment.newInstance();
+        FragmentTransaction fragmentTransaction =
+                getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.content_frame, mapFragment);
+        fragmentTransaction.commit();
         mapFragment.getMapAsync(this);
 
         markerContentDialog = DialogFactory
@@ -140,11 +159,6 @@ public class MainActivity extends ActionBarActivity
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
         uiSettings = googleMap.getUiSettings();
-
-        gMap.addMarker(new MarkerOptions()
-                .position(WROCLAW_RYNEK)
-                .title("Marker"));
-
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WROCLAW_RYNEK, 14));
 
         uiSettings.setZoomControlsEnabled(true);
@@ -152,12 +166,46 @@ public class MainActivity extends ActionBarActivity
         uiSettings.setMapToolbarEnabled(true);
 
         setMapListeners();
+        setCustomInfoWindow();
         ObjectsOnMapHandler.objectsOnMapHandler.setMap(gMap);
     }
 
     private void setMapListeners() {
         gMap.setOnMapClickListener(onMapClickListener);
         gMap.setOnMarkerClickListener(onMarkerClickListener);
+    }
+
+    private void setCustomInfoWindow() {
+        gMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker __marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(final Marker __marker) {
+                LayoutInflater _inflater = getLayoutInflater();
+                View _custom_view = _inflater.inflate(R.layout.window_info_content, null);
+                TextView _content = (TextView)_custom_view.findViewById(R.id.contentWindowInfoTextView);
+                _content.setText(__marker.getSnippet());
+                TextView _title = (TextView)_custom_view.findViewById(R.id.titleWindowInfoTextView);
+                _title.setText(__marker.getTitle());
+                //TODO: wyświetlanie większej porcji informacji w oknie dialogowym! Czy tak jest okej?
+
+                return _custom_view;
+            }
+        });
+
+        gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker __marker) {
+                ProblemInstance _problem =
+                        ObjectsOnMapHandler.objectsOnMapHandler.findProblemByMarker(__marker);
+                if(_problem != null) {
+                    showMarkerContentDialog(_problem);
+                }
+            }
+        });
     }
 
     private void setActionBar() {
@@ -188,7 +236,7 @@ public class MainActivity extends ActionBarActivity
         onMarkerClickListener = new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                markerContentDialog.show();
+                marker.showInfoWindow();
                 return true;
             }
         };
@@ -216,11 +264,14 @@ public class MainActivity extends ActionBarActivity
                          */
                         break;
                     case OPTIONS:
+                        showPreferenceScreen();
                         break;
                     case HELP:
+
                         break;
                     default:
                         break;
+
                 };
             }
         };
@@ -235,7 +286,6 @@ public class MainActivity extends ActionBarActivity
         };
     }
 
-    @Override
     public void enableLongClickListener() {
         gMap.setOnMapLongClickListener(longClickListener);
     }
@@ -249,12 +299,6 @@ public class MainActivity extends ActionBarActivity
         addMarkerFromFormData();
     }
 
-    private void prepareToNewMarker() {
-        drawerLayout.closeDrawers();
-        enableLongClickListener();
-        showToastMarkerInfo();
-    }
-
     @Override
     public void showToastMarkerInfo() {
         Toast _text = Toast.makeText(
@@ -262,6 +306,12 @@ public class MainActivity extends ActionBarActivity
                 R.string.onLongClickOnMapString,
                 Toast.LENGTH_LONG);
         _text.show();
+    }
+
+    private void prepareToNewMarker() {
+        drawerLayout.closeDrawers();
+        enableLongClickListener();
+        showToastMarkerInfo();
     }
 
     private void setFormData(String __email, int __category_id, String __content) {
@@ -280,6 +330,13 @@ public class MainActivity extends ActionBarActivity
         ObjectsOnMapHandler.objectsOnMapHandler.addProblem(_data);
     }
 
+    private void showPreferenceScreen() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, new PreferenceScreen())
+                .commit();
+        drawerLayout.closeDrawers();
+    }
+
     private void showNewMarkerFormDialog() {
         FragmentTransaction _f_transaction = getFragmentManager().beginTransaction();
         DialogFragment _f_dialog = (DialogFragment)getFragmentManager().findFragmentByTag("FormDialog");
@@ -288,8 +345,8 @@ public class MainActivity extends ActionBarActivity
         }
         _f_transaction.addToBackStack(null);
 
-        FormDialogFragment ff = FormDialogFragment.newInstance();
-        _f_transaction.add(ff, "FormDialog");
+        FormDialogFragment _f = FormDialogFragment.newInstance();
+        _f_transaction.add(_f, "FormDialog");
         _f_transaction.commit();
     }
 
@@ -301,8 +358,21 @@ public class MainActivity extends ActionBarActivity
         }
         _f_transaction.addToBackStack(null);
 
-        CategoriesChoiceDialogFragment f = CategoriesChoiceDialogFragment.newInstance();
-        _f_transaction.add(f, "FilterDialog");
+        CategoriesChoiceDialogFragment _f = CategoriesChoiceDialogFragment.newInstance();
+        _f_transaction.add(_f, "FilterDialog");
+        _f_transaction.commit();
+    }
+
+    private void showMarkerContentDialog(ProblemInstance __problem) {
+        FragmentTransaction _f_transaction = getFragmentManager().beginTransaction();
+        DialogFragment _f_dialog = (DialogFragment)getFragmentManager().findFragmentByTag("MarkerContentDialog");
+        if(_f_dialog != null) {
+            _f_transaction.remove(_f_dialog);
+        }
+        _f_transaction.addToBackStack(null);
+
+        MarkerContentDialogFragment _f = MarkerContentDialogFragment.newInstance(__problem);
+        _f_transaction.add(_f, "FilterDialog");
         _f_transaction.commit();
     }
 }
