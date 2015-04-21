@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_e0130d0b",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/res/layout/drawer_title_item.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-21T06:51:00Z",
+      "side": 0,
+      "message": "Co to było 0_o",
+      "range": {
+        "startLine": 16,
+        "startChar": 40,
+        "endLine": 16,
+        "endChar": 41
+      },
+      "revId": "584dda76ddf54c40fd1c8ed77a726c7568885c98",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}

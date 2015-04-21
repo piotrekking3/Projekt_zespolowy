@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_a00915df",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/ObjectsOnMapHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-21T06:51:00Z",
+      "side": 1,
+      "message": "Ten import jest potrzebny?",
+      "revId": "6f84ea6abc769083a6d12d55780eb6c4452c78c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_c006d1cd",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/ObjectsOnMapHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1004248
+      },
+      "writtenOn": "2015-04-21T06:51:00Z",
+      "side": 1,
+      "message": "??",
+      "revId": "6f84ea6abc769083a6d12d55780eb6c4452c78c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
