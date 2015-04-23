@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_4d15ed3e",
+        "filename": "ClientTest/src/main/java/projekt_zespolowy/clienttest/ClientTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-23T18:18:27Z",
+      "side": 1,
+      "message": "Czy mi się wydaje, czy ten String jest wystawiony w prawo???",
+      "revId": "92c89994044d0ebd97effddde95bddcf97758cac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_2d3991d7",
+        "filename": "ClientTest/src/main/java/projekt_zespolowy/clienttest/ClientTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-23T18:18:27Z",
+      "side": 1,
+      "message": "Czy tu potrzeba aż 5 tabów?",
+      "revId": "92c89994044d0ebd97effddde95bddcf97758cac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_0d6db5cc",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/ZgloszeniaDao.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-23T18:18:27Z",
+      "side": 1,
+      "message": "tu coś czerwonego",
+      "revId": "92c89994044d0ebd97effddde95bddcf97758cac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_cd76fda3",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/ZgloszeniaDao.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-23T18:18:27Z",
+      "side": 1,
+      "message": "tu coś czerwonego",
+      "revId": "92c89994044d0ebd97effddde95bddcf97758cac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_8d49a562",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/ZgloszeniaDao.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-23T18:18:27Z",
+      "side": 1,
+      "message": "ten pusty while to specjalnie?",
+      "revId": "92c89994044d0ebd97effddde95bddcf97758cac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_8d6085d0",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/services/ServiceUzytkownicy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-23T18:18:27Z",
+      "side": 1,
+      "message": "czy tu nie wystarczy jeden tab, jak już kod wyrównany do jednej linii (jak wyżej)",
+      "revId": "92c89994044d0ebd97effddde95bddcf97758cac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_cd9d5dbe",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/services/ServiceZgloszenia.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-23T18:18:27Z",
+      "side": 1,
+      "message": "jeszcze coś czerwonego",
+      "revId": "92c89994044d0ebd97effddde95bddcf97758cac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_eda819dd",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/util/DatabaseConnection.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-04-23T18:18:27Z",
+      "side": 1,
+      "message": "Wyjście po angielsku jest celowe, czy nie zostało przerobione?",
+      "revId": "92c89994044d0ebd97effddde95bddcf97758cac",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
