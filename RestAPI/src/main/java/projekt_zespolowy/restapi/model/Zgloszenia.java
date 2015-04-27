@@ -43,14 +43,6 @@ public class Zgloszenia
         this.id_zgloszenia = id;
     }
 
-    public int setId_zgloszenia(String json, int idx) {
-        if ((idx = json.indexOf("\"id_zgloszenia\":", idx)) > -1) {
-            id_zgloszenia = Integer.parseInt(json.substring(idx += "\"id_zgloszenia\":".length(), json.indexOf(",", idx)));
-        }
-
-        return idx;
-    }
-
     @XmlElement
     public int getId_uzytkownika() {
         return id_uzytkownika;
@@ -58,14 +50,6 @@ public class Zgloszenia
 
     public void setId_uzytkownika(int id_uzytkownika) {
         this.id_uzytkownika = id_uzytkownika;
-    }
-
-    public int setId_uzytkownikaByJSON(String json, int idx) {
-        if ((idx = json.indexOf("\"id_uzytkownika\":", idx)) > -1) {
-            id_uzytkownika = Integer.parseInt(json.substring(idx += "\"id_uzytkownika\":".length(), json.indexOf(",", idx)));
-        }
-
-        return idx;
     }
 
     @XmlElement
@@ -77,14 +61,6 @@ public class Zgloszenia
         this.id_typu = typ;
     }
 
-    public int setId_typuByJSON(String json, int idx) {
-        if ((idx = json.indexOf("\"id_typu\":", idx)) > -1) {
-            id_typu = Integer.parseInt(json.substring(idx += "\"id_typu\":".length(), json.indexOf(",", idx)));
-        }
-
-        return idx;
-    }
-
     @XmlElement
     public int getId_statusu() {
         return id_statusu;
@@ -92,14 +68,6 @@ public class Zgloszenia
 
     public void setId_statusu(int status) {
         this.id_statusu = status;
-    }
-
-    public int setId_statusuByJSON(String json, int idx) {
-        if ((idx = json.indexOf("\"id_statusu\":", idx)) > -1) {
-            id_statusu = Integer.parseInt(json.substring(idx += "\"id_statusu\":".length(), json.indexOf(",", idx)));
-        }
-
-        return idx;
     }
 
     @XmlElement
@@ -120,14 +88,6 @@ public class Zgloszenia
         this.id_disqus = id_disqus;
     }
 
-    public int setId_disqusByJSON(String json, int idx) {
-        if ((idx = json.indexOf("\"id_disqus\":", idx)) > -1) {
-            id_disqus = Integer.parseInt(json.substring(idx += "\"id_disqus\":".length(), json.indexOf(",", idx)));
-        }
-
-        return idx;
-    }
-
     @XmlElement
     public PGpoint getWspolrzedne() {
         return wspolrzedne;
@@ -135,23 +95,5 @@ public class Zgloszenia
 
     public void setWspolrzedne(PGpoint wspolrzedne) {
         this.wspolrzedne = wspolrzedne;
-    }
-
-    public int setWspolrzedneByJSON(String json, int idx) {
-        double x, y;
-
-        if ((idx = json.indexOf("\"x\":", idx)) > -1) {
-            x = Double.parseDouble(json.substring(idx += "\"x\":".length(), json.indexOf(",", idx)));
-        } else {
-            return 0;
-        }
-        if ((idx = json.indexOf("\"y\":", idx)) > -1) {
-            y = Double.parseDouble(json.substring(idx += "\"y\":".length(), json.indexOf("}", idx)));
-        } else {
-            return 0;
-        }
-        wspolrzedne = new PGpoint(x, y);
-
-        return idx;
     }
 }

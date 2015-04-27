@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import org.postgresql.geometric.PGpoint;
 import projekt_zespolowy.restapi.model.Zgloszenia;
 import projekt_zespolowy.restapi.util.DatabaseConnection;
@@ -25,12 +26,11 @@ public class ZgloszeniaDao
 
             while (resultSet.next()) {
                 zgloszenia = new Zgloszenia();
-
                 zgloszenia.setId_zgloszenia(resultSet.getInt("id_zgloszenia"));
                 zgloszenia.setId_uzytkownika(resultSet.getInt("id_uzytkownika"));
-                zgloszenia.setId_typu(resultSet.getInt/*getObject*/("id_typu"));
+                zgloszenia.setId_typu(resultSet.getInt("id_typu"));
                 zgloszenia.setId_statusu(resultSet.getInt("id_statusu"));
-                zgloszenia.setKalendarz(resultSet./*getDate*/getString("data"));
+                zgloszenia.setKalendarz(resultSet.getString("data"));
                 zgloszenia.setId_disqus(resultSet.getInt("disqus_identifier"));
                 zgloszenia.setWspolrzedne((PGpoint)resultSet.getObject("wspolrzedne"));
 
@@ -105,26 +105,35 @@ public class ZgloszeniaDao
         return list;
     }
 
-    public int postZgloszenia(Zgloszenia zgloszenia) throws Exception {
+    public Response postZgloszenia(Zgloszenia zgloszenia) {
         Statement statement;
-        ResultSet resultSet;
 
         try {
             connection.establishConnection();
             statement = connection.getConnection().createStatement();
-            resultSet = statement.executeQuery("SELECT addZgloszenie(" + zgloszenia.getId_uzytkownika()
+            statement.executeQuery("SELECT addZgloszenie(" + zgloszenia.getId_uzytkownika()
                     + ", " + zgloszenia.getId_typu() + ", " + zgloszenia.getId_disqus()
                     + ", POINT(" + zgloszenia.getWspolrzedne().x + ", " + zgloszenia.getWspolrzedne().y + "))");
         } catch (Exception ex) {
-            if (!ex.toString().contains("Zapytanie nie zwrocilo zadnych wynikow.")) {
-                System.out.println("Zapytanie nie zostalo wykonane: " + ex.toString());
-                connection.closeConnection();
-                return 500;
-            }
-        }
-        connection.closeConnection();
-        System.out.println("Zapytanie wykonane pomyslenie");
+            // Wypisanie bledu na serwer
+            System.err.println(ex);
 
-        return 200;
+            // Zwrocenie informacji o bledzie użytkownikowi
+            if (ex.toString().contains("(id_uzytkownika)=") && ex.toString().contains("nie występuje")) {
+                return Response.serverError().entity("Podane id_uzytkownika nie wystepuje w bazie danych").build();
+            }
+            else if (ex.toString().contains("(id_typu)=") && ex.toString().contains("nie występuje")) {
+                return Response.serverError().entity("Podane id_typu nie wystepuje w bazie danych").build();
+            }
+            else if (ex.toString().contains("Brak funkcji")) {
+                return Response.serverError().entity("Brakuje odpowiedniej funkcji w bazie danych").build();
+            }
+
+            connection.closeConnection();
+            return Response.serverError().entity("Wystapil nieznany blad").build();
+        }
+
+        connection.closeConnection();
+        return Response.ok("OK").build();
     }
 }

@@ -38,14 +38,6 @@ public class Uzytkownicy
         this.id_uzytkownika = id_uzytkownika;
     }
 
-    public int setId_uzytkownikaByJSON(String json, int idx) {
-        if ((idx = json.indexOf("\"id_uzytkownika\":", idx)) > -1) {
-            id_uzytkownika = Integer.parseInt(json.substring(idx += "\"id_uzytkownika\":".length(), json.indexOf(",", idx)));
-        }
-
-        return idx;
-    }
-
     @XmlElement
     public String getNick() {
         return nick;
@@ -53,14 +45,6 @@ public class Uzytkownicy
 
     public void setNick(String nick) {
         this.nick = nick;
-    }
-
-    public int setNickByJSON(String json, int idx) {
-        if ((idx = json.indexOf("\"nick\":\"", idx)) > -1) {
-            nick = json.substring(idx += "\"nick\":\"".length(), json.indexOf("\"", idx));
-        }
-
-        return idx;
     }
 
     @XmlElement
@@ -72,14 +56,6 @@ public class Uzytkownicy
         this.email = email;
     }
 
-    public int setEmailByJSON(String json, int idx) {
-        if ((idx = json.indexOf("\"email\":\"", idx)) > -1) {
-            email = json.substring(idx += "\"email\":\"".length(), json.indexOf("\"", idx));
-        }
-
-        return idx;
-    }
-
     @XmlElement
     public String getHaslo() {
         return haslo;
@@ -87,14 +63,6 @@ public class Uzytkownicy
 
     public void setHaslo(String haslo) {
         this.haslo = haslo;
-    }
-
-    public int setHasloByJSON(String json, int idx) {
-        if ((idx = json.indexOf("\"haslo\":\"", idx)) > -1) {
-            haslo = json.substring(idx += "\"haslo\":\"".length(), json.indexOf("\"", idx));
-        }
-
-        return idx;
     }
 
     @XmlElement

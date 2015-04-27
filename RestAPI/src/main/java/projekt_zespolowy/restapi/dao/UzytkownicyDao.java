@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import projekt_zespolowy.restapi.model.Uzytkownicy;
 import projekt_zespolowy.restapi.util.DatabaseConnection;
 
@@ -152,54 +153,55 @@ public class UzytkownicyDao
         return list;
     }
 
-    public int postUzytkownicy(Uzytkownicy uzytkownicy) throws Exception {
+    public Response postUzytkownicy(Uzytkownicy uzytkownicy) {
         Statement statement;
-        ResultSet resultSet;
 
         try {
             connection.establishConnection();
             statement = connection.getConnection().createStatement();
-            resultSet = statement.executeQuery(
-                    "INSERT INTO uzytkownicy (nick, email, haslo, admin)"
-                    + "VALUES('" + uzytkownicy.getNick() + "', '" + uzytkownicy.getEmail() + "', '"
-                    + uzytkownicy.getHaslo() + "', '" + uzytkownicy.isAdmin() + "')");
-
+            statement.executeQuery("SELECT adduzytkownik('" + uzytkownicy.getNick()
+                    + "', '" + uzytkownicy.getEmail() + "', '" + uzytkownicy.getHaslo() + "')");
         } catch (Exception ex) {
-            if (!ex.toString().contains("Zapytanie nie zwróciło żadnych wyników.")) {
-                System.out.println("Zapytanie nie zostalo wykonane: " + ex.toString());
-                connection.closeConnection();
-                return 500;
-            }
-        }
-        connection.closeConnection();
-        System.out.println("Zapytanie wykonane pomyslenie");
+            // Wypisanie bledu na serwer
+            System.err.println(ex);
 
-        return 200;
+            // Zwrocenie informacji o bledzie uzytkownikowi
+            if (ex.toString().contains("(email)=") && ex.toString().contains("już istnieje")) {
+                return Response.serverError().entity("Podany email jest juz zajety").build();
+            }
+            else if (ex.toString().contains("(nick)=") && ex.toString().contains("już istnieje")) {
+                return Response.serverError().entity("Podany nick jest juz zajety").build();
+            }
+            else if (ex.toString().contains("Brak funkcji")) {
+                return Response.serverError().entity("Brakuje odpowiedniej funkcji w bazie danych").build();
+            }
+
+            connection.closeConnection();
+            return Response.serverError().entity("Wystapil nieznany blad").build();
+        }
+
+        connection.closeConnection();
+        return Response.ok("OK").build();
     }
 
-    public int updateEmail(Uzytkownicy uzytkownicy) throws Exception {
+    public Response updateEmail(Uzytkownicy uzytkownicy) {
         Statement statement;
-        ResultSet resultSet;
 
         try {
             connection.establishConnection();
             statement = connection.getConnection().createStatement();
-            resultSet = statement.executeQuery("SELECT updateEmail(" + uzytkownicy.getId_uzytkownika() + ", '"
+            statement.executeQuery("SELECT updateEmail(" + uzytkownicy.getId_uzytkownika() + ", '"
                     + uzytkownicy.getEmail() + "', '" + uzytkownicy.getHaslo() + "')");
 
-            while (resultSet.next()) {
-
-            }
         } catch (Exception ex) {
-            if (!ex.toString().contains("Zapytanie nie zwróciło żadnych wyników.")) {
-                System.out.println("Zapytanie nie zostalo wykonane: " + ex.toString());
-                connection.closeConnection();
-                return 500;
-            }
-        }
-        connection.closeConnection();
-        System.out.println("Zapytanie wykonane pomyslenie");
+            // Wypisanie bledu na serwer
+            System.err.println(ex);
 
-        return 200;
+            connection.closeConnection();
+            return Response.serverError().entity("Wystapil nieznany blad").build();
+        }
+
+        connection.closeConnection();
+        return Response.ok("OK").build();
     }
 }
