@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_59dc8173",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/UzytkownicyDao.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T14:10:05Z",
+      "side": 1,
+      "message": "a nie powinno byc .serverError() albo .status ??",
+      "range": {
+        "startLine": 176,
+        "startChar": 32,
+        "endLine": 176,
+        "endChar": 34
+      },
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_b9e5b539",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/UzytkownicyDao.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T14:10:05Z",
+      "side": 1,
+      "message": "to samo pytanie :)",
+      "range": {
+        "startLine": 201,
+        "startChar": 28,
+        "endLine": 201,
+        "endChar": 30
+      },
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_f9d28d5a",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/ZgloszeniaDao.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T14:10:05Z",
+      "side": 1,
+      "message": "tabulator",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 12
+      },
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_d9d7d149",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/ZgloszeniaDao.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T14:10:05Z",
+      "side": 1,
+      "message": "caly czas mnie to zastanawia :)",
+      "range": {
+        "startLine": 133,
+        "startChar": 28,
+        "endLine": 133,
+        "endChar": 30
+      },
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_39c9c5ac",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/model/Uzytkownicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T14:10:05Z",
+      "side": 1,
+      "message": "co tu sie zmienilo?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 1
+      },
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_79c69d9b",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/services/ServiceUzytkownicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T14:10:05Z",
+      "side": 1,
+      "message": ":)",
+      "range": {
+        "startLine": 79,
+        "startChar": 28,
+        "endLine": 79,
+        "endChar": 30
+      },
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_19ce89b4",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/services/ServiceZgloszenia.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T14:10:05Z",
+      "side": 1,
+      "message": ":)",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_f939eda4",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/util/DatabaseConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T14:10:05Z",
+      "side": 1,
+      "message": "?",
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
