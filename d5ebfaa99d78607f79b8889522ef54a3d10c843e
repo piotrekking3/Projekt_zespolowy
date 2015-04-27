@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_4eb5d97c",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/ZgloszeniaDao.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T12:46:30Z",
+      "side": 1,
+      "message": "usuwamy?",
+      "range": {
+        "startLine": 31,
+        "startChar": 56,
+        "endLine": 31,
+        "endChar": 65
+      },
+      "revId": "d5ebfaa99d78607f79b8889522ef54a3d10c843e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_2eba1d6e",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/ZgloszeniaDao.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T12:46:30Z",
+      "side": 1,
+      "message": "usuwamy?",
+      "range": {
+        "startLine": 33,
+        "startChar": 52,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "d5ebfaa99d78607f79b8889522ef54a3d10c843e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_ee6ac5ec",
+        "filename": "RestAPI/src/main/webapp/index.html",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-04-27T12:46:30Z",
+      "side": 1,
+      "message": ":)",
+      "range": {
+        "startLine": 8,
+        "startChar": 23,
+        "endLine": 8,
+        "endChar": 26
+      },
+      "revId": "d5ebfaa99d78607f79b8889522ef54a3d10c843e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
