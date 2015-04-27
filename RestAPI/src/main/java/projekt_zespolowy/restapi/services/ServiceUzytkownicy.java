@@ -1,8 +1,6 @@
 package projekt_zespolowy.restapi.services;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,6 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import projekt_zespolowy.restapi.dao.UzytkownicyDao;
 import projekt_zespolowy.restapi.model.Uzytkownicy;
 
@@ -38,7 +38,6 @@ public class ServiceUzytkownicy
     @Path("/getByNick/{nick}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uzytkownicy getByNick(@PathParam("nick") String nick) {
-        //return Response.status(Response.Status.OK).entity(nick).build();
         return uzytkownicyDao.getByNick(nick);
     }
 
@@ -61,36 +60,30 @@ public class ServiceUzytkownicy
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add(String incomingData) {
         Uzytkownicy uzytkownicy = new Uzytkownicy();
-        int httpCode = 500, idx = 0, oldIdx = 0;
+
+        String nick;
+        String email;
+        String haslo;
 
         try {
-            if ((idx = uzytkownicy.setNickByJSON(incomingData, idx)) == oldIdx) {
-                throw new Exception();
-            }
-            oldIdx = idx;
-            if ((idx = uzytkownicy.setEmailByJSON(incomingData, idx)) == oldIdx) {
-                throw new Exception();
-            }
-            oldIdx = idx;
-            if (uzytkownicy.setHasloByJSON(incomingData, idx) == oldIdx) {
-                throw new Exception();
-            }
-            uzytkownicy.setAdmin(false);
-        } catch (Exception ex) {
-            System.out.println("Niepowodzenie odczytania danych przychodzacych");
+            JSONObject json = new JSONObject(incomingData);
+
+            // Wyciagniecie danych o zgloszeniu
+            json = json.getJSONObject("uzytkownicy");
+
+            // Sprawdzenie czy JSON zgloszenia zawiera wszystkie potrzebne pola
+            nick = json.getString("nick");
+            email = json.getString("email");
+            haslo = json.getString("haslo");
+        } catch (JSONException ex) {
+            return Response.ok("Niepoprawny format JSONa").build();
         }
 
-        try {
-            httpCode = uzytkownicyDao.postUzytkownicy(uzytkownicy);
-        } catch (Exception ex) {
-            Logger.getLogger(ServiceUzytkownicy.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        uzytkownicy.setNick(nick);
+        uzytkownicy.setEmail(email);
+        uzytkownicy.setHaslo(haslo);
 
-        if (httpCode == 200) {
-            return Response.status(httpCode).entity("Operacja dodania uzytkownika zostala zakonczona sukcesem").build();
-        }
-
-        return Response.status(200).entity("Operacja dodania uzytkownika nie powiodla sie").build();
+        return uzytkownicyDao.postUzytkownicy(uzytkownicy);
     }
 
     @PUT
@@ -98,33 +91,29 @@ public class ServiceUzytkownicy
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateEmail(String incomingData) {
         Uzytkownicy uzytkownicy = new Uzytkownicy();
-        int httpCode = 500, idx = 0, oldIdx = 0;
+
+        int id_uzytkownika;
+        String email;
+        String haslo;
 
         try {
-            if ((idx = uzytkownicy.setId_uzytkownikaByJSON(incomingData, idx)) == oldIdx) {
-                throw new Exception();
-            }
-            oldIdx = idx;
-            if ((idx = uzytkownicy.setEmailByJSON(incomingData, idx)) == oldIdx) {
-                throw new Exception();
-            }
-            oldIdx = idx;
-            if (uzytkownicy.setHasloByJSON(incomingData, idx) == oldIdx) {
-                throw new Exception();
-            }
-        } catch (Exception ex) {
-            System.out.println("Niepowodzenie odczytania danych przychodzacych");
+            JSONObject json = new JSONObject(incomingData);
+
+            // Wyciagniecie danych o zgloszeniu
+            json = json.getJSONObject("uzytkownicy");
+
+            // Sprawdzenie czy JSON zgloszenia zawiera wszystkie potrzebne pola
+            id_uzytkownika = json.getInt("id_uzytkownika");
+            email = json.getString("email");
+            haslo = json.getString("haslo");
+        } catch (JSONException ex) {
+            return Response.ok("Niepoprawny format JSONa").build();
         }
 
-        try {
-            httpCode = uzytkownicyDao.updateEmail(uzytkownicy);
-        } catch (Exception ex) {
-        }
+        uzytkownicy.setId_uzytkownika(id_uzytkownika);
+        uzytkownicy.setEmail(email);
+        uzytkownicy.setHaslo(haslo);
 
-        if (httpCode == 200) {
-            return Response.status(httpCode).entity("Operacja aktualizacji adresu e-mail zakonczona sukcesem").build();
-        }
-
-        return Response.status(200).entity("Operacja aktualizacji adresu e-mail nie powiodla sie").build();
+        return uzytkownicyDao.updateEmail(uzytkownicy);
     }
 }

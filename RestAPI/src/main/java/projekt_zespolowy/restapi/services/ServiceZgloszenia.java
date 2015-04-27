@@ -1,5 +1,6 @@
 package projekt_zespolowy.restapi.services;
 
+import java.sql.SQLException;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -9,6 +10,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.postgresql.geometric.PGpoint;
 import projekt_zespolowy.restapi.dao.ZgloszeniaDao;
 import projekt_zespolowy.restapi.model.Zgloszenia;
 
@@ -43,38 +47,32 @@ public class ServiceZgloszenia
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add(String incomingData) {
         Zgloszenia zgloszenia = new Zgloszenia();
-        int httpCode = 500, idx = 0, oldIdx = 0;
+
+        int id_uzytkownika;
+        int id_typu;
+        int id_disqus;
+        PGpoint point;
 
         try {
-            if ((idx = zgloszenia.setId_uzytkownikaByJSON(incomingData, idx)) == oldIdx) {
-                throw new Exception();
-            }
-            oldIdx = idx;
-            if ((idx = zgloszenia.setId_typuByJSON(incomingData, idx)) == oldIdx) {
-                throw new Exception();
-            }
-            oldIdx = idx;
-            if ((idx = zgloszenia.setId_disqusByJSON(incomingData, idx)) == oldIdx) {
-                throw new Exception();
-            }
-            oldIdx = idx;
-            if (zgloszenia.setWspolrzedneByJSON(incomingData, idx) == oldIdx) {
-                throw new Exception();
-            }
-        } catch (Exception ex) {
-            System.out.println("Niepowodzenie odczytania danych przychodzacych");
+            JSONObject json = new JSONObject(incomingData);
+
+            // Wyciagniecie danych o zgloszeniu
+            json = json.getJSONObject("zgloszenia");
+
+            // Sprawdzenie czy JSON zgloszenia zawiera wszystkie potrzebne pola
+            id_uzytkownika = json.getInt("id_uzytkownika");
+            id_typu = json.getInt("id_typu");
+            id_disqus = json.getInt("id_disqus");
+            point = new PGpoint((String)json.get("wspolrzedne"));
+        } catch (JSONException | SQLException ex) {
+            return Response.ok("Niepoprawny format JSONa").build();
         }
 
-        try {
-            httpCode = zgloszeniaDao.postZgloszenia(zgloszenia);
-        } catch (Exception ex) {
+        zgloszenia.setId_uzytkownika(id_uzytkownika);
+        zgloszenia.setId_typu(id_typu);
+        zgloszenia.setId_disqus(id_disqus);
+        zgloszenia.setWspolrzedne(point);
 
-        }
-
-        if (httpCode == 200) {
-            return Response.status(httpCode).entity("Operacja dodania zgloszenia zostala zakonczona sukcesem").build();
-        }
-
-        return Response.status(httpCode).entity("Operacja dodania zgloszenia nie powiodla sie").build();
+        return zgloszeniaDao.postZgloszenia(zgloszenia);
     }
 }
