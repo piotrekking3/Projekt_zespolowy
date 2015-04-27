@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "1a106d94_99c39956",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/model/Uzytkownicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1004359
+      },
+      "writtenOn": "2015-04-27T14:58:54Z",
+      "side": 1,
+      "message": "pousuwałem niepotrzebne metody. Wcześniej metody były używane do odczytywania informacji z JSONa, ale ten sposób był kiepski. Teraz odczytywanie informacji znajduje się w ServiceUzytkownicy",
+      "parentUuid": "1a106d94_39c9c5ac",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 1
+      },
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a106d94_79c69d9b",
         "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/services/ServiceUzytkownicy.java",
         "patchSetId": 1
@@ -174,6 +198,24 @@
       "writtenOn": "2015-04-27T14:10:05Z",
       "side": 1,
       "message": "?",
+      "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a106d94_d98fd128",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/util/DatabaseConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004359
+      },
+      "writtenOn": "2015-04-27T14:58:54Z",
+      "side": 1,
+      "message": "SourceTree krzyczało na mnie, że nie ma newline :P. Zgaduje, że standardem jest stawianie entera na końcu pliku",
+      "parentUuid": "1a106d94_f939eda4",
       "revId": "aa284a0df983f5aa8556af83548b8b564e01e074",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
