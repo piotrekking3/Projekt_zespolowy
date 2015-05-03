@@ -159,6 +159,22 @@ public class ObjectsOnMapHandler {
         }
     }
 
+    /*
+        Metoda odświeżająca widok na mapie. Z tą różnicą, że dodaje na nowa wszystkie
+        utrudnienia i dopiero wywołuje metodę refreshMap.
+     */
+    public void refresh() {
+        for(ProblemInstance problem : markersOnMap) {
+            MarkerOptions _options = new MarkerOptions();
+            _options.snippet(problem.getContent());
+            _options.title(problem.getCategoryString());
+            _options.position(problem.getMarker().getPosition());
+            gMap.addMarker(_options);
+        }
+
+        refreshMap();
+    }
+
     private float getMarkerColorById(int __id) {
         switch (__id) {
             case 0:

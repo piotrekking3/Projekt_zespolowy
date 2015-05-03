@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="DelayArray">
+        <item>5 minut</item>
+        <item>10 minut</item>
+        <item>15 minut</item>
+        <item>30 minut</item>
+        <item>60 minut</item>
+        <item>4 godziny</item>
+        <item>8 godzin</item>
+        <item>24 godziny</item>
+    </string-array>
+
+    <string-array name="DelayArrayValues">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>240</item>
+        <item>480</item>
+        <item>1440</item>
+    </string-array>
+</resources>
