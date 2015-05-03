@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< HEAD
+    <ListPreference     android:title="Odświeżanie mapy"
+                        android:summary="Ta opcja umożliwia odświeżanie mapy co określoną jednostkę czasu. Pamiętaj, że jest wymagane połączenie z internetem."
+                        android:key="applicationRefresingDelay"
+                        android:defaultValue="60"
+                        android:entries="@array/DelayArray"
+                        android:entryValues="@array/DelayArrayValues" />
+
+    <CheckBoxPreference android:title="Automatyczne odświeżanie"
+                        android:defaultValue="true"
+                        android:summary="Ta opcja wyłącza lub włącza automatyczne odświeżanie mapy."
+                        android:key="applicationRefresing" />
+=======
+    <EditTextPreference android:title="Your Name"
+        android:key="username"
+        android:summary="Please provide your username"
+        android:background="@color/button_material_dark"></EditTextPreference>
+    <CheckBoxPreference android:title="Application Updates"
+        android:defaultValue="false"
+        android:summary="This option if selected will allow the application to check for latest versions."
+        android:key="applicationUpdates"
+        android:background="@color/accent_material_dark" />
+>>>>>>> acbdcb73a0f1c3ada10976d99918f74dd4743d0a
+</PreferenceScreen>
