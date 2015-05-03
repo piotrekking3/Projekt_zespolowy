@@ -181,6 +181,22 @@ public class ObjectsOnMapHandler {
                 return BitmapDescriptorFactory.HUE_VIOLET;
             default:
                 return BitmapDescriptorFactory.HUE_RED;
+            case 2:
+                return BitmapDescriptorFactory.HUE_CYAN;
+            case 3:
+                return BitmapDescriptorFactory.HUE_GREEN;
+            case 4:
+                return BitmapDescriptorFactory.HUE_MAGENTA;
+            case 5:
+                return BitmapDescriptorFactory.HUE_ORANGE;
+            case 6:
+                return BitmapDescriptorFactory.HUE_RED;
+            case 7:
+                return BitmapDescriptorFactory.HUE_ROSE;
+            case 8:
+                return BitmapDescriptorFactory.HUE_VIOLET;
+            default:
+                return BitmapDescriptorFactory.HUE_RED;
         }
     }
 }
