@@ -7,9 +7,11 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -119,32 +121,66 @@ public class MainActivity extends ActionBarActivity
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         drawerListView = (ListView)findViewById(R.id.left_drawer);
-        NavDrawerArrayAdapter drawerListAdapter =
+        drawerListAdapter =
                 new NavDrawerArrayAdapter(this, R.id.drawer_text_view_list_item);
         drawerListAdapter.makeAndSetItems();
 
         drawerListView.setOnItemClickListener(navDrawerListListener);
         drawerListView.setAdapter(drawerListAdapter);
+
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+                R.string.app_name, R.string.app_name);
+
+        drawerLayout.setDrawerListener(drawerToggle);
+        aBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0099CC")));
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.clear();
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        super.onCreateOptionsMenu(menu);
+    protected void onPostCreate(Bundle __saved_instance_state) {
+        super.onPostCreate(__saved_instance_state);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration __newConfig) {
+        super.onConfigurationChanged(__newConfig);
+        drawerToggle.onConfigurationChanged(__newConfig);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu __menu) {
+        __menu.clear();
+        getMenuInflater().inflate(R.menu.menu_main, __menu);
+        super.onCreateOptionsMenu(__menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(MenuItem __item) {
+        int id = __item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            showPreferenceScreen();
             return true;
         }
+        else
+        if(drawerToggle.onOptionsItemSelected(__item)){
+            return true;
+        }
+        else
+        if(id == android.R.id.home) {
+            FragmentTransaction fragmentTransaction =
+                    getFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.content_frame, mapFragment);
+            fragmentTransaction.commit();
 
-        return super.onOptionsItemSelected(item);
+            drawerToggle.setDrawerIndicatorEnabled(true);
+            mapFragment.getMapAsync(this);
+            ObjectsOnMapHandler.objectsOnMapHandler.refresh();
+            return true;
+        }
+        return super.onOptionsItemSelected(__item);
     }
 
     @Override
@@ -323,6 +359,10 @@ public class MainActivity extends ActionBarActivity
     }
 
     private void showPreferenceScreen() {
+        drawerToggle.setDrawerIndicatorEnabled(false);
+        getFragmentManager().beginTransaction()
+                .remove(mapFragment)
+                .commit();
         getFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, new PreferenceScreen())
                 .commit();
