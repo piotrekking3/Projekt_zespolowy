@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_33c08be0",
+        "filename": "Android/UtrudnieniaRuchu/app/src/main/java/com/example/mrlukashem/utrudnieniaruchu/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1004387
+      },
+      "writtenOn": "2015-05-04T10:43:07Z",
+      "side": 1,
+      "message": "lepiej zrobic define gdzies u gory albo w plikach xml",
+      "range": {
+        "startLine": 135,
+        "startChar": 71,
+        "endLine": 135,
+        "endChar": 78
+      },
+      "revId": "9cfd15def312886f1341cff6b947c85cccf89981",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
