@@ -2,33 +2,45 @@
 <html>
 	<head lang="pl">
 		<meta charset="UTF-8">
-		<meta name="viewport" content="initial-scale=0.75, width=device-width, user-scalable=yes, minimum-scale=0.5, maximum-scale=2.0">
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=0.5, maximum-scale=2.0">
 		<link rel="stylesheet" href="./styles/design.css">
 		<link rel="stylesheet" href="./styles/jquery.ui.css">
 		<link rel="stylesheet" href="./styles/leaflet.css">
 		<link rel="stylesheet" href="./styles/leaflet.draw.css">
-		<script src="./scripts/jquery.js"></script>
-		<script src="./scripts/jquery.ui.js"></script>
-		<script src="./scripts/leaflet.js"></script>
-		<script src="./scripts/leaflet.draw.js"></script>
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 		<script src="./scripts/html5shiv.js"></script>
 		<![endif]-->
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="681813526718-oio0jcr9ncausm5v70q98roocatkug4d.apps.googleusercontent.com">
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+		<script src="./scripts/md5.js"></script>
+		<script src="./scripts/jquery.js"></script>
+		<script src="./scripts/happy.js"></script>
+		<script src="./scripts/happy.methods.js"></script>
+		<script src="./scripts/jquery.ui.js"></script>
+		<script src="./scripts/leaflet.js"></script>
+		<script src="./scripts/leaflet.draw.js"></script>
+		<script src="./scripts/easy-button.js"></script>
+		<script src="./scripts/i18next.js"></script>
+		<script src="./scripts/wmb.translate.js"></script>
+		<script src="./scripts/wmb.tool.js"></script>
 		<title><?php echo($this->data['title']); ?></title>
 	</head>
-	<body>
-		<header role="banner">
+	<body onload="isLogin()">
+		<header id="header" role="banner">
 			<div id="title">
-				<h1>Wrocławska Mapa Barier</h1>
-				<h2>Identyfikacja miejskich utrudnień ruchu</h2>
+				<h1 data-i18n="header.title">Test</h1>
+				<h2 data-i18n="header.subtitle">Test 2</h2>
 			</div>
 		</header>
-		<nav role="navigation">
+		<nav id="nav" role="navigation">
 			<ul>
-				<li><a href="/contact" rel="nofollow"<?= ($this->data['active'] == 'contact') ? ' class="active"' : '' ; ?>>Kontakt</a></li>
-				<li><a href="/about" rel="author"<?= ($this->data['active'] == 'about') ? ' class="active"' : '' ; ?>>O projekcie</a></li>
-				<li><a href="/types" rel="help"<?= ($this->data['active'] == 'types') ? ' class="active"' : '' ; ?>>Rodzaje barier</a></li>
-				<li><a href="/list" rel="search"<?= ($this->data['active'] == 'list') ? ' class="active"' : '' ; ?>>Lista barier</a></li>
-				<li><a href="/map" rel="index"<?= ($this->data['active'] == 'map') ? ' class="active"' : '' ; ?>>Mapa barier</a></li>
+				<li><a href="/contact" rel="nofollow"<?= ($this->data['active'] == 'contact') ? ' class="active"' : '' ; ?> data-i18n="nav.contact"></a></li>
+				<li><a href="/about" rel="author"<?= ($this->data['active'] == 'about') ? ' class="active"' : '' ; ?> data-i18n="nav.about"></a></li>
+				<li><a href="/types" rel="help"<?= ($this->data['active'] == 'types') ? ' class="active"' : '' ; ?> data-i18n="nav.types"></a></li>
+				<li><a href="/list" rel="search"<?= ($this->data['active'] == 'list') ? ' class="active"' : '' ; ?> data-i18n="nav.list"></a></li>
+				<li><a href="/map" rel="index"<?= ($this->data['active'] == 'map') ? ' class="active"' : '' ; ?> data-i18n="nav.map"></a></li>
+				<li id="adminPanel" style="display:none;"><a href="/admin" rel="admin"<?= ($this->data['active'] == 'admin') ? ' class="active"' : '' ; ?> data-i18n="nav.admin"></a></li>
 			</ul>
 		</nav>

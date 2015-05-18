@@ -43,6 +43,14 @@ $app->get('/map', function () use ($app) {
 	$app->render('footer.html');
 });
 
+$app->get('/admin', function () use ($app) {
+	$data = array('title' => 'Wrocławska Mapa Barier', 'active' => 'admin');
+	$app->render('header.html', $data);
+	$app->render('admin.html');
+	$app->render('forms.html');
+	$app->render('footer.html');
+});
+
 $app->get('/', function () use ($app) {
 	$data = array('title' => 'Wrocławska Mapa Barier', 'active' => 'map');
 	$app->render('header.html', $data);
