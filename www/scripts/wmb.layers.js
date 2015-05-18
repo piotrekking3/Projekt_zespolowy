@@ -36,9 +36,9 @@ var category1 = new L.FeatureGroup(),
 	newMarkers = new L.FeatureGroup();
 
 var overlays = {
-	"Kategoria 1": category1,
-	"Kategoria 2": category2,
-	"Kategoria 3": category3,
-	"Kategoria 4": category4,
-	"Kategoria 5": category5
+	"Sygnalizacja świetlna": category1,
+	"Komunikacja publiczna": category2,
+	"Niepełnosprawni ruchowo": category3,
+	"Rowerzyści": category4,
+	"Pozostałe": category5
 };

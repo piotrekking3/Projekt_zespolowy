@@ -15,3 +15,9 @@ var drawMarkerControl = new L.Control.Draw({
 		remove: false	// Opcje edycji i usuwania wyłączone
 	}
 });
+
+//Dodanie przycisku do centralizacji mapy
+L.easyButton('fa-compass', 
+	function (){
+		map.panTo(new L.LatLng(51.1101, 17.03));
+	}, 'Centruj mapę');

@@ -23,15 +23,34 @@ map.addLayer(newMarkers);
 map.addControl(drawMarkerControl);
 // Dodanie skali do mapy
 L.control.scale().addTo(map);
+//Dodanie przycisku do centralizacji mapy
+L.easyButton('fa-compass', 
+	function (){
+		map.panTo(new L.LatLng(51.1101, 17.03));
+	}, 'Centruj mapę');
 // Dodanie toolbara z filtrowaniem warstw
 L.control.layers(baseLayers, overlays).addTo(map);
 
 var newMarkerLayer;
+var adres;
 map.on('draw:created', function (e) {
 	if (e.layerType == 'marker') {
 		// Zapamiętujemy warstwę nowego znacznika,
 		// ponieważ dodamy ją do mapy dopiero po obsłudze formularza
 		newMarkerLayer = e.layer;
+		var geocoder = new google.maps.Geocoder();
+		var latlng = new google.maps.LatLng(newMarkerLayer.getLatLng().lat, newMarkerLayer.getLatLng().lng);
+		geocoder.geocode({'latLng': latlng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			if (results[0]) {
+				adres = results[0].formatted_address;
+			} else {
+				adres = "Wrocław";
+			}
+		} else {
+			adres = "Wrocław";
+		}
+		});
 		newMarkerDialog.dialog("open");
 	}
 });
