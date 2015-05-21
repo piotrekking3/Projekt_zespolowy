@@ -27,7 +27,7 @@ body {
 	font-family: Arial, sans-serif;
 	font-size: 12pt;
 	color: #001F3D;
-	background-color: #6699FF;
+	background-color: #D2D2D2;
 	width: 100%;
 	height: 100%;
 	display: block;
@@ -37,7 +37,7 @@ body {
 }
 
 header {
-	background-color: #6699FF;
+	background-color: #D2D2D2;
 	width: 100%;
 	height: 75px;
 	display: table;
@@ -59,7 +59,7 @@ header #title h1 {
 	font-family: 'Segoe Script', 'font_segoe_script', sans-serif;
 	font-size: 1.5em;
 	text-indent: 25px;
-	color: #FFFFFF;
+	color: #696666;
 	margin: 0;
 	padding: 0;
 }
@@ -68,14 +68,14 @@ header #title h2 {
 	font-family: 'Segoe Print', 'font_segoe_print', sans-serif;
 	font-size: 1.0em;
 	text-indent: 50px;
-	color: #E0F0FF;
+	color: #668199;
 	margin: 0;
 	padding: 0;
 }
 
 nav {
-	background-color: #6699FF;
-	border-bottom: 5px solid #4775FF;
+	background-color: #D2D2D2;
+	border-bottom: 5px solid #BAB4B4;
 	width: 100%;
 	height: 40px;
 	display: block;
@@ -106,7 +106,7 @@ nav ul li a {
 	font-size: 1em;
 	text-decoration: none;
 	text-align: center;
-	color: #D6E3FF;
+	color: #6E6E6F;
 	display: block;
 	float: right;
 	margin: 0.3em 0 0 0;
@@ -114,7 +114,7 @@ nav ul li a {
 }
 
 nav ul li a:hover, nav ul li a:active, nav ul li .active {
-	background-color: #4775FF;
+	background-color: #BAB4B4;
 	color: #FFFFFF;
 	-webkit-border-top-left-radius: 10px;
 	-webkit-border-top-right-radius: 10px;
@@ -134,7 +134,7 @@ nav ul li a:hover, nav ul li a:active, nav ul li .active {
 	padding: 0;
 }
 
-#list, #types, #about, #contact {
+#list, #types, #about, #contact, #admin {
 	background-color: #E0EAFF;
 	width: 100%;
 	min-height: calc(100% - 75px - 40px - 40px - 5px);
@@ -145,8 +145,8 @@ nav ul li a:hover, nav ul li a:active, nav ul li .active {
 }
 
 footer {
-	background-color: #6699FF;
-	border-top: 5px solid #4775FF;
+	background-color: #D2D2D2;
+	border-top: 5px solid #BAB4B4;
 	width: 100%;
 	height: 40px;
 	display: block;
@@ -160,7 +160,7 @@ footer ul li a {
 	font-size: 1em;
 	text-decoration: none;
 	text-align: center;
-	color: #D6E3FF;
+	color: #6E6E6F;
 	display: block;
 	float: right;
 	margin: -0.3em 0 0 0;
@@ -205,11 +205,16 @@ div #add-marker textarea {
 	padding: 0.4em;
 }
 
-div #add-marker label, div #add-marker input, div #login label, div #login input {
+div #add-marker label, div #add-marker input{
 	display:block;
 }
 
-div #add-marker input.text, div #login input.email, div #login input.password {
+div #login label, div #login input, div #register label, div #register input {
+	display:block;
+	width: 100%;
+}
+
+div #add-marker input.text, div #login input.email, div #login input.password, div #register input.emailreg, div #register input.passwordreg, div #register input.reemailreg, div #register input.repasswordreg {
 	width: 95%;
 	margin-bottom: 12px;
 	padding: 0.4em;
@@ -226,4 +231,56 @@ div #add-marker input.text, div #login input.email, div #login input.password {
 .validateTips {
 	border: 1px solid transparent;
 	padding: 0.3em;
+}
+
+#adminpanel {
+	border-collapse:collapse;
+}
+
+#adminpanel ul {
+	margin:10px 0 10px 40px;
+	padding:0px;
+}
+
+#adminpanel th {
+	background:#7CB8E2 repeat-x scroll center left;
+	color:#fff;
+	padding:7px 15px;
+	text-align:left;
+}
+
+#adminpanel td {
+	background:#C7DDEE none repeat-x scroll center left;
+	color:#000;
+	padding:7px 15px;
+}
+
+#contactForm {
+	margin-left: 5%;
+}
+
+#contactForm h2 {
+	margin-left: 7%;
+}
+
+#report {
+	border-collapse:collapse;
+}
+
+#report ul {
+	margin:10px 0 10px 40px;
+	padding:0px;
+}
+
+#report th {
+	background:#7CB8E2 repeat-x scroll center left;
+	color:#fff;
+	padding:7px 15px;
+	text-align:left;
+}
+
+#report td {
+	background:#C7DDEE none repeat-x scroll center left;
+	color:#000;
+	padding:7px 15px;
 }

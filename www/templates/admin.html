@@ -1,40 +1,16 @@
 		<div id="admin" role="main">
-			<style>
-				#adminpanel { border-collapse:collapse;}
-				#adminpanel ul { margin:10px 0 10px 40px; padding:0px;}
-				#adminpanel th { background:#7CB8E2 repeat-x scroll center left; color:#fff; padding:7px 15px; text-align:left;}
-				#adminpanel td { background:#C7DDEE none repeat-x scroll center left; color:#000; padding:7px 15px; }
-			</style>
-			<h1>Przegląd zgłoszonych problemów (version TEMP)</h1>
+			<h1>Przegląd zgłoszonych problemów (v5)</h1>
 			<table id="adminpanel">
-			<tr>
-				<th>Data zgłoszenia</th>
-				<th>Kategoria</th>
-				<th>Szczegóły</th>
-				<th>Zgłaszający</th>
-				<th>Status</th>
-				<th>Operacje</th>
-			</tr>
+				<tr>
+					<th>Data zgłoszenia</th>
+					<th>Kategoria</th>
+					<th>Szczegóły</th>
+					<th>Zgłaszający</th>
+					<th>Status</th>
+					<th>Operacje</th>
+				</tr>
 			</table>
 			<script>
-			function getFullDescription(i){
-				var value;
-				$.ajax({
-					type: "GET",
-					url: "http://virt2.iiar.pwr.edu.pl/api/zgloszenia/getById/" + i,
-					contentType: "application/json",
-					accept: "application/json",
-					dataType: "json",
-					success: function(data) {
-						value = data.zgloszenia.opis;
-						alert(value);
-					},
-					error: function(data){
-						alert("Coś poszło nie tak... Opis nie będzie wyświetlony");
-					}
-				});
-			}
-
 			$.getJSON("http://virt2.iiar.pwr.edu.pl/api/zgloszenia/getAll",
 				function(data){
 					$.each(data, function(i){
@@ -43,7 +19,7 @@
 								"<td>" + data[i].zgloszenia.kalendarz + "</td>" +
 								"<td>" + typ[ data[i].zgloszenia.id_typu ] + "</td>" +
 								"<td><ul>" +
-										"<li>Opis<br>" + data[i].zgloszenia.opis + "<br><br><button onclick=\"getFullDescription(" + data[i].zgloszenia.id_zgloszenia + ")\">Czytaj cały opis...</button></li>" +
+										"<li>Opis<br>" + data[i].zgloszenia.opis + "<br><br><button onclick=\"showMore(" + data[i].zgloszenia.id_zgloszenia + ");\" \">Czytaj cały opis...</button></li>" +
 										"<br><li>Adres<br>" + data[i].zgloszenia.adres + "</li>" +
 									"</ul>" +
 								"<td>" + data[i].zgloszenia.email_uzytkownika + "</td>" +

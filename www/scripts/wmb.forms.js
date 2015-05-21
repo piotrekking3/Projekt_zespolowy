@@ -1,10 +1,9 @@
 // Definicje formularzy
 
 // Formularz dodawania nowego znacznika
-var image = $("#image"),
-	newMarkerFields = $([]).add(category).add(description).add(image),
+var newMarkerFields = $([]).add(category).add(description).add(image),
 	tips = $(".validateTips");
-var category, description;
+var category, description, image;
 $('#category').on('change', function() {
 	category = parseInt(this.value);
 })
@@ -31,15 +30,17 @@ function newMarkerSubmit() {
 	tmp['zgloszenia']['email_uzytkownika'] = getCookie("emailwmb");
 	tmp['zgloszenia']['token'] = getCookie("tokenwmb");
 	var postData = JSON.stringify(tmp);
+	image = $("#image").get(0).files[0];
+	//console.log(image);
 	$.ajax({
 		type: "POST",
 		url: "http://virt2.iiar.pwr.edu.pl/api/zgloszenia/post",
 		data: postData,
-		success: function (l) { 
+		success: function (l) {
 			newMarkers.addLayer(newMarkerLayer);	// Dodanie nowego znacznika
 			alert("Zgłoszenie zostało poprawnie dodane");
 		},
-		error: function (l) { 
+		error: function (l) {
 			alert("Wystąpiły błędy, bądź nie jesteś zalogowany - zgłoszenie nie zostało dodane");
 		},
 		contentType: "application/json",
@@ -285,10 +286,12 @@ function logout(i) {
 		});
 		document.cookie="tokenwmb=";
 		document.cookie="emailwmb=";
+		document.cookie="validatorwmb=";
 		document.cookie="logwmb=0";
 		alert("Wylogowałeś się");
 		$("#notlogin").css("display", "block");
 		$("#islogin").css("display", "none");
+		$("#adminPanel").css("display", "none");
 	}
 	if(i==2){
 		signOut();
@@ -343,9 +346,11 @@ function signOut() {
 	});
 	document.cookie="tokenwmb=";
 	document.cookie="emailwmb=";
+	document.cookie="validatorwmb=";
 	document.cookie="logwmb=0";
 	$("#notlogin").css("display", "block");
 	$("#isloginGoogle").css("display", "none");
+	$("#adminPanel").css("display", "none");
 	alert("Pomyślnie wylogowano");
 	});
 }
@@ -433,9 +438,11 @@ function logoutFacebook(){
 		});
 		document.cookie="tokenwmb=";
 		document.cookie="emailwmb=";
+		document.cookie="validatorwmb=";
 		document.cookie="logwmb=0";
 		$("#notlogin").css("display", "block");
 		$("#isloginFb").css("display", "none");
+		$("#adminPanel").css("display", "none");
 		alert("Pomyślnie wylogowano");
 	});
 }
