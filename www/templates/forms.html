@@ -1,6 +1,6 @@
 		<div id="add-marker" title="Nowe zgłoszenie">
 			<p class="validateTips">Uzupełnij poniższe pola</p>
-			<form>
+			<form enctype="multipart/form-data">
 				<fieldset>
 					<label for="category">Kategoria zgłoszenia*</label>
 					<select name="category" id="category" required>
@@ -78,4 +78,20 @@
 				</fieldset>
 			</form>
 		</div>
+
+		<div id="comments" title="Komentarze">
+		</div>
+		
+		<div id="fullText" title="Opis zgłoszenia">
+		</div>
+		
+		<div id="postComment" title="Dodaj komentarz">
+			<form>
+				<label for="komentarz">Wpisz komentarz do wybranej bariery*</label>
+				<textarea name="komentarz" id="komentarz" style="width:320px; height:185px;" class="text ui-widget-content ui-corner-all" required></textarea>
+				<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+			</form>
+		</div>
 		<script src="./scripts/wmb.forms.js"></script>
+		<script src="./scripts/wmb.comments.js"></script>
+		<script src="./scripts/wmb.list.js"></script>

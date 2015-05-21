@@ -1,10 +1,4 @@
 		<div id="list" role="main">
-		<style>
-			#report { border-collapse:collapse;}
-			#report ul { margin:10px 0 10px 40px; padding:0px;}
-			#report th { background:#7CB8E2 repeat-x scroll center left; color:#fff; padding:7px 15px; text-align:left;}
-			#report td { background:#C7DDEE none repeat-x scroll center left; color:#000; padding:7px 15px; }
-		</style>
 			<h1>Lista zgłoszonych problemów</h1>
 	<table id="report">
 		<tr>
@@ -24,9 +18,10 @@ $.getJSON("http://virt2.iiar.pwr.edu.pl/api/zgloszenia/getAll",
 					"<td>" + typ[ data[i].zgloszenia.id_typu ] + "</td>" +
 					"<td>" + statusy[ data[i].zgloszenia.id_statusu ] + "</td>" +
 					"<td><ul>" +
-							"<li>" + data[i].zgloszenia.opis + "</li>" +
 							"<li>" + data[i].zgloszenia.adres + "</li>" +
-							"<li>Może mini zdjęcie</li>" +
+							"<li>" + data[i].zgloszenia.opis + " <a style=\"text-decoration: none;\" href=\"#\" onclick=\"showMore(" + data[i].zgloszenia.id_zgloszenia + ");\">>>Czytaj więcej</a></li>" +
+							"<li><button onclick=\"commentsOpen(" + data[i].zgloszenia.id_zgloszenia + ");\">Komentarze do zgłoszenia</button></li>" +
+							"<li><button onclick=\"newCommentOpen(" + data[i].zgloszenia.id_zgloszenia +");\">Skomentuj</button></li>" +
 						"</ul>" +
 				"</tr>");
 		});

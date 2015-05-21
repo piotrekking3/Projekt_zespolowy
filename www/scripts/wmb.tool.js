@@ -8,9 +8,10 @@ var typ = {1:"Zbyt długie oczekiwanie na światłach", 2:"Zbyt krótkie zielone
 	19:"Źle zaparkowane auto", 20:"Niedziałające oświetlenie uliczne"};
 var kategoria = {1:"Sygnalizacja świetlna", 2:"Komunikacja publiczna", 3:"Niepełnosprawni ruchowo", 4:"Rowerzyści", 5:"Pozostałe"};
 var statusy = {1:"Nowe", 2:"Zweryfikowane", 3:"Anulowane", 4:"Zamknięte"};
-var log;
+var log, validation;
 function isLogin(){
 	log = getCookie("logwmb");
+	validation = getCookie("validatorwmb");
 	if(log==0){
 		$("#notlogin").css("display", "block");
 		$("#islogin").css("display", "none");
@@ -23,21 +24,43 @@ function isLogin(){
 		$("#islogin").css("display", "block");
 		$("#isloginGoogle").css("display", "none");
 		$("#isloginFb").css("display", "none");
-		$("#adminPanel").css("display", "block");
 	}
 	if(log==2){
 		$("#notlogin").css("display", "none");
 		$("#islogin").css("display", "none");
 		$("#isloginGoogle").css("display", "block");
-		$("#adminPanel").css("display", "none");
 	}
 	if(log==3){
 		$("#notlogin").css("display", "none");
 		$("#islogin").css("display", "none");
 		$("#isloginGoogle").css("display", "none");
 		$("#isloginFb").css("display", "block");
+	}
+	if(validation == 1){
+		$("#adminPanel").css("display", "block");
+	}
+	if(validation == 0){
 		$("#adminPanel").css("display", "none");
 	}
+}
+
+function validate(){
+	var tmp = {"uzytkownicy": { }};
+	tmp['uzytkownicy']['email'] = getCookie("emailwmb");
+	tmp['uzytkownicy']['token'] = getCookie("tokenwmb");
+	var postData = JSON.stringify(tmp);
+	$.ajax({
+			type: "POST",
+			url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/valid",
+			data: postData,
+			contentType: "application/json",
+			accept: "application/json",
+			dataType: "json",
+			success: function(json) {
+				value = json.valid;
+				document.cookie="validatorwmb="+value;
+			}
+		});
 }
 
 function getCookie(cname){
@@ -74,4 +97,23 @@ function changeStat(id){
 		accept: "application/json",
 		dataType: "json"
 	});
+}
+
+var nazwa, nadawca, wiadomosc;
+$('#nazwa').on('change', function() {
+	nazwa = $("#nazwa").val();
+})
+
+$('#nadawca').on('change', function() {
+	nadawca = $("#nadawca").val();
+})
+
+$('#wiadomosc').on('change', function() {
+	wiadomosc = $("#wiadomosc").val();
+})
+
+function sendContactForm(){
+	var tresc = "Wiadomość ze strony Wrocławskiej Mapy Barier<br><br>Od: " + nazwa + "<br>Adres e-mail: " +
+				nadawca + "<br>Treść zapytania:<br>" + wiadomosc + "<br><br>WMB";
+	$("#sukces").css("display","block");
 }
