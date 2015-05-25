@@ -1,24 +1,14 @@
-# Windows files
+# Windows
 Thumbs.db
-ehthumbs.db
 Desktop.ini
-$RECYCLE.BIN/
 *.lnk
 
-# Android
-*.apk
-*.ap_
-*.dex
-*.class
-bin/
-gen/
-.gradle/
-build/
-/*/build/
-local.properties
-proguard/
-*.log
-*.jar
-*.war
-*.ear
-*.bat
+# Projekt
+composer.phar
+composer.lock
+favicon.ico
+favicon.png
+/*/images/
+/*/fonts/
+vendors/
+errors/

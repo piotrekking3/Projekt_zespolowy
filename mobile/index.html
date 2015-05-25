@@ -1,0 +1,572 @@
+<!doctype html>
+<html>
+	<head lang="pl">
+		<meta http-equiv="X-Frame-Options" content="DENY">
+		<meta http-equiv="cleartype" content="on">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="description" content="Identyfikacja miejskich utrudnień w ruchu na terenie Wrocławia">
+		<meta name="keywords" content="wrocław, mapa, bariery architektoniczne, utrudnienia w ruchu, problemy, zgłoszenia">
+		<meta name="theme-color" content="#E9E9E9">
+		<meta name="google-signin-client_id" content="510674898388-tu9qim42c5n1q9i20lcuqbkopp5oajck.apps.googleusercontent.com">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.css">
+		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+		<!--[if lt IE 9]>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<![endif]-->
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.2.3/leaflet.draw.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/1.6.3/i18next-1.6.3.min.js"></script>
+		<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script src="scripts/leaflet.easybutton.js"></script>
+		<script src="scripts/wmb.translate.js"></script>
+		<title>Wrocławska Mapa Barier</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<script id="panel-init">
+			// Pokaż pasek ładowania przy zapytaniach AJAX
+			$.ajaxSetup({
+				beforeSend: function() {
+					$.mobile.loading('show');
+				},
+				complete: function(){
+					$.mobile.loading('hide');
+				}
+			});
+			// Wysuń menu po przeciągnięciu w lewo/prawo
+			$(document).on('pagecreate', function() {
+				$(document).on('swipeleft swiperight', function(e) {
+					if ($('.ui-page-active').jqmData('panel') !== 'open') {
+						if (e.type === 'swipeleft') {
+							$('#panel-login').panel('open');
+						} else if (e.type === 'swiperight') {
+							$('#panel-menu').panel('open');
+						}
+					}
+				});
+			});
+			// Zewnętrzne panele i okna dialogowe (z zachowaniem stylów)
+			$(function() {
+				$('body>[data-role="panel"]').panel().enhanceWithin();
+				$('body>[data-role="popup"]').popup().enhanceWithin();
+			});
+			function showPanelLink() {
+				if (checkLogin()) {
+					$('.is-logged-in').append('<a href="#panel-user" data-role="button" data-icon="user" data-iconpos="notext" data-i18n="global.userpanel">Panel użytkownika</a>');
+				} else {
+					$('.is-logged-in').append('<a href="#panel-login" data-role="button" data-icon="user" data-iconpos="notext" class="ui-focus" data-i18n="global.loginpanel">Panel logowania</a>');
+				}
+			}
+			function showMarkerList() {
+				$.getJSON("https://m.bariery.wroclaw.pl/api/zgloszenia/getAll",
+					function(data) {
+						$.each(data, function(i) {
+							$("#marker-list").append(
+								"<tr>" +
+									"<td>" + data[i].zgloszenia.kalendarz + "</td>" +
+									"<td>" + data[i].zgloszenia.adres + "</td>" +
+									"<td>" + typ[data[i].zgloszenia.id_typu] + "</td>" +
+									"<td>" + statusy[data[i].zgloszenia.id_statusu] + "</td>" +
+									"<td><a href=\"#page-details?id=" + data[i].zgloszenia.id_zgloszenia + "\" data-ajax=\"false\">Szczegóły</a></td>" +
+								"</tr>");
+						});
+				});
+			}
+			function getComments(i) {
+				$.ajax({
+					type: "GET",
+					url: "https://m.bariery.wroclaw.pl/api/komentarze/getById/" + i,
+					contentType: "application/json",
+					accept: "application/json",
+					dataType: "json",
+					success: function(data) {
+						$.each(data, function(j){
+							$("#comment-list").append(
+								"<tr>" +
+									"<td>" + data[j].komentarze.login + "</td>" +
+									"<td>" + data[j].komentarze.data_nadania.substr(0,19) + "</td>" +
+									"<td>" + data[j].komentarze.komentarz + "</td>" +
+								"</tr>");
+						});
+					},
+					error: function(data){
+						alert('Błąd komentarzy');
+					}
+				});
+			}
+		</script>
+		<style>
+			.ui-content-map {
+				position: absolute;
+				top: 44px;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				padding: 0 !important;
+			}
+			#map {
+				height: 100%;
+			}
+			.movie-list thead th,
+			.movie-list tbody tr:last-child {
+				border-bottom: 1px solid #d6d6d6;
+				border-bottom: 1px solid rgba(0,0,0,.1);
+			}
+			.movie-list tbody th,
+			.movie-list tbody td {
+				border-bottom: 1px solid #e6e6e6;
+				border-bottom: 1px solid rgba(0,0,0,.05);
+			}
+			.movie-list tbody tr:last-child th,
+			.movie-list tbody tr:last-child td {
+				border-bottom: 0;
+			}
+			.movie-list tbody tr:nth-child(odd) td,
+			.movie-list tbody tr:nth-child(odd) th {
+				background-color: #eeeeee;
+				background-color: rgba(0,0,0,.04);
+			}
+		</style>
+	</head>
+	<body>
+		<script src="scripts/wmb.forms.js"></script>
+		<!-- Mapa barier (strona główna) -->
+		<div id="page-map" data-role="page">
+			<div data-role="header" data-theme="a">
+				<h1>Mapa barier</h1>
+				<a href="#panel-menu" data-role="button" data-icon="bars" data-iconpos="notext">Menu główne</a>
+				<div data-type="horizontal" class="is-logged-in ui-btn-right">
+					<a href="#popup-lang" data-transition="fade" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="notext">Ustawienia</a>
+				</div>
+			</div>
+			<div role="main" class="ui-content ui-content-map">
+				<div id="map"></div>
+				<script src="scripts/wmb.layers.js"></script>
+				<script src="scripts/wmb.map.js"></script>
+				<script src="scripts/wmb.markers.js"></script>
+			</div>
+		</div>
+		<!-- Lista barier -->
+		<div id="page-list" data-role="page">
+			<div data-role="header" data-theme="a">
+				<h1>Lista barier</h1>
+				<a href="#panel-menu" data-role="button" data-icon="bars" data-iconpos="notext">Menu główne</a>
+				<div data-type="horizontal" class="is-logged-in ui-btn-right">
+					<a href="#popup-lang" data-transition="fade" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="notext">Ustawienia</a>
+				</div>
+			</div>
+			<div role="main" class="ui-content">
+				<table data-role="table" id="marker-list" data-mode="reflow" class="movie-list ui-responsive">
+					<thead>
+						<tr>
+							<th data-priority="1">Data zgłoszenia</th>
+							<th data-priority="persist">Adres</th>
+							<th data-priority="2">Kategoria</th>
+							<th data-priority="3">Status</th>
+							<th data-priority="4">Opcje</th>
+						</tr>
+					</thead>
+					<tbody>
+						<script>showMarkerList();</script>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- Rodzaje barier -->
+		<div id="page-types" data-role="page">
+			<div data-role="header" data-theme="a">
+				<h1>Rodzaje barier</h1>
+				<a href="#panel-menu" data-role="button" data-icon="bars" data-iconpos="notext">Menu główne</a>
+				<div data-type="horizontal" class="is-logged-in ui-btn-right">
+					<a href="#popup-lang" data-transition="fade" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="notext">Ustawienia</a>
+				</div>
+			</div>
+			<div role="main" class="ui-content">
+				<b>Sygnalizacja świetlna</b>
+				<ul>
+					<li>Zbyt długie oczekiwanie</li>
+					<li>Zbyt krótkie zielone</li>
+					<li>Brak możliwości przejścia dwóch jezdni na raz</li>
+					<li>Awaria sygnalizacji</li>
+				</ul>
+				<b>Komunikacja publiczna</b>
+				<ul>
+					<li>Zbyt niski peron przystanku</li>
+					<li>Potrzeba zmiany lokalizacji przystanku</li>
+				</ul>
+				<b>Niepełnosprawni ruchowo</b>
+				<ul>
+					<li>Wysoki krawężnik</li>
+					<li>Brak podjazdu/rampy</li>
+					<li>Niedziałająca winda</li>
+				</ul>
+				<b>Rowerzyści</b>
+				<ul>
+					<li>Brak możliwości zaparkowania roweru</li>
+					<li>Utrudnione/niemożliwe przejechanie</li>
+					<li>Brak możliwości zjazdu/wjazdu z/na ścieżkę rowerową</li>
+				</ul>
+				<b>Pozostałe</b>
+				<ul>
+					<li>Konieczne uspokojenie ruchu</li>
+					<li>Nieuporządkowana zieleń</li>
+					<li>Zniszczona nawierzchnia</li>
+					<li>Miejsce często blokowane przez parkujące samochody</li>
+					<li>Brak widoczności uczestników ruchu</li>
+					<li>Niebezpieczne miejsce</li>
+					<li>Źle zaparkowane auto</li>
+					<li>Niedziałające oświetlenie uliczne</li>
+				</ul>
+			</div>
+		</div>
+		<!-- O projekcie -->
+		<div id="page-about" data-role="page">
+			<div data-role="header" data-theme="a">
+				<h1>O projekcie</h1>
+				<a href="#panel-menu" data-role="button" data-icon="bars" data-iconpos="notext">Menu główne</a>
+				<div data-type="horizontal" class="is-logged-in ui-btn-right">
+					<a href="#popup-lang" data-transition="fade" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="notext">Ustawienia</a>
+				</div>
+			</div>
+			<div role="main" class="ui-content">
+				<b>Wrocławska Mapa Barier - Identyfikacja miejskich utrudnień ruchu</b>
+				<div>
+					<br/>Celem projektu jest stworzeniem aplikacji mobilnej na system Android, która w połączeniu z silnikiem map (np. OSM, Google Maps, Here) pozwoli na zebranie danych o miejskich utrudnieniach ruchu dla pieszych, rowerzystów i niepełnosprwnych takich jak np.:<br/>
+					<ul>
+						<li>Zbyt długi/krótki czas oczekiwania na zmianę światła</li>
+						<li>Zbyt wysokie krawężniki</li>
+						<li>Brak przejść dla pieszych</li>
+						<li>Obecność pieszych na ścieżkach rowerowych</li>
+						<li>Obecność rowerzystów na ścieżkach dla pieszych</li>
+						<li>Brak podjazdu / windy dla wózka inwalidzkiego</li>
+						<li>Uszkodzona nawierzchnia</li>
+					</ul>
+					Przy tworzeniu aplikacji studenci uzyskali pomoc specjalistów z firmy Tieto, którzy mają wieloletnie doświadczenie w tworzeniu podobnych rozwiązań.<br/><br/>
+					Największą zaletą jest jednak stworzenie aplikacji, która ma realne zastosowanie w życiu miasta i przynosi wartość dodaną dla mieszkańców Wrocławia. Danymi tego typu zainteresowany jest Urząd Miasta, a także liczne stowarzyszenia wspierające rozwój naszego miasta.
+				</div>
+			</div>
+		</div>
+		<!-- Kontakt -->
+		<div id="page-contact" data-role="page">
+			<div data-role="header" data-theme="a">
+				<h1>Kontakt</h1>
+				<a href="#panel-menu" data-role="button" data-icon="bars" data-iconpos="notext">Menu główne</a>
+				<div data-type="horizontal" class="is-logged-in ui-btn-right">
+					<a href="#popup-lang" data-transition="fade" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="notext">Ustawienia</a>
+				</div>
+			</div>
+			<div role="main" class="ui-content">
+				<form>
+					<div class="ui-field-contain">
+						<label for="name_surname" class="ui-hidden-accessible">Imię i nazwisko*:</label>
+						<input type="text" name="name_surname" id="name_surname" data-mini="true" placeholder="Imię i nazwisko" pattern=".{6,32}" required>
+					</div>
+					<div class="ui-field-contain">
+						<label for="contact-email" class="ui-hidden-accessible">Adres e-mail*:</label>
+						<input type="email" name="contact-email" id="contact-email" data-mini="true" placeholder="Adres e-mail" required>
+					</div>
+					<div class="ui-field-contain">
+						<label for="message" class="ui-hidden-accessible">Treść wiadomości*:</label>
+						<textarea cols="20" rows="8" maxlength="255" name="message" id="message" placeholder="Treść wiadomości" data-mini="true" required></textarea>
+					</div>
+					<div class="ui-grid-a" style="width: 255px">
+						<div class="ui-block-a"><input type="submit" value="Wyślij" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" data-mini="true"></div>
+						<div class="ui-block-b"><input type="reset" value="Wyczyść" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" data-mini="true"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- Szczegóły -->
+		<div id="page-details" data-role="page">
+			<div data-role="header" data-theme="a">
+				<h1>Szczegóły</h1>
+				<a href="#panel-menu" data-role="button" data-icon="bars" data-iconpos="notext">Menu główne</a>
+				<div data-type="horizontal" class="is-logged-in ui-btn-right">
+					<a href="#popup-lang" data-transition="fade" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="notext">Ustawienia</a>
+				</div>
+			</div>
+			<div role="main" class="ui-content">
+				<div id="details"></div>
+				<script>
+					$('#page-details').on('pageshow', function() {
+						var id_zgloszenia = parseInt($.urlParam('id'));
+						$.ajax({
+							type: "GET",
+							url: "https://m.bariery.wroclaw.pl/api/zgloszenia/getById/" + id_zgloszenia,
+							contentType: "application/json",
+							accept: "application/json",
+							dataType: "json",
+							success: function(data) {
+								$("#details").html(
+									"<p><b>Adres</b>: " + data.zgloszenia.adres + "</p>" +
+									"<p><b>Współrzędne</b>: " + data.zgloszenia.wspolrzedne.x + ", " + data.zgloszenia.wspolrzedne.y + "</p>" +
+									"<p><b>Data dodania</b>: " + data.zgloszenia.kalendarz + "</p>" +
+									"<p><b>Kategoria</b>: " + typ[data.zgloszenia.id_typu] + "</p>" +
+									"<p><b>Status</b>: " + statusy[data.zgloszenia.id_statusu] + "</p>" +
+									"<p><b>Zgłoszone przez</b>: " + data.zgloszenia.email_uzytkownika + "</p>" +
+									"<p><b>Opis</b>: <br><i>" + data.zgloszenia.opis + "</i></p>");
+								getComments(id_zgloszenia);
+							},
+							error: function(e){
+								alert('Brak zgłoszenia o takim ID.');
+							}
+						});
+					});
+				</script>
+				<table data-role="table" id="comment-list" data-mode="reflow" class="movie-list ui-responsive">
+					<thead>
+						<tr>
+							<th data-priority="1">Login</th>
+							<th data-priority="persist">Data dodania</th>
+							<th data-priority="2">Treść komentarza</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<div class="login-to-comment"></div>
+				<script>
+				if (checkLogin()) {
+					$('.login-to-comment').append('<a href="#popup-add-comment" class="ui-btn  ui-corner-all ui-shadow ui-btn-a ui-icon-plus ui-btn-icon-left ui-mini" data-transition="fade" data-rel="popup" data-role="button">Dodaj komentarz</a>');
+				}
+				</script>
+			</div>
+		</div>
+		<script>showPanelLink();</script>
+		<!-- Menu główne (lewa strona) -->
+		<div id="panel-menu" data-role="panel" data-position="left" data-display="overlay" data-theme="a">
+			<ul data-role="listview" data-theme="a">
+				<li data-icon="delete"><a href="#" data-rel="close">Zamknij</a></li>
+				<li data-icon="home"><a href="#page-map">Mapa barier</a></li>
+				<li data-icon="bars"><a href="#page-list">Lista barier</a></li>
+				<li data-icon="info"><a href="#page-types">Rodzaje barier</a></li>
+				<li data-icon="star"><a href="#page-about">O projekcie</a></li>
+				<li data-icon="alert"><a href="#page-contact">Kontakt</a></li>
+			</ul>
+		</div>
+		<!-- Zmiana języka (okno dialogowe) -->
+		<div id="popup-lang" data-role="popup" data-theme="a">
+			<ul data-role="listview" data-inset="true">
+				<li data-role="list-divider">Wybierz język</li>
+				<li><a href="#" class="ui-btn ui-mini">Polski</a></li>
+				<li><a href="#" class="ui-btn ui-mini">English</a></li>
+			</ul>
+		</div>
+		<!-- Dodanie nowego znacznika -->
+		<div id="popup-add-marker" data-role="popup" data-overlay-theme="a" data-theme="a" data-dismissible="false">
+			<div data-role="header" data-theme="a">
+				<h2>Dodaj barierę</h2>
+			</div>
+			<div role="main" class="ui-content">
+				<form>
+					<div class="ui-field-contain">
+						<label for="category" class="ui-hidden-accessible">Kategoria zgłoszenia*:</label>
+						<select name="category" id="category" data-mini="true" required>
+							<option value="">Wybierz kategorię</option>
+							<optgroup label="Sygnalizacja świetlna">
+								<option value="1">Zbyt długie oczekiwanie</option>
+								<option value="2">Zbyt krótkie zielone</option>
+								<option value="3">Brak możliwości przejścia dwóch jezdni na raz</option>
+								<option value="4">Awaria sygnalizacji</option>
+							</optgroup>
+							<optgroup label="Komunikacja publiczna">
+								<option value="5">Zbyt niski peron przystanku</option>
+								<option value="6">Potrzeba zmiany lokalizacji przystanku</option>
+							</optgroup>
+							<optgroup label="Niepełnosprawni ruchowo">
+								<option value="7">Wysoki krawężnik</option>
+								<option value="8">Brak podjazdu/rampy</option>
+								<option value="9">Niedziałająca winda</option>
+							</optgroup>
+							<optgroup label="Rowerzyści">
+								<option value="10">Brak możliwości zaparkowania roweru</option>
+								<option value="11">Utrudnione/niemożliwe przejechanie</option>
+								<option value="12">Brak możliwości zjazdu/wjazdu z/na ścieżkę rowerową</option>
+							</optgroup>
+							<optgroup label="Pozostałe">
+								<option value="13">Konieczne uspokojenie ruchu</option>
+								<option value="14">Nieuporządkowana zieleń</option>
+								<option value="15">Zniszczona nawierzchnia</option>
+								<option value="16">Miejsce często blokowane przez parkujące samochody</option>
+								<option value="17">Brak widoczności uczestników ruchu</option>
+								<option value="18">Niebezpieczne miejsce</option>
+								<option value="19">Źle zaparkowane auto</option>
+								<option value="20">Niedziałające oświetlenie uliczne</option>
+							</optgroup>
+						</select>
+					</div>
+					<div class="ui-field-contain">
+						<label for="address" class="ui-hidden-accessible">Adres*:</label>
+						<input type="text" name="address" id="address" data-mini="true" value="Plac Grunwaldzki" placeholder="Adres" pattern=".{4,32}" required>
+					</div>
+					<div class="ui-field-contain">
+						<label for="description" class="ui-hidden-accessible">Opis problemu*:</label>
+						<textarea cols="40" rows="8" maxlength="255" name="description" id="description" placeholder="Opis problemu" data-mini="true" required></textarea>
+					</div>
+					<div class="ui-field-contain">
+						<label for="file" class="ui-hidden-accessible">Zdjęcie (opcjonalnie):</label>
+						<input type="file" name="file" id="file" accept="image/jpeg">
+					</div>
+					<div data-role="controlgroup" data-type="horizontal" style="text-align: center;">
+						<button type="submit" onclick="newMarkerSubmit();" class="ui-btn  ui-corner-all ui-shadow ui-btn-a ui-icon-plus ui-btn-icon-left ui-mini">Dodaj</button>
+						<button type="reset" onclick="$('#popup-add-marker').popup('close');" class="ui-btn  ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-right ui-mini">Anuluj</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- Dodanie nowego komentarza -->
+		<div id="popup-add-comment" data-role="popup" data-overlay-theme="a" data-theme="a" data-dismissible="false">
+			<div data-role="header" data-theme="a">
+				<h2>Dodaj komentarz</h2>
+			</div>
+			<div role="main" class="ui-content">
+				<form>
+					<div class="ui-field-contain">
+						<label for="new-comment" class="ui-hidden-accessible">Treść komentarza*:</label>
+						<textarea cols="40" rows="8" maxlength="255" name="new-comment" id="new-comment" placeholder="Treść komentarza" data-mini="true" required></textarea>
+					</div>
+					<div data-role="controlgroup" data-type="horizontal" style="text-align: center;">
+						<button type="submit" onclick="newCommentSubmit();" class="ui-btn  ui-corner-all ui-shadow ui-btn-a ui-icon-plus ui-btn-icon-left ui-mini">Dodaj</button>
+						<button type="reset" onclick="$('#popup-add-comment').popup('close');" class="ui-btn  ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-right ui-mini">Anuluj</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- Rejestracja pomyślnia -->
+		<div id="popup-register-succes" data-role="popup" data-overlay-theme="a" data-theme="a">
+			<div data-role="header" data-theme="a">
+				<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Zamknij</a>
+				<h3>Zarejestrowano</h3>
+			</div>
+			<div role="main" class="ui-content"><p>Rejestracja w systemie zakończyła się sukcesem. Możesz się teraz zalogować.</p></div>
+		</div>
+		<!-- Rejestracja nieprawidłowa -->
+		<div id="popup-register-failure" data-role="popup" data-overlay-theme="a" data-theme="a">
+			<div data-role="header" data-theme="a">
+				<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Zamknij</a>
+				<h3>Błąd</h3>
+			</div>
+			<div role="main" class="ui-content"><p>Wystąpił błąd rejestracji. Wprowadzone dane są niepoprawne lub taki użytkownik już istnieje w naszym systemie.</p></div>
+		</div>
+		<!-- Logownaie pomyślnie -->
+		<div id="popup-login-succes" data-role="popup" data-overlay-theme="a" data-theme="a">
+			<div data-role="header" data-theme="a">
+				<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Zamknij</a>
+				<h3>Zalogowano</h3>
+			</div>
+			<div role="main" class="ui-content"><p>Pomyślnie zalogowano się do systemu.</p></div>
+		</div>
+		<!-- Logownaie nieprawidłowe -->
+		<div id="popup-login-failure" data-role="popup" data-overlay-theme="a" data-theme="a">
+			<div data-role="header" data-theme="a">
+				<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Zamknij</a>
+				<h3>Błąd</h3>
+			</div>
+			<div role="main" class="ui-content"><p>Podany adres e-mail i/lub hasło nie pasują do siebie bądź taki użytkownik nie istnieje.</p></div>
+		</div>
+		<!-- Wylogowanie pomyślne -->
+		<div id="popup-logout-succes" data-role="popup" data-overlay-theme="a" data-theme="a">
+			<div data-role="header" data-theme="a">
+				<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Zamknij</a>
+				<h3>Wylogowanie</h3>
+			</div>
+			<div role="main" class="ui-content"><p>Pomyślnie wylogowano z systemu.</p></div>
+		</div>
+		<!-- Pomyślnie dodano nowe zgłoszenie -->
+		<div id="popup-add-marker-succes" data-role="popup" data-overlay-theme="a" data-theme="a">
+			<div data-role="header" data-theme="a">
+				<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Zamknij</a>
+				<h3>Dodano nowe zgłoszenie</h3>
+			</div>
+			<div role="main" class="ui-content"><p>Twoje zgłoszenie zostało przyjęte. Dziękujemy za informacje.</p></div>
+		</div>
+		<!-- Błąd dodawania zgłoszenia -->
+		<div id="popup-add-marker-failure" data-role="popup" data-overlay-theme="a" data-theme="a">
+			<div data-role="header" data-theme="a">
+				<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Zamknij</a>
+				<h3>Błąd</h3>
+			</div>
+			<div role="main" class="ui-content"><p>Wystąpił błąd przy dodawaniu zgłoszenia. Prosimy spróbować ponownie, poprawnie wypełniając wszystkie pola.</p></div>
+		</div>
+		<!-- Panel użytkownika (prawa strona) -->
+		<div id="panel-user" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
+			<form onsubmit="logoutSubmit();">
+				<h4 id="logged-as"></h4>
+				<input type="hidden" name="test" value="test">
+				<script>
+					if (checkLogin()) {
+						$('#logged-as').append(getCookie('email'));
+					}
+				</script>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><input type="submit" value="Wyloguj" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" data-mini="true"></div>
+					<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini ui-icon-delete ui-btn-icon-right">Zamknij</a></div>
+				</div>
+			</form>
+		</div>
+		<!-- Logowanie (prawa strona) -->
+		<div id="panel-login" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
+			<form onsubmit="loginSubmit();">
+				<h2>Logowanie</h2>
+				<label for="login-email" class="ui-hidden-accessible">Adres e-mail:</label>
+				<input type="email" name="login-email" id="login-email" data-clear-btn="true" data-mini="true" placeholder="Adres e-mail" required>
+				<label for="login-password" class="ui-hidden-accessible">Hasło:</label>
+				<input type="password" name="login-password" id="login-password" data-clear-btn="true" autocomplete="off" data-mini="true" title="Od 6 do 32 znaków" placeholder="Hasło" required>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><input type="submit" value="Zaloguj" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" data-mini="true"></div>
+					<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini ui-icon-delete ui-btn-icon-right">Zamknij</a></div>
+				</div>
+				<!-- <a href="#panel-reset-password" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Zapomniane hasło</a> -->
+				<!-- <span class="g-signin2 ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" data-onsuccess="loginGoogle">
+					<span class="fa fa-google-plus fa-lg" style="padding-right: 5px;"> </span> Zaloguj z Google+
+				</span>
+				<span class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">
+					<span class="fa fa-facebook fa-lg" style="padding-right: 5px;"> </span> Zaloguj z Facebookiem
+				</span> -->
+				<span class="g-signin2" data-onsuccess="loginGoogle"></span>
+				<fb:login-button scope="public_profile,email" data-size="large" onlogin="loginFacebook();"></fb:login-button>
+			</form>
+		</div>
+		<!-- Rejestracja (prawa strona) -->
+		<div id="panel-register" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
+			<form onsubmit="registerSubmit();">
+				<h2>Rejestracja</h2>
+				<label for="register-email" class="ui-hidden-accessible">Adres e-mail:</label>
+				<input type="email" name="register-email" id="register-email" data-clear-btn="true" data-mini="true" placeholder="Adres e-mail" onchange="confirmTextBox('register-email', 'confirm-email');"required>
+				<label for="confirm-email" class="ui-hidden-accessible">Powtórz e-mail:</label>
+				<input type="email" name="confirm-email" id="confirm-email" data-clear-btn="true" data-mini="true" placeholder="Powtórz e-mail" onkeyup="confirmTextBox('register-email', 'confirm-email');" required>
+				<label for="register-password" class="ui-hidden-accessible">Hasło:</label>
+				<input type="password" name="register-password" id="register-password" data-clear-btn="true" autocomplete="off" data-mini="true" pattern=".{6,32}" title="6-32 znaków" placeholder="Hasło" onchange="confirmTextBox('register-email', 'confirm-email');" required>
+				<label for="confirm-password" class="ui-hidden-accessible">Powtórz hasło:</label>
+				<input type="password" name="confirm-password" id="confirm-password" data-clear-btn="true" autocomplete="off" data-mini="true" pattern=".{6,32}" title="6-32 znaków" placeholder="Powtórz hasło" onkeyup="confirmTextBox('register-password', 'confirm-password');" required>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><input type="submit" value="Załóż konto" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" data-mini="true"></div>
+					<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini ui-icon-delete ui-btn-icon-right">Zamknij</a></div>
+				</div>
+				<a href="#panel-login" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Logowanie</a>
+			</form>
+		</div>
+		<!-- Zapomniane hasło (prawa strona) -->
+		<div id="panel-reset-password" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
+			<form method="post">
+				<h2>Zapomniane hasło</h2>
+				<label for="email" class="ui-hidden-accessible">Adres e-mail:</label>
+				<input type="email" name="email" id="email" data-clear-btn="true" data-mini="true" placeholder="Adres e-mail" required>
+				<label for="confirm-email" class="ui-hidden-accessible">Powtórz e-mail:</label>
+				<input type="email" name="confirm-email" id="confirm-email" data-clear-btn="true" data-mini="true" placeholder="Powtórz e-mail" required>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><input type="submit" value="Przypomnij" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" data-mini="true"></div>
+					<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini ui-icon-delete ui-btn-icon-right">Zamknij</a></div>
+				</div>
+				<a href="#panel-login" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Logowanie</a>
+				<a href="#panel-register" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Rejestracja</a>
+			</form>
+		</div>
+	</body>
+</html>
