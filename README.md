@@ -1,12 +1,19 @@
 # Web-App
 ==============
-Identyfikacja miejskich utrudnień ruchu - aplikacja internetowa
+Identyfikacja miejskich utrudnień w ruchu dla miasta Wrocław - aplikacja internetowa
 
-Osoby odpowiedzialne za aplikacje internetową:
+Struktura katalogów
 --------------
-- Piotr Kulewicz
-- Robert Chojnacki
+/desktop/ - pliki źródłowe wersji desktopowej 
+/mobile/ - pliki źródłowe wersji mobilnej
+
+Osoby odpowiedzialne za aplikacje internetową
+--------------
+- Piotr Kulewicz (desktop)
+- Robert Chojnacki (mobile)
 
 Podgląd
 --------------
-http://virt2.iiar.pwr.edu.pl/
+Wersja testowa: http://virt2.iiar.pwr.edu.pl/
+Wersja desktop: https://bariery.wroclaw.pl/
+Wersja mobilna: https://m.bariery.wroclaw.pl/
