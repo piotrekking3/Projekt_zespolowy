@@ -1,6 +1,5 @@
 package projekt_zespolowy.restapi.services;
 
-import java.sql.SQLException;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -48,10 +47,12 @@ public class ServiceZgloszenia
     public Response add(String incomingData) {
         Zgloszenia zgloszenia = new Zgloszenia();
 
-        int id_uzytkownika;
         int id_typu;
-        int id_disqus;
-        PGpoint point;
+        PGpoint wspolrzedne = new PGpoint();
+        String opis;
+        String email_uzytkownika;
+        String adres;
+        String token;
 
         try {
             JSONObject json = new JSONObject(incomingData);
@@ -60,19 +61,82 @@ public class ServiceZgloszenia
             json = json.getJSONObject("zgloszenia");
 
             // Sprawdzenie czy JSON zgloszenia zawiera wszystkie potrzebne pola
-            id_uzytkownika = json.getInt("id_uzytkownika");
             id_typu = json.getInt("id_typu");
-            id_disqus = json.getInt("id_disqus");
-            point = new PGpoint((String)json.get("wspolrzedne"));
-        } catch (JSONException | SQLException ex) {
-            return Response.serverError().entity("Niepoprawny format JSONa").build();
+            wspolrzedne.x = json.getDouble("x");
+            wspolrzedne.y = json.getDouble("y");
+            opis = json.getString("opis");
+            adres = json.getString("adres");
+            email_uzytkownika = json.getString("email_uzytkownika");
+            token = json.getString("token");
+        } catch (JSONException ex) {
+            return Response.ok("Niepoprawny format JSONa").build();
         }
 
-        zgloszenia.setId_uzytkownika(id_uzytkownika);
         zgloszenia.setId_typu(id_typu);
-        zgloszenia.setId_disqus(id_disqus);
-        zgloszenia.setWspolrzedne(point);
+        zgloszenia.setWspolrzedne(wspolrzedne);
+        zgloszenia.setOpis(opis);
+        zgloszenia.setAdres(adres);
+        zgloszenia.setEmail_uzytkownika(email_uzytkownika);
 
-        return zgloszeniaDao.postZgloszenia(zgloszenia);
+        return zgloszeniaDao.postZgloszenia(zgloszenia, token);
+    }
+
+    @POST
+    @Path("/updateStatusZgloszenia")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateStatusZgloszenia(String incomingData) {
+        Zgloszenia zgloszenia = new Zgloszenia();
+
+        String email;
+        String token;
+        int id_zgloszenia;
+        int id_statusu;
+
+        try {
+            JSONObject json = new JSONObject(incomingData);
+
+            // Wyciagniecie danych o zgloszeniu
+            json = json.getJSONObject("zgloszenia");
+
+            // Sprawdzenie czy JSON zgloszenia zawiera wszystkie potrzebne pola
+            email = json.getString("email");
+            token = json.getString("token");
+            id_zgloszenia = json.getInt("id_zgloszenia");
+            id_statusu = json.getInt("id_statusu");
+
+        } catch (JSONException ex) {
+            return Response.ok("Niepoprawny format JSONa").build();
+        }
+        zgloszenia.setId_zgloszenia(id_zgloszenia);
+        zgloszenia.setId_statusu(id_statusu);
+
+        return zgloszeniaDao.updateStatusZgloszenia(zgloszenia, email, token);
+    }
+
+    @POST
+    @Path("/deleteZgloszenie")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteZgloszenie(String incomingData) {
+        int id_zgloszenia;
+        String admin_email;
+        String token;
+
+        try {
+            JSONObject json = new JSONObject(incomingData);
+
+            json = json.getJSONObject("zgloszenia");
+
+            id_zgloszenia = json.getInt("id_zgloszenia");
+            admin_email = json.getString("admin_email");
+            token = json.getString("token");
+        } catch (JSONException ex) {
+            System.err.println(ex.toString());
+            return Response.status(500).entity("Niepoprawny format JSONa").build();
+        }catch (Exception ex) {
+            System.err.println(ex.toString());
+            return Response.serverError().build();
+        }
+
+        return zgloszeniaDao.deleteZgloszenie(admin_email, token, id_zgloszenia);
     }
 }

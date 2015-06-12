@@ -13,39 +13,29 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="uzytkownicy")
 @XmlRootElement(name = "uzytkownicy")
-@XmlType(propOrder={"id_uzytkownika", "nick", "email", "haslo", "admin"})
+@XmlType(propOrder={"email", "haslo", "facebook", "google", "typ", "token", "uprawnienia", "czy_aktywowany", "data_rejestracji"})
 public class Uzytkownicy
 {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_uzytkownika")
-    private int id_uzytkownika;
-    @Column(name="nick")
-    private String nick;
     @Column(name="email")
     private String email;
     @Column(name="haslo")
     private String haslo;
-    @Column(name="admin")
-    private boolean admin;
-
-    @XmlElement
-    public int getId_uzytkownika() {
-        return id_uzytkownika;
-    }
-
-    public void setId_uzytkownika(int id_uzytkownika) {
-        this.id_uzytkownika = id_uzytkownika;
-    }
-
-    @XmlElement
-    public String getNick() {
-        return nick;
-    }
-
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
+    @Column(name="facebook")
+    private String facebook;
+    @Column(name="google")
+    private String google;
+    @Column(name="typ")
+    private String typ;
+    @Column(name="token")
+    private String token;
+    @Column(name="uprawnienia")
+    private String uprawnienia;
+    @Column(name="czy_aktywowany")
+    private boolean czy_aktywowany;
+    @Column(name="data_rejestracji")
+    private String data_rejestracji;
 
     @XmlElement
     public String getEmail() {
@@ -66,11 +56,65 @@ public class Uzytkownicy
     }
 
     @XmlElement
-    public boolean isAdmin() {
-        return admin;
+    public String getFacebook() {
+        return facebook;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    @XmlElement
+    public String getGoogle() {
+        return google;
+    }
+
+    public void setGoogle(String google) {
+        this.google = google;
+    }
+
+    @XmlElement
+    public String getTyp() {
+        return typ;
+    }
+
+    public void setTyp(String typ) {
+        this.typ = typ;
+    }
+
+    @XmlElement
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @XmlElement
+    public String getUprawnienia() {
+        return uprawnienia;
+    }
+
+    public void setUprawnienia(String uprawnienia) {
+        this.uprawnienia = uprawnienia;
+    }
+
+    @XmlElement
+    public boolean isCzy_aktywowany() {
+        return czy_aktywowany;
+    }
+
+    public void setCzy_aktywowany(boolean czy_aktywowany) {
+        this.czy_aktywowany = czy_aktywowany;
+    }
+
+    @XmlElement
+    public String getData_rejestracji() {
+        return data_rejestracji;
+    }
+
+    public void setData_rejestracji(String data_rejestracji) {
+        this.data_rejestracji = data_rejestracji;
     }
 }
