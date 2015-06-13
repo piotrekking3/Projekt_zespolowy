@@ -1,5 +1,5 @@
 // Definicja mapy
-var map = L.map('map', {center: [51.1101, 17.03], zoom: 14, layers: [OSMcycle, OSMgrayscale, OSMcolor], maxBounds: mapBounds});
+var map = L.map('map', {center: [51.1101, 17.03], zoom: 14, layers: OSMcolor, maxBounds: mapBounds});
 
 // Obsługa geolokalizacji
 function onLocationFound(e) {
@@ -43,7 +43,8 @@ map.on('draw:created', function (e) {
 		geocoder.geocode({'latLng': latlng}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			if (results[0]) {
-				adres = results[0].formatted_address;
+				adres = results[0].address_components[1].long_name + " " + results[0].address_components[0].long_name;
+				//adres = results[0].formatted_address;
 			} else {
 				adres = "Wrocław";
 			}

@@ -1,3 +1,4 @@
+// Przykład tłumaczenia z wykorzystaniem i18next
 $(document).ready(function() {
 	language_complete = navigator.language.split("-");
 	language = (language_complete[0]);

@@ -1,5 +1,5 @@
 <?php
-require_once('./vendor/autoload.php');
+require_once('../vendor/autoload.php');
 
 $app = new \Slim\Slim(array('debug' => true, 'templates.path' => './templates'));
 

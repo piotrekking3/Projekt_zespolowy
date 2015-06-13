@@ -1,15 +1,15 @@
 		<div id="contact" role="main">
 			<div id="contactForm">
-				<p id="sukces" style="display:none;">Dziękujemy za przesłanie wiadomości!</p>
-				<h2>Formularz kontaktowy (v1)</h2>
-				<form>
+				<p id="sukces"></p>
+				<h2>Formularz kontaktowy</h2>
+				<form action="mail.php" method="post" id="contactformpro">
 					<label><b>Imię i nazwisko*</b></label><br>
 					<input type="text" name="nazwa" id="nazwa" required style="width: 380px;"><br><br>
 					<label><b>E-mail*</b></label><br>
 					<input type="email" name="nadawca" id="nadawca" required style="width: 380px;"><br><br>
 					<label><b>Treść wiadomości*</b></label><br>
 					<textarea name="wiadomosc" id="wiadomosc" required style="margin: 0px; width: 380px; height: 150px;"></textarea><br><br>
-					<button onclick="sendContactForm();">Wyślij pytanie</button>
+					<input type="submit"  value="Wyślij pytanie"/>
 				</form>
 			</div>
 		</div>

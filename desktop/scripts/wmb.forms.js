@@ -3,7 +3,7 @@
 // Formularz dodawania nowego znacznika
 var newMarkerFields = $([]).add(category).add(description).add(image),
 	tips = $(".validateTips");
-var category, description, image;
+var category, description = "", image;
 $('#category').on('change', function() {
 	category = parseInt(this.value);
 })
@@ -20,34 +20,44 @@ function updateTips(t) {
 }
 
 function newMarkerSubmit() {
-	var punkt = newMarkerLayer.getLatLng();
-	var tmp = {"zgloszenia": { }};
-	tmp['zgloszenia']['adres'] = adres;
-	tmp['zgloszenia']['id_typu'] = category;
-	tmp['zgloszenia']['x'] = punkt.lat;
-	tmp['zgloszenia']['y'] = punkt.lng;
-	tmp['zgloszenia']['opis'] = description;
-	tmp['zgloszenia']['email_uzytkownika'] = getCookie("emailwmb");
-	tmp['zgloszenia']['token'] = getCookie("tokenwmb");
-	var postData = JSON.stringify(tmp);
-	image = $("#image").get(0).files[0];
-	//console.log(image);
-	$.ajax({
-		type: "POST",
-		url: "http://virt2.iiar.pwr.edu.pl/api/zgloszenia/post",
-		data: postData,
-		success: function (l) {
-			newMarkers.addLayer(newMarkerLayer);	// Dodanie nowego znacznika
-			alert("Zgłoszenie zostało poprawnie dodane");
-		},
-		error: function (l) {
-			alert("Wystąpiły błędy, bądź nie jesteś zalogowany - zgłoszenie nie zostało dodane");
-		},
-		contentType: "application/json",
-		accept: "application/json",
-		dataType: "json"
-	});
-	newMarkerDialog.dialog("close");
+	if(typeof category === "undefined"){
+		alert("Należy wybrać kategorię z listy");
+	}
+	else{
+		if(description == ""){
+			alert("Nie uzupełniono opisu");
+		}
+		else{
+			var punkt = newMarkerLayer.getLatLng();
+			var tmp = {"zgloszenia": { }};
+			tmp['zgloszenia']['adres'] = adres;
+			tmp['zgloszenia']['id_typu'] = category;
+			tmp['zgloszenia']['x'] = punkt.lat;
+			tmp['zgloszenia']['y'] = punkt.lng;
+			tmp['zgloszenia']['opis'] = description;
+			tmp['zgloszenia']['email_uzytkownika'] = getCookie("emailwmb");
+			tmp['zgloszenia']['token'] = getCookie("tokenwmb");
+			var postData = JSON.stringify(tmp);
+			//image = $("#image").get(0).files[0];
+			//console.log(image);
+			$.ajax({
+				type: "POST",
+				url: "//bariery.wroclaw.pl/api/zgloszenia/post",
+				data: postData,
+				success: function (l) {
+					newMarkers.addLayer(newMarkerLayer);	// Dodanie nowego znacznika
+					alert("Zgłoszenie zostało poprawnie dodane");
+				},
+				error: function (l) {
+					alert("Wystąpiły błędy - zgłoszenie nie zostało dodane");
+				},
+				contentType: "application/json",
+				accept: "application/json",
+				dataType: "json"
+			});
+			newMarkerDialog.dialog("close");
+		}
+	}
 }
 
 function newMarkerCancel() {
@@ -56,7 +66,6 @@ function newMarkerCancel() {
 
 var newMarkerDialog = $("#add-marker").dialog({
 	autoOpen: false,
-	height: 500,
 	width: 350,
 	modal: true,
 	buttons: {
@@ -97,7 +106,7 @@ function loginSubmit() {
 			var postData = JSON.stringify(tmp);
 			$.ajax({
 					type: "POST",
-					url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/login",
+					url: "//bariery.wroclaw.pl/api/uzytkownicy/login",
 					data: postData,
 					contentType: "application/json",
 					accept: "application/json",
@@ -109,6 +118,8 @@ function loginSubmit() {
 						document.cookie="logwmb=1";
 						$("#notlogin").css("display", "none");
 						$("#islogin").css("display", "block");
+						$(".leaflet-draw.leaflet-control").css("display", "block");
+						$("#who").append("Zalogowany jako " + getCookie("emailwmb") + "  ");
 						alert("Zalogowano pomyślnie!");
 					},
 					error: function() {
@@ -140,6 +151,7 @@ var loginDialog= $("#login").dialog({
 	autoOpen: false,
 	height: 340,
 	width: 310,
+	top: 200,
 	modal: true,
 	buttons: {
 		"Zarejestruj się": registerForm,
@@ -191,7 +203,7 @@ function registerSubmit() {
 					var postData = JSON.stringify(tmp);
 					$.ajax({
 						type: "POST",
-						url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/register",
+						url: "//bariery.wroclaw.pl/api/uzytkownicy/register",
 						data: postData,
 						contentType: "application/json",
 						accept: "application/json",
@@ -278,7 +290,7 @@ function logout(i) {
 	if(i==1){
 		$.ajax({
 			type: "POST",
-			url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/logout",
+			url: "//bariery.wroclaw.pl/api/uzytkownicy/logout",
 			data: postData,
 			contentType: "application/json",
 			accept: "application/json",
@@ -292,6 +304,8 @@ function logout(i) {
 		$("#notlogin").css("display", "block");
 		$("#islogin").css("display", "none");
 		$("#adminPanel").css("display", "none");
+		$(".leaflet-draw.leaflet-control").css("display", "none");
+		$("#who").empty();
 	}
 	if(i==2){
 		signOut();
@@ -310,7 +324,7 @@ function onSignIn(googleUser) {
 	var postData = JSON.stringify(tmp);
 	$.ajax({
 		type: "POST",
-		url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/loginWithGoogle",
+		url: "//bariery.wroclaw.pl/api/uzytkownicy/loginWithGoogle",
 		data: postData,
 		contentType: "application/json",
 		accept: "application/json",
@@ -323,9 +337,10 @@ function onSignIn(googleUser) {
 			alert("Zalogowano pomyślnie przez Google!");
 			$("#notlogin").css("display", "none");
 			$("#isloginGoogle").css("display", "block");
+			$(".leaflet-draw.leaflet-control").css("display", "block");
+			$("#who").append("Zalogowany jako " + getCookie("emailwmb") + "  ");
 		},
 	});
-	
 	loginDialog.dialog("close");
 }
 
@@ -338,7 +353,7 @@ function signOut() {
 	var postData = JSON.stringify(tmp);
 	$.ajax({
 		type: "POST",
-		url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/logout",
+		url: "//bariery.wroclaw.pl/api/uzytkownicy/logout",
 		data: postData,
 		contentType: "application/json",
 		accept: "application/json",
@@ -351,6 +366,8 @@ function signOut() {
 	$("#notlogin").css("display", "block");
 	$("#isloginGoogle").css("display", "none");
 	$("#adminPanel").css("display", "none");
+	$(".leaflet-draw.leaflet-control").css("display", "none");
+	$("#who").empty();
 	alert("Pomyślnie wylogowano");
 	});
 }
@@ -358,9 +375,12 @@ function signOut() {
 //Logowanie Facebook
 window.fbAsyncInit = function() {
 	FB.init({
-		appId	: '433627263481338',
-		xfbml	: true,
-		version	: 'v2.3'
+		appId: '457858824389193',
+		channelUrl: '//bariery.wroclaw.pl/channel.html',
+		status: true,
+		cookie: true,
+		xfbml: true,
+		version: 'v2.3'
 	});
 };
 
@@ -380,7 +400,7 @@ function loginFb() {
 		var postData = JSON.stringify(tmp);
 		$.ajax({
 			type: "POST",
-			url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/loginWithFacebook",
+			url: "//bariery.wroclaw.pl/api/uzytkownicy/loginWithFacebook",
 			data: postData,
 			contentType: "application/json",
 			accept: "application/json",
@@ -392,6 +412,8 @@ function loginFb() {
 				document.cookie="logwmb=3";
 				$("#notlogin").css("display", "none");
 				$("#isloginFb").css("display", "block");
+				$(".leaflet-draw.leaflet-control").css("display", "block");
+				$("#who").append("Zalogowany jako " + getCookie("emailwmb") + "  ");
 				if(log != 3){
 					alert("Zalogowano pomyślnie przez Facebook!");
 				}
@@ -399,7 +421,7 @@ function loginFb() {
 			error: function(l) {
 				$.ajax({
 					type: "POST",
-					url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/loginWithFacebook",
+					url: "//bariery.wroclaw.pl/api/uzytkownicy/loginWithFacebook",
 					data: postData,
 					contentType: "application/json",
 					accept: "application/json",
@@ -411,6 +433,8 @@ function loginFb() {
 						document.cookie="logwmb=3";
 						$("#notlogin").css("display", "none");
 						$("#isloginFb").css("display", "block");
+						$(".leaflet-draw.leaflet-control").css("display", "block");
+						$("#who").append("Zalogowany jako " + getCookie("emailwmb") + "  ");
 						if(log != 3){
 							alert("Zalogowano pomyślnie przez Facebook!");
 						}
@@ -430,7 +454,7 @@ function logoutFacebook(){
 		var postData = JSON.stringify(tmp);
 		$.ajax({
 			type: "POST",
-			url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/logout",
+			url: "//bariery.wroclaw.pl/api/uzytkownicy/logout",
 			data: postData,
 			contentType: "application/json",
 			accept: "application/json",
@@ -443,6 +467,8 @@ function logoutFacebook(){
 		$("#notlogin").css("display", "block");
 		$("#isloginFb").css("display", "none");
 		$("#adminPanel").css("display", "none");
+		$(".leaflet-draw.leaflet-control").css("display", "none");
+		$("#who").empty();
 		alert("Pomyślnie wylogowano");
 	});
 }

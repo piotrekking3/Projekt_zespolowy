@@ -3,7 +3,7 @@ function getComments(i){
 	var value;
 	$.ajax({
 		type: "GET",
-		url: "http://virt2.iiar.pwr.edu.pl/api/komentarze/getById/" + i,
+		url: "//bariery.wroclaw.pl/api/komentarze/getById/" + i,
 		contentType: "application/json",
 		accept: "application/json",
 		dataType: "json",
@@ -65,31 +65,35 @@ function newCommentSubmit(i) {
 	var postData = JSON.stringify(tmp);
 	$.ajax({
 		type: "POST",
-		url: "http://virt2.iiar.pwr.edu.pl/api/komentarze/post",
+		url: "//bariery.wroclaw.pl/api/komentarze/post",
 		data: postData,
-		/*success: function (l) {
+		success: function (l) {
 			alert("Twój komentarz został poprawnie dodany");
 		},
 		error: function (l) {
-				alert("Wystąpiły błędy, bądź nie jesteś zalogowany - komentarz nie został dodany");
-		},*/
+				if(l.status == 200){
+					alert("Twój komentarz został poprawnie dodany");
+				}
+				else{
+					alert("Wystąpiły błędy, bądź nie jesteś zalogowany - komentarz nie został dodany");
+				}
+		},
 		contentType: "application/json",
 		accept: "application/json",
 		dataType: "json"
 	});
 	newCommentDialog.dialog("close");
-	log = getCookie("logwmb");
-	if(log != 0){
-		alert("Twój komentarz został poprawnie dodany");
-	}
-	else{
-		alert("Wystąpiły błędy, bądź nie jesteś zalogowany - komentarz nie został dodany");
-	}
 }
 
 function newCommentOpen(i) {
-	newCommentDialog.dialog("open");
-	id = i;
+	log = getCookie("logwmb");
+	if(log != 0){
+		newCommentDialog.dialog("open");
+		id = i;
+	}
+	else{
+		notLoginDialog.dialog("open");
+	}
 }
 
 function newCommentCancel() {
@@ -99,6 +103,7 @@ function newCommentCancel() {
 var newCommentDialog = $("#postComment").dialog({
 	autoOpen: false,
 	width: 350,
+	top: 200,
 	modal: true,
 	buttons: {
 		"Wyślij": newCommentSubmit,
@@ -113,4 +118,29 @@ var newCommentDialog = $("#postComment").dialog({
 var newCommentForm = newCommentDialog.find("form").on( "submit", function(event) {
 	 event.preventDefault();
 	 newCommentSubmit();
+});
+
+//Użytkownik nie zalogowany - info okienko
+function notLoginCancel() {
+	notLoginDialog.dialog("close");
+}
+
+function notLoginOpen() {
+	notLoginDialog.dialog("close");
+	loginOpen();
+}
+
+var notLoginDialog = $("#notLoginUser").dialog({
+	autoOpen: false,
+	width: 350,
+	top: 200,
+	modal: true,
+	buttons: {
+		"Zaloguj": notLoginOpen,
+		"Zamknij": notLoginCancel
+	}
+});
+
+var notLoginForm = notLoginDialog.find("form").on( "submit", function(event) {
+	 event.preventDefault();
 });

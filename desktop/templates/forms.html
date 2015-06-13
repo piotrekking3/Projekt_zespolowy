@@ -4,7 +4,7 @@
 				<fieldset>
 					<label for="category">Kategoria zgłoszenia*</label>
 					<select name="category" id="category" required>
-					<option disabled>Wybierz</option>
+					<option selected disabled>Wybierz</option>
 						<optgroup label="Sygnalizacja świetlna">
 							<option value="1">Zbyt długie oczekiwanie</option>
 							<option value="2">Zbyt krótkie zielone</option>
@@ -38,8 +38,8 @@
 					</select>
 					<label for="description">Opis problemu*</label>
 					<textarea name="description" id="description" class="text ui-widget-content ui-corner-all" required></textarea>
-					<label for="image">Zdjęcie</label>
-					<input type="file" name="image" id="image" accept="image/*" class="text ui-widget-content ui-corner-all">
+					<!--<label for="image">Zdjęcie</label>
+					<input type="file" name="image" id="image" accept="image/*" class="text ui-widget-content ui-corner-all">-->
 					<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 				</fieldset>
 			</form>
@@ -83,6 +83,12 @@
 		</div>
 
 		<div id="fullText" title="Opis zgłoszenia">
+		</div>
+
+		<div id="notLoginUser" title="Komunikat">
+			<form>
+				Aby dodać komentarz musisz być zalogowany. Możesz to zrobić klikając poniższy przycisk.
+			</form>
 		</div>
 
 		<div id="postComment" title="Dodaj komentarz">

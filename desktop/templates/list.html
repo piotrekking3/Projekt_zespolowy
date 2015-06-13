@@ -9,7 +9,7 @@
 		</tr>
 	</table>
 <script>
-$.getJSON("http://virt2.iiar.pwr.edu.pl/api/zgloszenia/getAll",
+$.getJSON("//bariery.wroclaw.pl/api/zgloszenia/getAll",
 	function(data){
 		$.each(data, function(i){
 			$("#report").append(
@@ -21,7 +21,7 @@ $.getJSON("http://virt2.iiar.pwr.edu.pl/api/zgloszenia/getAll",
 							"<li>" + data[i].zgloszenia.adres + "</li>" +
 							"<li>" + data[i].zgloszenia.opis + " <a style=\"text-decoration: none;\" href=\"#\" onclick=\"showMore(" + data[i].zgloszenia.id_zgloszenia + ");\">>>Czytaj więcej</a></li>" +
 							"<li><button onclick=\"commentsOpen(" + data[i].zgloszenia.id_zgloszenia + ");\">Komentarze do zgłoszenia</button></li>" +
-							"<li><button onclick=\"newCommentOpen(" + data[i].zgloszenia.id_zgloszenia +");\">Skomentuj</button></li>" +
+							"<li><button id=\"newComment\" onclick=\"newCommentOpen(" + data[i].zgloszenia.id_zgloszenia +");\">Skomentuj</button></li>" +
 						"</ul>" +
 				"</tr>");
 		});
