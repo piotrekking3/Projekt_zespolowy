@@ -2,7 +2,7 @@ function getFullText(i){
 	var value;
 	$.ajax({
 		type: "GET",
-		url: "http://virt2.iiar.pwr.edu.pl/api/zgloszenia/getById/" + i,
+		url: "//bariery.wroclaw.pl/api/zgloszenia/getById/" + i,
 		contentType: "application/json",
 		accept: "application/json",
 		dataType: "json",

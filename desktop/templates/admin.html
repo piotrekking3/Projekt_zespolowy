@@ -1,5 +1,5 @@
 		<div id="admin" role="main">
-			<h1>Przegląd zgłoszonych problemów (v5)</h1>
+			<h1>Przegląd zgłoszonych problemów</h1>
 			<table id="adminpanel">
 				<tr>
 					<th>Data zgłoszenia</th>
@@ -11,7 +11,7 @@
 				</tr>
 			</table>
 			<script>
-			$.getJSON("http://virt2.iiar.pwr.edu.pl/api/zgloszenia/getAll",
+			$.getJSON("//bariery.wroclaw.pl/api/zgloszenia/getAll",
 				function(data){
 					$.each(data, function(i){
 						$("#adminpanel").append(
@@ -35,7 +35,7 @@
 								"</td>" +
 								"<td><button onclick=\"changeStat(" + data[i].zgloszenia.id_zgloszenia + ")\">Zapisz status</button><br>" +
 								"<button><a style=\"text-decoration: none;\" href=\"mailto:" + data[i].zgloszenia.email_uzytkownika +"\">Odpowiedz</a></button><br>" +
-								"<button>Usuń</button></td>" +
+								"<button onclick=\"del(" + data[i].zgloszenia.id_zgloszenia + ")\">Usuń</button></td>" +
 							"</tr>");
 					});
 			});

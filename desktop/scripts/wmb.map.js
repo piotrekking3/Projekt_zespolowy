@@ -43,7 +43,8 @@ map.on('draw:created', function (e) {
 		geocoder.geocode({'latLng': latlng}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			if (results[0]) {
-				adres = results[0].formatted_address;
+				adres = results[0].address_components[1].long_name + " " + results[0].address_components[0].long_name;
+				//adres = results[0].formatted_address;
 			} else {
 				adres = "Wrocław";
 			}

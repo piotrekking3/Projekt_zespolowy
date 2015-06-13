@@ -1,0 +1,18 @@
+{
+	"header": {
+		"title": "Wrocławska Mapa Barier",
+		"subtitle": "Identyfikacja miejskich utrudnień ruchu"
+	},
+	"nav": {
+		"contact": "Kontakt",
+		"about": "O projekcie",
+		"types": "Rodzaje barier",
+		"list" : "Lista barier",
+		"map" : "Mapa barier",
+		"admin" : "Panel administracyjny"
+	},
+	"footer": {
+		"admin": "Logowanie/Rejestracja",
+		"logout": "Wyloguj"
+	}
+}
