@@ -18,23 +18,31 @@ function isLogin(){
 		$("#isloginGoogle").css("display", "none");
 		$("#isloginFb").css("display", "none");
 		$("#adminPanel").css("display", "none");
+		$(".leaflet-draw.leaflet-control").css("display", "none");
+		$("#who").empty();
 	}
 	if(log==1){
 		$("#notlogin").css("display", "none");
 		$("#islogin").css("display", "block");
 		$("#isloginGoogle").css("display", "none");
 		$("#isloginFb").css("display", "none");
+		$(".leaflet-draw.leaflet-control").css("display", "block");
+		$("#who").append("Zalogowany jako " + getCookie("emailwmb") + "  ");
 	}
 	if(log==2){
 		$("#notlogin").css("display", "none");
 		$("#islogin").css("display", "none");
 		$("#isloginGoogle").css("display", "block");
+		$(".leaflet-draw.leaflet-control").css("display", "block");
+		$("#who").append("Zalogowany jako " + getCookie("emailwmb") + "  ");
 	}
 	if(log==3){
 		$("#notlogin").css("display", "none");
 		$("#islogin").css("display", "none");
 		$("#isloginGoogle").css("display", "none");
 		$("#isloginFb").css("display", "block");
+		$(".leaflet-draw.leaflet-control").css("display", "block");
+		$("#who").append("Zalogowany jako " + getCookie("emailwmb") + "  ");
 	}
 	if(validation == 1){
 		$("#adminPanel").css("display", "block");
@@ -51,7 +59,7 @@ function validate(){
 	var postData = JSON.stringify(tmp);
 	$.ajax({
 			type: "POST",
-			url: "http://virt2.iiar.pwr.edu.pl/api/uzytkownicy/valid",
+			url: "//bariery.wroclaw.pl/api/uzytkownicy/valid",
 			data: postData,
 			contentType: "application/json",
 			accept: "application/json",
@@ -85,13 +93,18 @@ function changeStat(id){
 	var postData = JSON.stringify(tmp);
 	$.ajax({
 		type: "POST",
-		url: "http://virt2.iiar.pwr.edu.pl/api/zgloszenia/updateStatusZgloszenia",
+		url: "//bariery.wroclaw.pl/api/zgloszenia/updateStatusZgloszenia",
 		data: postData,
 		success: function (l) {
 			alert("Status wybranego zgłoszenia został zaktualizowany");
 		},
 		error: function (l) {
-			alert("Wystąpiły błędy - status nie został zmieniony");
+			if(l.status == 200){
+				alert("Status wybranego zgłoszenia został zaktualizowany");
+			}
+			else{
+				alert("Wystąpiły błędy - status nie został zmieniony");
+			}
 		},
 		contentType: "application/json",
 		accept: "application/json",
@@ -99,7 +112,7 @@ function changeStat(id){
 	});
 }
 
-var nazwa, nadawca, wiadomosc;
+var nazwa = "", nadawca = "", wiadomosc = "";
 $('#nazwa').on('change', function() {
 	nazwa = $("#nazwa").val();
 })
@@ -112,8 +125,61 @@ $('#wiadomosc').on('change', function() {
 	wiadomosc = $("#wiadomosc").val();
 })
 
-function sendContactForm(){
-	var tresc = "Wiadomość ze strony Wrocławskiej Mapy Barier<br><br>Od: " + nazwa + "<br>Adres e-mail: " +
-				nadawca + "<br>Treść zapytania:<br>" + wiadomosc + "<br><br>WMB";
-	$("#sukces").css("display","block");
+/*function sendContactForm(){
+	if(nazwa != ""){
+		if(nadawca != ""){
+			if(wiadomosc != ""){
+				var tresc = "Wiadomość ze strony Wrocławskiej Mapy Barier<br><br>Od: " + nazwa +
+				"<br>Adres e-mail: " + nadawca +
+				"<br>Treść zapytania:<br>" + wiadomosc +
+				"<br><br>WMB";
+				$("#sukces").css("display","block");
+}*/
+$(function(){
+	$("#contactformpro").submit(function(e){
+		var info=$("#sukces");
+		var form=$(this);
+		$.ajax({
+			url: "mail.php",
+			dataType: "JSON",
+			type: "post",
+			data: form.serialize(),
+			success: function(obj){
+				if (obj.type=="ok"){
+					info.append("Dziękujemy za wysłanie zgłoszenia.");
+					form.get(0).reset();
+				}
+				else{
+					info.append("Przepraszamy, ale wystąpił błąd podczas wysyłania wiadomości.");
+				}
+			},
+			error : function(){
+				info.append("Przepraszamy, ale wystąpił błąd podczas wysyłania wiadomości.");
+			}
+		});
+		e.preventDefault();
+	})
+})
+
+function del(id){
+	var tmp = {"zgloszenia": { }};
+	tmp['zgloszenia']['id_zgloszenia'] = id.toString();
+	tmp['zgloszenia']['admin_email'] = getCookie("emailwmb");
+	tmp['zgloszenia']['token'] = getCookie("tokenwmb");
+	var postData = JSON.stringify(tmp);
+	$.ajax({
+		type: "POST",
+		url: "//bariery.wroclaw.pl/api/zgloszenia/deleteZgloszenie",
+		data: postData,
+		success: function (l) {
+			alert("Zgłoszenie usunięto");
+			location.reload();
+		},
+		error: function (l) {
+			alert("Wystąpiły błędy - zgłoszenia nie usunięto");
+		},
+		contentType: "application/json",
+		accept: "application/json",
+		dataType: "json"
+	});
 }

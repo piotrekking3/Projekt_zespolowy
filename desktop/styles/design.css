@@ -26,8 +26,8 @@
 body {
 	font-family: Arial, sans-serif;
 	font-size: 12pt;
-	color: #001F3D;
-	background-color: #D2D2D2;
+	color: #141F33;
+	background-color: #94B8FF;
 	width: 100%;
 	height: 100%;
 	display: block;
@@ -37,7 +37,7 @@ body {
 }
 
 header {
-	background-color: #D2D2D2;
+	background-color: #A3C2FF;
 	width: 100%;
 	height: 75px;
 	display: table;
@@ -74,8 +74,8 @@ header #title h2 {
 }
 
 nav {
-	background-color: #D2D2D2;
-	border-bottom: 5px solid #BAB4B4;
+	background-color: #A3C2FF;
+	border-bottom: 5px solid #6699FF;
 	width: 100%;
 	height: 40px;
 	display: block;
@@ -106,7 +106,7 @@ nav ul li a {
 	font-size: 1em;
 	text-decoration: none;
 	text-align: center;
-	color: #6E6E6F;
+	color: #293D66;
 	display: block;
 	float: right;
 	margin: 0.3em 0 0 0;
@@ -114,7 +114,7 @@ nav ul li a {
 }
 
 nav ul li a:hover, nav ul li a:active, nav ul li .active {
-	background-color: #BAB4B4;
+	background-color: #6699FF;
 	color: #FFFFFF;
 	-webkit-border-top-left-radius: 10px;
 	-webkit-border-top-right-radius: 10px;
@@ -145,8 +145,8 @@ nav ul li a:hover, nav ul li a:active, nav ul li .active {
 }
 
 footer {
-	background-color: #D2D2D2;
-	border-top: 5px solid #BAB4B4;
+	background-color: #A3C2FF;
+	border-top: 5px solid #6699FF;
 	width: 100%;
 	height: 40px;
 	display: block;
@@ -160,7 +160,7 @@ footer ul li a {
 	font-size: 1em;
 	text-decoration: none;
 	text-align: center;
-	color: #6E6E6F;
+	color: #293D66;
 	display: block;
 	float: right;
 	margin: -0.3em 0 0 0;
@@ -168,7 +168,7 @@ footer ul li a {
 }
 
 footer ul li a:hover, footer ul li a:active, footer ul li .active {
-	background-color: #4775FF;
+	background-color: #6699FF;
 	color: #FFFFFF;
 	-webkit-border-bottom-right-radius: 1em;
 	-webkit-border-bottom-left-radius: 1em;
@@ -245,7 +245,7 @@ div #add-marker input.text, div #login input.email, div #login input.password, d
 #adminpanel th {
 	background:#7CB8E2 repeat-x scroll center left;
 	color:#fff;
-	padding:7px 15px;
+	padding:10px 20px;
 	text-align:left;
 }
 
@@ -275,7 +275,7 @@ div #add-marker input.text, div #login input.email, div #login input.password, d
 #report th {
 	background:#7CB8E2 repeat-x scroll center left;
 	color:#fff;
-	padding:7px 15px;
+	padding:10px 20px;
 	text-align:left;
 }
 
@@ -283,4 +283,13 @@ div #add-marker input.text, div #login input.email, div #login input.password, d
 	background:#C7DDEE none repeat-x scroll center left;
 	color:#000;
 	padding:7px 15px;
+}
+
+.leaflet-draw.leaflet-control {
+	display:none;
+}
+
+#who {
+	margin-top: 0.5%;
+	margin-right: 3%;
 }
