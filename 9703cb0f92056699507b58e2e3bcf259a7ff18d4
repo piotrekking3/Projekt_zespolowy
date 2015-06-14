@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_2e3b22d2",
+        "filename": "desktop/scripts/wmb.forms.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-06-14T13:43:29Z",
+      "side": 1,
+      "message": ".",
+      "revId": "9703cb0f92056699507b58e2e3bcf259a7ff18d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_4e36a6e8",
+        "filename": "desktop/scripts/wmb.translate.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-06-14T13:43:29Z",
+      "side": 1,
+      "message": ".",
+      "revId": "9703cb0f92056699507b58e2e3bcf259a7ff18d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_6e352ad9",
+        "filename": "mobile/scripts/wmb.global.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-06-14T13:43:29Z",
+      "side": 1,
+      "message": "2xtab",
+      "revId": "9703cb0f92056699507b58e2e3bcf259a7ff18d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_8e30aee9",
+        "filename": "mobile/scripts/wmb.global.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-06-14T13:43:29Z",
+      "side": 1,
+      "message": "a tu 1 raz tab, które wybrać?",
+      "revId": "9703cb0f92056699507b58e2e3bcf259a7ff18d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
