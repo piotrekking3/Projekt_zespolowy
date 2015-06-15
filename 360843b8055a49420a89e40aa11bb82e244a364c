@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_b9bdc16a",
+        "filename": "mobile/scripts/wmb.marker.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1004357
+      },
+      "writtenOn": "2015-06-15T09:56:54Z",
+      "side": 1,
+      "message": "Dodawania zdjęcia działa już poprawnie. Jednak do bazy danych oprócz danych binarnych jpeg, trafiają jakieś dziwne nagłówki-śmieci wysyłane przez przeglądarkę (WebKitFormBoundary). Pytanie, czy można coś zmienić z poziomu JavaScript, czy należy parsować nagłówki z REST API?",
+      "range": {
+        "startLine": 112,
+        "startChar": 5,
+        "endLine": 128,
+        "endChar": 7
+      },
+      "revId": "360843b8055a49420a89e40aa11bb82e244a364c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
