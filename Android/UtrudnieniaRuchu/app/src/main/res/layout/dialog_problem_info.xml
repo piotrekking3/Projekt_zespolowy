@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+<FrameLayout android:layout_height="match_parent" android:layout_width="match_parent"
+             xmlns:android="http://schemas.android.com/apk/res/android">
+
+<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+            android:gravity="top">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
         <TextView
@@ -11,11 +19,29 @@
             android:padding="10dp"
             android:background="@color/background_floating_material_light"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addressDialog"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@color/background_floating_material_light"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendarDialog"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:background="@color/background_floating_material_light"/>
+
          <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/categoryContentLabel"
             android:text="Opis:"
+            android:paddingLeft="10dp"
             android:background="@color/background_floating_material_light"/>
 
         <TextView
@@ -25,18 +51,12 @@
             android:padding="10dp"
             android:background="@color/background_floating_material_light"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/emailLabel"
-            android:text="Email:"
-            android:background="@color/background_floating_material_light"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/emailLabelWindowInfo"
-            android:padding="10dp"
-            android:background="@color/background_floating_material_light"/>
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgView"
+                android:padding="10dp"/>
 
 </LinearLayout>
+</ScrollView>
+</FrameLayout>

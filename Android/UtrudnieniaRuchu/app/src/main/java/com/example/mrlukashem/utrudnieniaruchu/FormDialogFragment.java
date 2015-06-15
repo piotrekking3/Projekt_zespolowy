@@ -8,10 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.*;
 
 import java.util.ArrayList;
 
@@ -28,6 +25,7 @@ public class FormDialogFragment extends DialogFragment
     private Spinner spinner;
     private ArrayAdapter<String> spinnerAdapter;
     private int selectedItem;
+    private final int MIN_SIZE = 5;
 
     public static FormDialogFragment newInstance() {
         FormDialogFragment _instance = new FormDialogFragment();
@@ -46,7 +44,7 @@ public class FormDialogFragment extends DialogFragment
     public Dialog onCreateDialog(Bundle __saved_instance_state) {
         AlertDialog.Builder _builder = new AlertDialog.Builder(getActivity());
         LayoutInflater _inflater = getActivity().getLayoutInflater();
-        enableListener();
+        setListener();
 
         customView = _inflater.inflate(R.layout.new_marker_form, null);
         _builder
@@ -64,7 +62,7 @@ public class FormDialogFragment extends DialogFragment
         Metoda tworzy obiekty słuchaczy i przypisuje je referencją, które
         są zdefiniowane w polach.
      */
-    private void enableListener() {
+    private void setListener() {
         /*
             Słuchacz odpowiedzialny za odebranie komunikatu o nacisnięciu przycisku ok.
             Następnie pobiera wszystkie dane z pół tekstowych i spinnera. Z kolei potem
@@ -76,14 +74,24 @@ public class FormDialogFragment extends DialogFragment
         onPositivClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                EditText _email = (EditText)customView.findViewById(R.id.newMarkerFormEmailEditText);
                 EditText _content = (EditText)customView.findViewById(R.id.newMarkerFormContentEditText);
+                CheckBox _check_box = (CheckBox)customView.findViewById(R.id.currentPosCheckBox);
 
-                NewMarkerOnMap _setter = (NewMarkerOnMap)getActivity();
-                _setter.createMarkerFromFormData(
-                        _email.getText().toString(),
-                        selectedItem,
-                        _content.getText().toString());
+                if(_content.getText().toString().length() > MIN_SIZE) {
+                    NewMarkerOnMap _setter = (NewMarkerOnMap) getActivity();
+                    _setter.createMarkerFromFormData(
+                            _check_box.isChecked(),
+                            selectedItem,
+                            _content.getText().toString()
+                    );
+                } else {
+                    Toast
+                            .makeText(
+                                    getActivity().getApplicationContext(),
+                                    "Nie można dodać utrudnienia - źle wypełniony formularz",
+                                    Toast.LENGTH_LONG)
+                            .show();
+                }
 
                 dismiss();
             }
@@ -118,12 +126,12 @@ public class FormDialogFragment extends DialogFragment
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedItem = position;
+    public void onItemSelected(AdapterView<?> __parent, View __view, int __position, long __id) {
+        selectedItem = __position;
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> __parent) {
 
     }
 }

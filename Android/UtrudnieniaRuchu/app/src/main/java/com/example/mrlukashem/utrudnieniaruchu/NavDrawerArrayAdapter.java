@@ -65,7 +65,8 @@ public class NavDrawerArrayAdapter extends ArrayAdapter<NavDrawerItem> {
         _items_list.add(NavDrawerItemFactory.newInstanceOfSection(context.getResources().getString(R.string.filtr), R.drawable.ic_format_paint_grey600_18dp));
         _items_list.add(NavDrawerItemFactory.newInstanceOfSection(context.getResources().getString(R.string.categories), R.drawable.ic_action_view_as_list));
         _items_list.add(NavDrawerItemFactory.newInstanceOfSection(context.getResources().getString(R.string.setting), R.drawable.ic_action_settings));
-        _items_list.add(NavDrawerItemFactory.newInstanceOfSection(context.getResources().getString(R.string.help), R.drawable.ic_action_help));
+        _items_list.add(NavDrawerItemFactory.newInstanceOfSection(context.getResources().getString(R.string.about), R.drawable.ic_action_help));
+        _items_list.add(NavDrawerItemFactory.newInstanceOfSection(context.getResources().getString(R.string.log_in), R.drawable.ic_action_person));
 
         this.addAll(_items_list);
     }
@@ -82,12 +83,10 @@ public class NavDrawerArrayAdapter extends ArrayAdapter<NavDrawerItem> {
     public View getView(int __position, View __convertView, ViewGroup __parent) {
         NavDrawerItem _item = this.getItem(__position);
 
-        if(__convertView == null) {
-            if (_item.getType() == NavDrawerTitleItem.TYPE) {
-                __convertView = getTitleItem(__position, __convertView, __parent);
-            } else if (_item.getType() == NavDrawerSectionItem.TYPE) {
-                __convertView = getSectionItem(__position, __convertView, __parent);
-            }
+        if (_item.getType() == NavDrawerTitleItem.TYPE) {
+            __convertView = getTitleItem(__position, __convertView, __parent);
+        } else if (_item.getType() == NavDrawerSectionItem.TYPE) {
+            __convertView = getSectionItem(__position, __convertView, __parent);
         }
 
         return __convertView;
@@ -116,7 +115,6 @@ public class NavDrawerArrayAdapter extends ArrayAdapter<NavDrawerItem> {
         @params... Takie same jak dla metody getView.
      */
     public View getSectionItem(int __position, View __convertVIew, ViewGroup __parent) {
-        if(__convertVIew == null) {
             __convertVIew = inflater.inflate(R.layout.drawer_list_item, __parent, false);
             TextView _text_view = (TextView)__convertVIew.findViewById(R.id.drawer_text_view_list_item);
             ImageView _img_view = (ImageView)__convertVIew.findViewById(R.id.drawer_image_view_list_item);
@@ -129,9 +127,18 @@ public class NavDrawerArrayAdapter extends ArrayAdapter<NavDrawerItem> {
             }
 
             return __convertVIew;
-        }
+    }
 
-        return __convertVIew;
+    public void setLoggedIn() {
+        NavDrawerItem _item = getItem(getCount() - 1);
+        _item.setLabel(context.getResources().getString(R.string.logged_out));
+        notifyDataSetChanged();
+    }
+
+    public void setLoggedOut() {
+        NavDrawerItem _item = getItem(getCount() - 1);
+        _item.setLabel(context.getResources().getString(R.string.logged_in));
+        notifyDataSetChanged();
     }
 }
 

@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" xmlns:facebook="http://schemas.android.com/apk/res-auto"
+              tools:context="com.example.mrlukashem.utrudnieniaruchu.LogInActivity"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:padding="15dp"
+              style="bold">
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/logInActivityEmailEditText"
+            android:layout_gravity="center_horizontal"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="10dp"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/logInActivityPasswordEditText"
+            android:layout_gravity="center_horizontal"
+            android:inputType="textPassword"
+            android:hint="Hasło"
+            android:paddingBottom="10dp"/>
+    <Button
+            android:text="Zaloguj się"
+            android:id="@+id/loginActivityLogInButton"
+            android:background="@xml/log_in_button"
+            android:onClick="loginButtonOnClick"
+            style="@style/ButtonText">
+    </Button>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:layout_gravity="center_horizontal"
+            android:text="Nie posiadasz konta?"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            />
+
+    <Button
+            android:text="Stwórz konto"
+            android:id="@+id/button2"
+            android:background="@xml/log_in_button"
+            style="@style/ButtonText"
+            android:onClick="registerButtonOnClick">
+    </Button>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal"
+            android:text="Lub"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
+          />
+
+    <com.facebook.login.widget.LoginButton
+            android:id="@+id/connectWithFbButton"
+            android:layout_gravity="bottom"
+            style="@style/ButtonText"
+            />
+
+</LinearLayout>

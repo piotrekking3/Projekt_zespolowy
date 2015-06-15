@@ -13,4 +13,5 @@ public interface NavDrawerItem {
     public int getType();
     public int getIconId();
     public boolean hasIcon();
+    public void setLabel(String __label);
 }

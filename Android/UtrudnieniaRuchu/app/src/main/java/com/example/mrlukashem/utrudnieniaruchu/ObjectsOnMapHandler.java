@@ -2,11 +2,19 @@ package com.example.mrlukashem.utrudnieniaruchu;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
+
+import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by mrlukashem on 26.03.15.
@@ -56,6 +64,10 @@ public class ObjectsOnMapHandler {
         setFields();
     }
 
+    public Context getContext() {
+        return context;
+    }
+
     public GoogleMap getMap() {
         return gMap;
     }
@@ -64,6 +76,7 @@ public class ObjectsOnMapHandler {
         Metoda dodająca nowy marker/problem na mapę i sprawdzająca, czy jego kategoria
         nie została wyłączona przez użytkownika.
         @param1 Dane potrzebne do stworzenia nowego utrudnienia
+        @param2 marker options
         Po stworzeniu i dodania na mapę i do listy nowego markera/problemu metoda sprawdza
         czy kategoria w jakiej marker się znajduje jest wyświetlana.
         Jeżeli nie to zostaje on wyłączony.
@@ -84,7 +97,7 @@ public class ObjectsOnMapHandler {
                 .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColorById(__data.getCategoryId())));
         _marker = gMap.addMarker(_options);
         try {
-            _problem = ProblemInstance.newInstance(__data, _marker);
+             _problem = ProblemInstance.newInstance(__data, _marker);
         } catch(NullPointerException __e) {
             _marker.remove();
             return;
@@ -93,6 +106,54 @@ public class ObjectsOnMapHandler {
 
         if (!categoriesStateArray[_problem.getCategoryId()]) {
             _marker.setVisible(false);
+        }
+    }
+
+    public void removeProblem(ProblemInstance __problem) {
+        int _i = 0;
+        for(ProblemInstance p : markersOnMap) {
+            if(p.equals(__problem)) {
+                break;
+            }
+            _i++;
+        }
+
+        markersOnMap.get(_i).getMarker().remove();
+        markersOnMap.remove(_i);
+    }
+
+    public void addProblemToServerAndMap(ProblemInstance.ProblemData __data) {
+        if (__data.getCategoryId() >= categoriesStateArray.length
+                || __data.getCategoryId() < 0) {
+            throw new ArrayIndexOutOfBoundsException("Index poza zakresem tablicy kategorii");
+        }
+        MarkerOptions _options = new MarkerOptions();
+        ProblemInstance _problem;
+        Marker _marker;
+
+        _options
+                .position(__data.getCords())
+                .title(context.getResources().getStringArray(R.array.categories)[__data.getCategoryId()])
+                .snippet(__data.getContent())
+                .icon(BitmapDescriptorFactory.defaultMarker(getMarkerColorById(__data.getCategoryId())));
+        _marker = gMap.addMarker(_options);
+        try {
+            _problem = ProblemInstance.newInstance(__data, _marker);
+        } catch (NullPointerException __e) {
+            _marker.remove();
+            return;
+        }
+
+        markersOnMap.add(_problem);
+
+        if (!categoriesStateArray[_problem.getCategoryId()]) {
+            _marker.setVisible(false);
+        }
+
+        try {
+            new Thread(new ProblemToServerSender(_problem)).start();
+        } catch (Exception __e) {
+            Log.e("addProblemToSAM", __e.toString());
         }
     }
 
@@ -131,6 +192,18 @@ public class ObjectsOnMapHandler {
         return null;
     }
 
+    public void refresh() {
+        for(ProblemInstance problem : markersOnMap) {
+            MarkerOptions _options = new MarkerOptions();
+            _options.snippet(problem.getContent());
+            _options.title(problem.getCategoryString());
+            _options.position(problem.getMarker().getPosition());
+            gMap.addMarker(_options);
+        }
+
+        refreshMap();
+    }
+
     /*
         Funkcja odpowiedzialna za ustawienie zadanej ketogorii poprzez Id wartości
         true lub false w zależności od drugiego argumentu.
@@ -159,22 +232,6 @@ public class ObjectsOnMapHandler {
         }
     }
 
-    /*
-        Metoda odświeżająca widok na mapie. Z tą różnicą, że dodaje na nowa wszystkie
-        utrudnienia i dopiero wywołuje metodę refreshMap.
-     */
-    public void refresh() {
-        for(ProblemInstance problem : markersOnMap) {
-            MarkerOptions _options = new MarkerOptions();
-            _options.snippet(problem.getContent());
-            _options.title(problem.getCategoryString());
-            _options.position(problem.getMarker().getPosition());
-            gMap.addMarker(_options);
-        }
-
-        refreshMap();
-    }
-
     private float getMarkerColorById(int __id) {
         switch (__id) {
             case 0:
@@ -197,6 +254,31 @@ public class ObjectsOnMapHandler {
                 return BitmapDescriptorFactory.HUE_VIOLET;
             default:
                 return BitmapDescriptorFactory.HUE_RED;
+        }
+    }
+
+    private class ProblemToServerSender implements Runnable {
+
+        private ProblemInstance problemInstance;
+
+        public ProblemToServerSender(ProblemInstance __problem) {
+            problemInstance = __problem;
+        }
+
+        @Override
+        public void run() {
+            try {
+                new CallAPI
+                        .GetLocationByCords(context, problemInstance)
+                        .execute(problemInstance.getCords())
+                        .get(8, TimeUnit.SECONDS);
+            } catch(Exception __e) {
+                Log.e("addProblemToSAM", __e.toString());
+                Toast.makeText(context, "Nie można nawiązać połączenia. Proszę spróbować później.", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+                CallAPI.getInstance().addProblem(problemInstance);
         }
     }
 }

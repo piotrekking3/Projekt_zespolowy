@@ -4,14 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity"
     >
 
-    <item android:id="@+id/action_settings" android:title="@string/setting"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings" android:title="@string/setting"
+        android:orderInCategory="100" app:showAsAction="never"
+        />
 
     <item
-        android:id="@+id/action_search"
-        android:title="@string/search"
-        android:icon="@drawable/ic_action_search"
-        app:showAsAction="ifRoom"
-        app:actionViewClass="android.support.v7.widget.SearchView"
+            android:id="@+id/refresh"
+            android:icon="@drawable/ic_action_refresh"
+            android:title="@string/refresh"
+            app:showAsAction="always"
+            />
+
+    <item
+            android:id="@+id/set_start_location"
+            android:icon="@drawable/ic_action_location_found"
+            android:title="@string/start_location"
+            app:showAsAction="always"
+            />
+
+    <item
+        android:id="@+id/action_add_marker"
+        android:title="Dodaj"
+        android:icon="@drawable/ic_action_place_light"
+        app:showAsAction="always"
         />
 </menu>

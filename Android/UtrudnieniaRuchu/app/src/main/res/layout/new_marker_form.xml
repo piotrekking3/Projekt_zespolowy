@@ -3,20 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/newMarkerFormEmailEditText"
-        android:layout_gravity="center_horizontal"
-        android:hint="@string/email"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        />
-
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,4 +25,21 @@
         android:layout_marginBottom="16dp"
         />
 
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/currentPosition"
+            android:id="@+id/currentPosCheckBox"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"/>
+
+    <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Załącz zdjęcie"
+            android:layout_marginRight="10dp"
+            android:id="@+id/newMarkerFormContentImageButton"
+            android:layout_gravity="right"
+            android:onClick="loadImageButton"/>
 </LinearLayout>
