@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_14c9f6ab",
+        "filename": "RestAPI/src/main/java/projekt_zespolowy/restapi/dao/KomentarzeDao.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1004339
+      },
+      "writtenOn": "2015-06-19T14:28:20Z",
+      "side": 1,
+      "message": "czy tutaj jest jakiś biały znak, czy mi się wydaje? Jeśli jest to dlaczego? linijki poniżej podobnie :)",
+      "revId": "acf4f41d3cc93b4b2cb9ae7adf70add4f6bc5191",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
