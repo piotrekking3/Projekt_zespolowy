@@ -154,7 +154,7 @@ WMB.Marker = {
 				$.each(data, function(i) {
 					// Nie pobieramy rozwiązanych i anulowanych zgłoszeń
 					if (data[i].zgloszenia.id_statusu != 4 && data[i].zgloszenia.id_statusu != 3) {
-						L.marker([data[i].zgloszenia.wspolrzedne.x, data[i].zgloszenia.wspolrzedne.y], {icon: idToIcon(data[i].zgloszenia.id_typu)}).setOpacity(0.80).bindPopup("<b>" + data[i].zgloszenia.adres + "</b><br>"+ types[data[i].zgloszenia.id_typu] + "<br><i>" + data[i].zgloszenia.opis + "</i> (<a href=\"#page-details?id=" + data[i].zgloszenia.id_zgloszenia + "\" data-ajax=\"false\">szczegóły</a>)<div style=\"text-align: right;\">" + data[i].zgloszenia.kalendarz + "</div>").addTo(idToCategory(data[i].zgloszenia.id_typu));
+						L.marker([data[i].zgloszenia.wspolrzedne.x, data[i].zgloszenia.wspolrzedne.y], {icon: idToIcon(data[i].zgloszenia.id_typu)}).setOpacity(0.80).bindPopup("<img onError=\"this.remove()\" style=\"width: 100%; display: block;\" src=\"" + REST_API_URL + "/zdjecia/getById/" + data[i].zgloszenia.id_zgloszenia + "\"><b>" + data[i].zgloszenia.adres + "</b><br>"+ types[data[i].zgloszenia.id_typu] + "<br><i>" + data[i].zgloszenia.opis + "</i> (<a href=\"#page-details?id=" + data[i].zgloszenia.id_zgloszenia + "\" data-ajax=\"false\">szczegóły</a>)<div style=\"text-align: right;\">" + data[i].zgloszenia.kalendarz + "</div>").addTo(idToCategory(data[i].zgloszenia.id_typu));
 					}
 				});
 			}
@@ -175,6 +175,7 @@ WMB.Marker = {
 			accept: 'application/json',
 			success: function(data) {
 				$('#details').html(
+					"<p><img onError=\"this.remove()\" style=\"max-width: 640px; max-height: 480px;\" src=\"" + REST_API_URL + "/zdjecia/getById/" + data.zgloszenia.id_zgloszenia + "\"></p>" + 
 					"<p><b>Adres</b>: " + data.zgloszenia.adres + "</p>" +
 					"<p><b>Współrzędne</b>: " + Number(data.zgloszenia.wspolrzedne.x.toFixed(4)) + ", " + Number(data.zgloszenia.wspolrzedne.y.toFixed(4)) + "</p>" +
 					"<p><b>Data dodania</b>: " + data.zgloszenia.kalendarz + "</p>" +
