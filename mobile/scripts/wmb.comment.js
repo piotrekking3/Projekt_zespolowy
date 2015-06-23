@@ -52,6 +52,7 @@ WMB.Comment = {
 			accept: 'application/json',
 			dataType: 'json',
 			success: function(data) {
+				$('#comment-list').empty();
 				$.each(data, function(j){
 					$('#comment-list').append(
 						"<tr>" +
