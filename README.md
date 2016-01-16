@@ -1,7 +1,7 @@
 # Projekt zespolowy
 Aplikacja mobilna – Identyfikacja miejskich utrudnień ruchu<br>
-Koordynator PWr - Paweł Rogaliński
-We współpracy z Tieto - Koordynator projektu Mateusz Babiarz
++ Koordynator PWr - Paweł Rogaliński
++ We współpracy z Tieto - Koordynator projektu Mateusz Babiarz
 
 # Informacje
 Aplikacja internetowa (branch web-app) została rozwinięta o panel administracyjny jako praca dyplomowa przez Roberta Chojnackiego.
